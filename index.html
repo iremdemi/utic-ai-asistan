@@ -58,6 +58,7 @@
     border: 1px solid var(--border);
   }
 
+  /* ---------- Header ---------- */
   .header {
     background: linear-gradient(160deg, var(--navy-950), var(--navy-800));
     color: #fff;
@@ -112,6 +113,7 @@
     letter-spacing: 0.3px;
   }
 
+  /* ---------- Messages ---------- */
   .messages {
     flex: 1;
     overflow-y: auto;
@@ -178,30 +180,60 @@
 
   .welcome strong { color: var(--ink); }
 
-  .chips {
+  .menu-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 14px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 2px;
   }
 
-  .chip {
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
     border: 1px solid var(--border);
     background: var(--paper);
-    color: var(--navy-900);
+    color: var(--ink);
     font-family: 'Inter', sans-serif;
-    font-size: 12.5px;
+    font-size: 13.5px;
     font-weight: 500;
-    padding: 7px 12px;
-    border-radius: 20px;
+    padding: 13px 15px;
+    border-radius: 12px;
     cursor: pointer;
     transition: 0.15s ease;
   }
 
-  .chip:hover {
+  .menu-item .icon { font-size: 16px; margin-left: 10px; flex-shrink: 0; }
+
+  .menu-item:hover {
     background: var(--navy-900);
     color: #fff;
     border-color: var(--navy-900);
+  }
+
+  .menu-item.back {
+    background: var(--navy-900);
+    color: #fff;
+    border-color: var(--navy-900);
+    justify-content: center;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .menu-item.back:hover { background: var(--navy-800); }
+
+  .submenu-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    margin: 0 0 2px;
+    font-weight: 600;
   }
 
   .typing {
@@ -229,6 +261,7 @@
     30% { transform: translateY(-4px); opacity: 1; }
   }
 
+  /* ---------- Input ---------- */
   .input-row {
     flex-shrink: 0;
     display: flex;
@@ -303,18 +336,7 @@
     </div>
   </div>
 
-  <div class="messages" id="messages">
-    <div class="welcome" id="welcome">
-      <strong>Merhaba! 👋</strong> UTİC bölümü hakkında staj, Erasmus &amp; Farabi, ÇAP,
-      sınav-geçme ve danışman hocalar gibi konularda sorularını yanıtlayabilirim.
-      <div class="chips">
-        <button class="chip" data-q="7+1 staj süreci nasıl işliyor?">7+1 Staj Süreci</button>
-        <button class="chip" data-q="Erasmus başvurusu nasıl yapılır?">Erasmus &amp; Farabi</button>
-        <button class="chip" data-q="ÇAP için hangi bölümlere başvurabilirim?">ÇAP İmkanları</button>
-        <button class="chip" data-q="Bölüm başkanı kim ve nasıl ulaşabilirim?">Danışman Hocalar</button>
-      </div>
-    </div>
-  </div>
+  <div class="messages" id="messages"></div>
 
   <div class="input-row">
     <textarea id="input" rows="1" placeholder="Sorunu yaz..." aria-label="Mesajınızı yazın"></textarea>
@@ -327,14 +349,89 @@
 
 <script>
   const messagesEl = document.getElementById('messages');
-  const welcomeEl = document.getElementById('welcome');
   const inputEl = document.getElementById('input');
   const sendBtn = document.getElementById('sendBtn');
 
-  let history = [];
+  let history = []; // {role: 'user'|'assistant', text: string}
   let isLoading = false;
 
   const ENDPOINT = '/.netlify/functions/chat';
+
+  // ---------- Konu / alt-konu menü verisi ----------
+  const TOPICS = [
+    {
+      icon: '🏛️', label: 'Bölümümüz Hakkında',
+      query: 'UTİC bölümü hakkında genel bilgi verir misin?',
+      submenu: [
+        { label: 'Bölümün tarihçesi nedir?', query: 'UTİC bölümünün tarihçesi nedir, ne zaman kuruldu?' },
+        { label: 'Misyon ve vizyonumuz nedir?', query: 'UTİC bölümünün misyonu ve vizyonu nedir?' },
+        { label: 'Mezunlar nerede çalışabilir?', query: 'UTİC mezunları hangi sektörlerde ve pozisyonlarda çalışabilir?' },
+      ],
+    },
+    {
+      icon: '📋', label: '7+1 Staj Süreci',
+      query: '7+1 staj süreci nasıl işliyor?',
+      submenu: [
+        { label: 'Zorunlu staj (İME) şartları neler?', query: 'Zorunlu stajım (İME) için GNO şartı ve başvuru süreci nedir?' },
+        { label: 'İşyeri hangi şartları taşımalı?', query: 'Staj yapacağım işyeri hangi şartları taşımalı?' },
+        { label: 'Devamsızlık kuralı nedir?', query: 'Stajda devamsızlık ve DZ notu kuralı nedir?' },
+        { label: 'İsteğe bağlı yaz stajı nasıl olur?', query: 'İsteğe bağlı yaz stajı başvurusu nasıl yapılır?' },
+      ],
+    },
+    {
+      icon: '✈️', label: 'Erasmus & Farabi',
+      query: 'Erasmus ve Farabi başvurusu nasıl yapılır?',
+      submenu: [
+        { label: 'Erasmus başvuru adımları neler?', query: 'Erasmus başvurusunun adımları neler?' },
+        { label: 'Farabi programı nedir?', query: 'Farabi programı nedir, nasıl başvurulur?' },
+        { label: 'Alınan dersler nasıl tanınıyor?', query: 'Erasmus\'ta alınan derslerin intibakı/tanınması nasıl oluyor?' },
+      ],
+    },
+    {
+      icon: '🎓', label: 'ÇAP & Yandal',
+      query: 'ÇAP için hangi bölümlere ve hangi şartlarla başvurabilirim?',
+      submenu: [
+        { label: 'Hangi bölümlerde ÇAP yapılabilir?', query: 'UTİC öğrencileri hangi bölümlerde ÇAP yapabilir?' },
+        { label: 'ÇAP başvuru şartları neler?', query: 'ÇAP başvurusu için hangi şartlar aranıyor?' },
+        { label: 'ÇAP mi Yandal mı, farkı ne?', query: 'ÇAP ile Yandal arasındaki fark nedir?' },
+      ],
+    },
+    {
+      icon: '📝', label: 'Sınav & Not Geçme',
+      query: 'Sınavlardan geçme notu kaç ve nasıl hesaplanıyor?',
+      submenu: [
+        { label: 'Bütünlemeye kimler giremez?', query: 'Bütünleme sınavına kimler giremez?' },
+        { label: 'Çakışma kuralı nasıl işliyor?', query: 'Ders tekrarında çakışma kuralı ve istisnaları nedir?' },
+        { label: 'Notlar nasıl hesaplanıyor?', query: 'Ders notları nasıl hesaplanıyor?' },
+      ],
+    },
+    {
+      icon: '👩‍🏫', label: 'Akademik Kadro',
+      query: 'Bölüm başkanı ve öğretim üyeleri kimler, nasıl ulaşabilirim?',
+      submenu: [
+        { label: 'Bölüm başkanı kim?', query: 'UTİC bölüm başkanı kim ve iletişim bilgisi nedir?' },
+        { label: 'Danışmanlık nasıl işliyor?', query: 'Akademik danışmanlık sistemi nasıl işliyor, istisnalar var mı?' },
+        { label: 'Öğretim üyeleri kimler?', query: 'UTİC bölümündeki öğretim üyeleri kimler?' },
+      ],
+    },
+    {
+      icon: '📣', label: 'Kulüpler & İletişim',
+      query: 'Bölümle ilgili kulüpler ve iletişim bilgileri neler?',
+      submenu: [
+        { label: 'Sosyal medya hesaplarımız neler?', query: 'Bölümün sosyal medya hesapları neler?' },
+        { label: 'Hangi öğrenci toplulukları var?', query: 'UTİC ile ilgili hangi öğrenci toplulukları/kulüpleri var?' },
+      ],
+    },
+    {
+      icon: '🗂️', label: 'Komisyonlar',
+      query: 'Bölüm komisyonları ve üyeleri kimler?',
+      submenu: [
+        { label: 'Burs komisyonunda kimler var?', query: 'Burs komisyonunda kimler görev yapıyor?' },
+        { label: 'Erasmus komisyonu kim?', query: 'Erasmus komisyonunda kimler görev yapıyor?' },
+        { label: 'Akreditasyon komisyonu kim?', query: 'Akreditasyon komisyonunda kimler görev yapıyor?' },
+      ],
+    },
+  ];
 
   function scrollToBottom() {
     messagesEl.scrollTop = messagesEl.scrollHeight;
@@ -398,9 +495,59 @@
     if (el) el.remove();
   }
 
-  async function sendMessage(text) {
-    if (!text.trim() || isLoading) return;
-    if (welcomeEl) { welcomeEl.remove(); }
+  // ---------- Ana menü / alt menü bloğu oluştur ----------
+  function createMenuBlock(topic) {
+    const wrap = document.createElement('div');
+    wrap.className = 'welcome';
+
+    if (!topic) {
+      wrap.innerHTML = '<strong>Merhaba! 👋</strong> Ben UTİC AI Asistanı — bölümün staj, ' +
+        'Erasmus, ÇAP, sınav ve daha bir sürü konudaki resmi belgeleriyle eğitildim, yani ' +
+        'sana kafamdan atmadan, gerçek bölüm bilgileriyle cevap veriyorum 😊<br>Aşağıdan bir ' +
+        'konu seçebilir ya da direkt sorunu yazabilirsin, hangisi rahatsa!';
+    } else {
+      const title = document.createElement('p');
+      title.className = 'submenu-title';
+      title.textContent = topic.label + ' ile ilgili daha fazlası';
+      wrap.appendChild(title);
+    }
+
+    const list = document.createElement('div');
+    list.className = 'menu-list';
+
+    const items = topic ? topic.submenu : TOPICS;
+    items.forEach((item) => {
+      const btn = document.createElement('button');
+      btn.className = 'menu-item';
+      btn.innerHTML = topic ? item.label : (item.label + ' <span class="icon">' + item.icon + '</span>');
+      btn.addEventListener('click', () => {
+        const targetTopic = topic || item;
+        askTopic(targetTopic, item.query);
+      });
+      list.appendChild(btn);
+    });
+
+    if (topic) {
+      const backBtn = document.createElement('button');
+      backBtn.className = 'menu-item back';
+      backBtn.textContent = '🔙 Ana Menüye Dön';
+      backBtn.addEventListener('click', () => {
+        messagesEl.appendChild(createMenuBlock(null));
+        scrollToBottom();
+      });
+      list.appendChild(backBtn);
+    }
+
+    wrap.appendChild(list);
+    return wrap;
+  }
+
+  function askTopic(topic, query) {
+    sendMessage(query, topic);
+  }
+
+  async function sendMessage(text, topic) {
+    if (!text || !text.trim() || isLoading) return;
 
     addMessage('user', text);
     history.push({ role: 'user', text });
@@ -434,6 +581,10 @@
       isLoading = false;
       sendBtn.disabled = false;
       inputEl.focus();
+      if (topic) {
+        messagesEl.appendChild(createMenuBlock(topic));
+        scrollToBottom();
+      }
     }
   }
 
@@ -451,9 +602,8 @@
     inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
   });
 
-  document.querySelectorAll('.chip').forEach((chip) => {
-    chip.addEventListener('click', () => sendMessage(chip.dataset.q));
-  });
+  // İlk yüklemede ana menüyü göster
+  messagesEl.appendChild(createMenuBlock(null));
 </script>
 
 </body>
