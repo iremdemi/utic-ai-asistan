@@ -181,7 +181,8 @@ exports.handler = async function (event) {
     try {
       response = await callGemini(requestBody, apiKey);
       if (response.ok) break;
-      if (response.status !== 429 && response.status < 500) break; // istemci hatasıysa tekrar deneme
+      if (response.status === 429) break; // kota bittiyse tekrar denemek kotayı daha da tüketir, direkt çık
+      if (response.status < 500) break; // diğer istemci hatalarında da tekrar deneme
     } catch (err) {
       lastErr = err;
       response = null;
@@ -209,11 +210,14 @@ exports.handler = async function (event) {
 
   if (!response.ok) {
     console.error("Gemini API hatası:", JSON.stringify(data));
+    const isQuota = response.status === 429;
     return {
       statusCode: 502,
       headers,
       body: JSON.stringify({
-        error: "Yapay zeka servisinden yanıt alınamadı. Lütfen tekrar dene.",
+        error: isQuota
+          ? "Şu anda çok fazla soru soruldu, birkaç dakika sonra tekrar dener misin? 🙏"
+          : "Yapay zeka servisinden yanıt alınamadı. Lütfen tekrar dene.",
       }),
     };
   }
