@@ -659,6 +659,8 @@ UTİC öğrencilerinin kayıt yenileme dönemlerindeki ders seçim süreçleri b
 
 - **Çakışma Kuralı İstisnası (Uygulama Dersleri):** Atölye, laboratuvar veya stüdyo gibi öğretim elemanı eşliğinde yapılan ve uygulama saati teorik saatine eşit veya fazla olan dersler, başarısızlık nedeniyle tekrar edilse dahi devamsızlıktan muaf tutulmaz; bu derslerde katılım zorunludur ve çakışma kontrolü sistemsel olarak uygulanır.
 
+- **Bu İstisnaya Takılan UTİC Dersleri:** UTİC müfredatında uygulama saati teorik saatine eşit veya fazla olduğu için bu istisna kapsamına giren (yani tekrar alınsa dahi devam zorunluluğu kalkmayan) dersler şunlardır: **UTC 209 Uluslararası Ticarette Excel Uygulamaları** (1 Teorik + 1 Uygulama), **UTC 326 Sosyal Proje Yönetimi** (1 Teorik + 1 Uygulama), **UTC 402 Bitirme Çalışması** (0 Teorik + 4 Uygulama) ve **UTC 404 İşletmede Mesleki Eğitim** (5 Teorik + 20 Uygulama).
+
 4. Özel Durumlar: Mazeretli Kayıt, Kayıt Yenilememe ve AKTS Tamamlama
 
 - **Kayıt Yenilememe Durumu:** Kayıt yenilemeyen öğrencilerin Sakarya Üniversitesi kaydı silinmez; ancak bu süreler azami öğrenim süresinden sayılır ve öğrenci bu süreçte öğrencilik haklarından (belge alma, indirim vb.) yararlanamaz.
@@ -695,6 +697,10 @@ Sakarya Üniversitesi'nin sınav yönetmeliği uyarınca öğrencilerin gireceğ
 
 - **Akademik Danışmanın Görevleri:** İşletme Fakültesi tarafından her UTİC öğrencisine atanan akademik danışmanlar, SABİS üzerinden görüntülenebilir. Danışmanlar, ders kayıt süreçlerinde intibak ve müfredat kontrollerini yapmakla, ayrıca öğrenciyi kariyer, mesleki gelişim ve üniversite yaşamına uyum konularında yönlendirmekle yükümlüdür.
 
+- **Danışmanlık İstisnası (ÇAP/Yandal Öğrencileri):** Çift Anadal (ÇAP) veya Yandal programı yapan bir UTİC öğrencisine, kayıtlı olduğu **her bir program için ayrı ayrı** akademik danışman atanır (yani UTİC'teki danışmanından farklı olarak, ikinci programda da o programa ait bir danışmanı olur).
+
+- **Danışmanlık İstisnası (Değişim Programı Öğrencileri):** Değişim programı (Erasmus/Farabi) ile UTİC'e dışarıdan gelen misafir öğrencilerin akademik danışmanlığını, normal akademik danışman ataması yerine **doğrudan Bölüm Değişim Programları Koordinatörü** üstlenir.
+
 - **Kayıp Kimlik Yenileme Süreci:** Öğrenci kimlik kartının kaybolması veya arızalanması halinde; öğrenci, İşletme Fakültesi'nden "Öğrenci Kimlik Kartı Talep Formu (EK-2)" belgesini doldurur, üniversitenin anlaşmalı olduğu ilgili bankaya kimlik yenileme ücretini yatırır ve dekontla birlikte Sakarya Üniversitesi Kart Otomasyon Merkezi'ne başvuru yapar.
 
 
@@ -717,6 +723,20 @@ Sakarya Üniversitesi İşletme Fakültesi Uluslararası Ticaret ve Lojistik (UT
 - **UTİC Bölümü Mezuniyet ve Not Kontrol Komisyonu:** Öğrencilerin mezuniyet aşamasındaki idari kontrolleri ve not durumlarının değerlendirilmesinden sorumlu olan bu komisyonda; **Dr. Öğr. Üyesi Büşra Garip**, **Dr. Öğr. Üyesi Ayşegül Karataş** ve **Doç. Dr. Esra Dil** görev yapmaktadır.
 
 - **UTİC Bölümü Farabi ve Mevlana Komisyonları:** Öğrencilerin Farabi (yurtiçi) ve Mevlana (yurtdışı) akademik değişim programları süreçlerinden sorumlu olan bu idari komisyonda; **Prof. Dr. Ahmet Yağmur Ersoy** ve **Dr. Öğr. Üyesi Oylum Şehvez Ergüzel** görev yapmaktadır.
+
+- **UTİC Bölümü SAÜDEK, SYBS ve Kalite Elçileri Komisyonu:** Bölümün eğitim kalitesi değerlendirme ve akreditasyon elçiliği süreçlerinden sorumlu bu komisyonda; **Dr. Öğr. Üyesi Büşra Garip**, **Doç. Dr. Yasin Kerem Gümüş** ve **Doç. Dr. Halil Şimdi** görev yapmaktadır.
+
+- **UTİC Bölümü Web Sayfası ve Sosyal Medya Komisyonu:** Bölümün resmi web sitesi ve sosyal medya hesaplarının yönetiminden sorumlu bu komisyonda; **Dr. Öğr. Üyesi Oylum Şehvez Ergüzel** ve **Prof. Dr. Ahmet Yağmur Ersoy** görev yapmaktadır.
+
+- **UTİC Bölümü Sosyal ve Kültürel Etkinlik Komisyonu:** Bölüm öğrencileri için düzenlenen sosyal ve kültürel etkinliklerin organizasyonundan sorumlu bu komisyonda; **Prof. Dr. Ahmet Yağmur Ersoy** ve **Dr. Öğr. Üyesi Oylum Şehvez Ergüzel** görev yapmaktadır.
+
+- **UTİC Bölümü Oryantasyon ve Tanıtım Komisyonu:** Yeni kayıt olan öğrencilerin oryantasyonu ve bölümün tanıtım faaliyetlerinden sorumlu bu komisyonda; **Prof. Dr. Ahmet Yağmur Ersoy**, **Doç. Dr. Esra Dil** ve **Dr. Öğr. Üyesi Oylum Şehvez Ergüzel** görev yapmaktadır.
+
+- **UTİC Bölümü Akreditasyon Komisyonu:** Bölümün akreditasyon (AACSB vb.) süreçlerinin takibinden sorumlu bu komisyonda; **Dr. Öğr. Üyesi Ayşegül Karataş**, **Dr. Öğr. Üyesi Büşra Garip** ve **Doç. Dr. Esra Dil** görev yapmaktadır.
+
+- **UTİC Bölümü Üniversite-Sanayi İşbirliği Komisyonu:** Bölümün sanayi ve iş dünyasıyla işbirliği faaliyetlerinden sorumlu bu komisyonda; **Prof. Dr. Ahmet Yağmur Ersoy**, **Doç. Dr. Engin Dücan** ve **Prof. Dr. Hakan Tunahan** görev yapmaktadır.
+
+- **UTİC Bölümü Akademik Teşvik Değerlendirme Komisyonu:** Öğretim üyelerinin akademik teşvik başvurularının değerlendirilmesinden sorumlu bu komisyonda; **Doç. Dr. Halil Şimdi**, **Doç. Dr. Esra Dil** ve **Dr. Öğr. Üyesi Büşra Garip** görev yapmaktadır.
 
 
 ## KAYNAK: /mnt/user-data/uploads/sinav_Gecme.docx
@@ -830,7 +850,7 @@ Sakarya Üniversitesi tarafından uygulanan 7+1 Eğitim Modeli kapsamında UTİC
 
 - **Başvuru Şartı:** Öğrencilerin İME alabilmeleri için önceki yarıyıllardaki derslerinin genel not ortalamasının (GNO) **en az 1.80** olması gerekmektedir.
 
-- **Yerleştirme:** Bölüm Komisyonu, öğrencilerin Sakarya Üniversitesi Bilgi Sistemi (SABİS) üzerinden yapacağı en fazla 3 tercihe ve akademik ortalamalarına göre işletmelere yerleştirmelerini yapar. Bu yerleştirmeler kesindir.
+- **Yerleştirme:** Zorunlu İME'de öğrenciler Bölüm Komisyonu tarafından bir işletmeye yerleştirilmez. İsteğe bağlı yaz stajında olduğu gibi, öğrenci **kendi işyerini kendisi bulur**; önemli olan bulunan işyerinin, aşağıda belirtilen İME kriterlerini (personel sayısı, sektör vb.) karşılamasıdır. Öğrencinin bulduğu işyeri, Bölüm Komisyonu tarafından bu kriterlere uygunluk açısından onaylanır.
 
 3. Zorunlu İME Yapılabilecek İşletmelerin Taşıması Gereken Kriterler
 
@@ -852,7 +872,7 @@ UTİC öğrencilerinin 16 haftalık zorunlu İME uygulamasını yapacağı işye
 
 4. İME Sürecindeki Resmi Yetkililer ve Görevleri
 
-- **UTİC Bölümü İME Komisyonu:** Başvuruları değerlendirir, öğrencileri SABİS üzerinden işletmelere yerleştirir, işyeri uygunluklarını denetler ve işletme değişikliği taleplerini karara bağlar.
+- **UTİC Bölümü İME Komisyonu:** Başvuruları değerlendirir, öğrencinin kendi bulduğu işyerinin İME kriterlerine uygunluğunu onaylar, işyeri uygunluklarını denetler ve işletme değişikliği taleplerini karara bağlar.
 
 - **Denetçi (Sorumlu) Öğretim Elemanı:** UTİC Bölümü tarafından atanır. Öğrencinin firmadaki çalışmalarını dönem boyunca fiziki veya çevrimiçi olarak en az 2 defa denetler. İME bitiminde jüri değerlendirmesini yaparak başarı notunu sisteme girer.
 
