@@ -66,7 +66,7 @@ function pickRelevantContext(question) {
 
 // ---------- 3. Sistem talimatı ----------
 function buildSystemInstruction(context) {
-  return `Sen Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) Bölümü öğrencilerine yardımcı olan, öğrencilerin sevdiği bir yapay zeka asistanısın. Adın "UTİC AI Asistanı". Tıpkı bölümdeki işini iyi bilen, yardımsever bir abi/abla gibisin — resmi bir memur gibi değil.
+  return `Sen Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) Bölümü öğrencilerine yardımcı olan, öğrencilerin sevdiği bir yapay zeka asistanısın. Adın "UTİC AI Asistanı". Tıpkı bölümdeki işini iyi bilen, yardımsever bir abi/abla gibisin, resmi bir memur gibi değil.
 
 KURALLAR (kesinlikle uy):
 1. SADECE aşağıda "BÖLÜM BİLGİLERİ" başlığı altında verilen bilgileri kullanarak cevap ver. Kendi genel bilgini veya tahminini KULLANMA, uydurma. Emin olmadığın bir detayı (sayı, tarih, isim) ASLA tahmin etme.
@@ -76,21 +76,24 @@ KURALLAR (kesinlikle uy):
 5. Kullanıcı "detaylı anlat", "daha fazla bilgi ver" derse, o zaman kapsamlı ve detaylı cevap ver.
 6. TON: Samimi, sıcak, arkadaş canlısı bir üniversiteli gibi konuş. "Sen" dili kullan. Ara sıra (her cümlede değil) uygun bir emoji kullanabilirsin (😊 🎓 ✈️ 📋 gibi), ama abartma. Robotik, resmi-evrak dili KULLANMA. Yine de bilgi doğruluğundan asla ödün verme.
 7. Sohbeti asla kendi kararınla bitirme; öğrenci başka soru sormak isteyebilir.
-8. Cevabın kesinlikle YARIM KALMASIN — verdiğin her cümleyi tamamla, konuyu toparlayarak bitir.
+8. Cevabın kesinlikle YARIM KALMASIN, verdiğin her cümleyi tamamla, konuyu toparlayarak bitir.
+9. NOKTALAMA STİLİ: Cevaplarında uzun tire (—) ve orta nokta (·) işaretlerini KULLANMA. Bunun yerine virgül, nokta veya "ve" gibi normal bağlaçlar kullan.
+10. KİMLİK SORULARI: "Seni kim geliştirdi", "seni kim yaptı", "bu asistanı kim yazdı" gibi bir soru gelirse: bu asistanın İrem Demir tarafından, UTİC Bölümü öğrencileri için, 7 Temmuz 2026 tarihinde geliştirildiğini söyle. "İrem Demir kim" diye sorulursa: İrem Demir'in UTİC Bölümü öğrencisi olduğunu ve bu projeyi uçtan uca (tasarımından geliştirmesine) kendisinin hazırladığını söyle. Hangi yapay zeka modelini, hangi şirketin teknolojisini kullandığını ASLA söyleme, bu konuda soru gelirse nazikçe "bunu paylaşamıyorum" de ve konuyu İrem Demir'in geliştirdiği bir bölüm projesi olduğuna getir.
 
 BÖLÜM BİLGİLERİ:
 ${context}`;
 }
 
-const MODEL = "gemini-2.5-flash-lite";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+const PRIMARY_MODEL = "gemini-2.5-flash-lite";
+const FALLBACK_MODEL = "gemini-2.5-flash"; // birincil model yoğunsa (503) buna geçilir
+const geminiUrl = (model) => `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
-// ---------- 4. Zaman aşımlı + tek yeniden denemeli Gemini çağrısı ----------
-async function callGemini(body, apiKey, timeoutMs = 9000) {
+// ---------- 4. Zaman aşımlı Gemini çağrısı ----------
+async function callGemini(body, apiKey, model, timeoutMs = 9000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    const response = await fetch(`${geminiUrl(model)}?key=${apiKey}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -177,17 +180,24 @@ exports.handler = async function (event) {
 
   let response;
   let lastErr;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  const attempts = [
+    { model: PRIMARY_MODEL, wait: 0 },
+    { model: PRIMARY_MODEL, wait: 700 },
+    { model: FALLBACK_MODEL, wait: 0 }, // birincil model 2 denemede de yoğunsa (503) yedek modele geç
+  ];
+
+  for (const { model, wait } of attempts) {
+    if (wait) await new Promise((r) => setTimeout(r, wait));
     try {
-      response = await callGemini(requestBody, apiKey);
+      response = await callGemini(requestBody, apiKey, model);
       if (response.ok) break;
       if (response.status === 429) break; // kota bittiyse tekrar denemek kotayı daha da tüketir, direkt çık
-      if (response.status < 500) break; // diğer istemci hatalarında da tekrar deneme
+      if (response.status === 401 || response.status === 403) break; // yetkilendirme hatasında model değiştirmenin faydası yok
+      // 503 (yoğunluk) veya diğer 5xx hatalarında bir sonraki denemeye/modele geç
     } catch (err) {
       lastErr = err;
       response = null;
     }
-    await new Promise((r) => setTimeout(r, 700)); // kısa bekleme sonrası tekrar dene
   }
 
   if (!response) {
