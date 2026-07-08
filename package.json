@@ -5,5 +5,8 @@
   "description": "Sakarya Üniversitesi UTİC Bölümü için yapay zeka destekli öğrenci asistanı.",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.0.0"
   }
 }
