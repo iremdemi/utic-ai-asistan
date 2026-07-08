@@ -2,7 +2,7 @@
 // Öğrencinin yazdığı öneri/şikayeti tamamen anonim olarak saklar.
 // Hiçbir kimlik bilgisi (isim, IP, cihaz vb.) kaydedilmez.
 
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 
 exports.handler = async function (event) {
   const headers = {
@@ -46,6 +46,7 @@ exports.handler = async function (event) {
   }
 
   try {
+    connectLambda(event);
     const store = getStore("oneri-sikayet");
     const id = Date.now() + "-" + Math.random().toString(36).slice(2, 8);
 
