@@ -97,16 +97,14 @@
     margin: 0 auto;
   }
 
-  .topbar img.logo {
-    height: 26px;
-    width: auto;
+  .tico-mascot {
+    animation: ticoFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 6px 8px rgba(15, 30, 61, 0.35));
   }
 
-  .topbar span {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--navy-900);
+  @keyframes ticoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
   }
 
   /* ---------- Ana içerik ---------- */
@@ -410,13 +408,24 @@
 <div class="glow"></div>
 
 <div class="topbar">
-  <img class="logo" src="utic-logo.png" alt="UTİC" />
-  <span>AI Asistanı</span>
+  <div class="tico-mascot" aria-label="Tico">
+    <svg viewBox="0 0 100 100" width="42" height="42">
+      <line x1="50" y1="6" x2="50" y2="17" stroke="#0f1e3d" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="50" cy="6" r="5" fill="#ffffff" stroke="#0f1e3d" stroke-width="2.5"/>
+      <rect x="12" y="40" width="10" height="20" rx="5" fill="#0f1e3d"/>
+      <rect x="78" y="40" width="10" height="20" rx="5" fill="#0f1e3d"/>
+      <rect x="20" y="18" width="60" height="58" rx="24" fill="#0f1e3d"/>
+      <rect x="32" y="34" width="36" height="28" rx="12" fill="#ffffff"/>
+      <circle cx="43" cy="48" r="4.5" fill="#0f1e3d"/>
+      <circle cx="57" cy="48" r="4.5" fill="#0f1e3d"/>
+      <path d="M 43 57 Q 50 62 57 57" fill="none" stroke="#0f1e3d" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
 </div>
 
 <main>
   <div class="hero" id="hero">
-    <h1>Merhaba! Ben UTİC AI Asistanı</h1>
+    <h1>Merhaba! Ben UTİC AI Asistanı Tico</h1>
     <p>Burada olduğuna sevindim. Staj, Erasmus, ÇAP, Yandal, dersler, sınavlar, mezuniyet ve diğer akademik süreçlerle ilgili sorularını resmi bilgi ve yönergeleri esas alarak yanıtlıyorum.</p>
     <p>İster kısa bir bilgi almak iste, ister detaylı bir konuda yardım arıyor ol, aşağıdan bir konu seçebilir veya sorunu doğrudan yazabilirsin.</p>
     <div class="hero-chips" id="heroChips"></div>
