@@ -45,31 +45,56 @@ function extractKeywords(question) {
     .filter((w) => w.length > 2 && !STOPWORDS.has(w));
 }
 
+// Bazı konular (özellikle isim/kişi listeleyen hassas konular) yanlışlıkla
+// alaka skorlamasında elenirse model isim uydurmaya başlıyor. Bu yüzden
+// belirli anahtar kelimeler geçtiğinde ilgili kaynağı skor ne olursa olsun
+// garanti şekilde bağlama dahil ediyoruz.
+const FORCE_INCLUDE_RULES = [
+  { pattern: /2209/, nameIncludes: ["TÜBİTAK 2209"] },
+  { pattern: /3005/, nameIncludes: ["TÜBİTAK 3005"] },
+];
+
 function pickRelevantContext(question) {
   const keywords = extractKeywords(question);
-  if (!keywords.length) return knowledgeBase; // anahtar kelime yoksa güvenli varsayılan: tüm bilgi
+  const normQ = normalizeTr(question);
 
-  const scored = CHUNKS.map((c) => {
-    const normContent = normalizeTr(c.text);
-    let score = 0;
-    for (const kw of keywords) {
-      score += normContent.split(kw).length - 1;
+  let selected;
+  if (!keywords.length) {
+    selected = CHUNKS.slice();
+  } else {
+    const scored = CHUNKS.map((c) => {
+      const normContent = normalizeTr(c.text);
+      let score = 0;
+      for (const kw of keywords) {
+        score += normContent.split(kw).length - 1;
+      }
+      return { ...c, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const matched = scored.filter((c) => c.score > 0).slice(0, 8);
+    selected = matched.length ? matched : CHUNKS.slice();
+  }
+
+  // Zorunlu dahil etme kuralları: eşleşmediyse bile ekle
+  for (const rule of FORCE_INCLUDE_RULES) {
+    if (rule.pattern.test(normQ)) {
+      for (const c of CHUNKS) {
+        const alreadyIn = selected.some((s) => s.name === c.name);
+        if (!alreadyIn && rule.nameIncludes.some((n) => c.name.includes(n))) {
+          selected.push(c);
+        }
+      }
     }
-    return { ...c, score };
-  }).sort((a, b) => b.score - a.score);
+  }
 
-  const matched = scored.filter((c) => c.score > 0).slice(0, 8);
   console.log(
     "Soru:",
     question,
     "| Seçilen kaynaklar:",
-    matched.length
-      ? matched.map((c) => c.name + " (skor:" + c.score + ")").join(", ")
-      : "eşleşme yok, TÜM bilgi kullanıldı"
+    selected.map((c) => c.name).join(", ")
   );
-  if (!matched.length) return knowledgeBase; // hiç eşleşme yoksa yine güvenli varsayılan: tüm bilgi
 
-  return matched.map((c) => c.text).join("\n\n");
+  return selected.map((c) => c.text).join("\n\n");
 }
 
 // ---------- 3. Sistem talimatı ----------
@@ -78,6 +103,7 @@ function buildSystemInstruction(context) {
 
 KURALLAR (kesinlikle uy):
 1. SADECE aşağıda "BÖLÜM BİLGİLERİ" başlığı altında verilen bilgileri kullanarak cevap ver. Kendi genel bilgini, tahminini veya dünyada var olan benzer program/topluluk/kulüp/yarışma isimlerini KULLANMA, uydurma. Bir konu BÖLÜM BİLGİLERİ içinde hiç geçmiyorsa, o konu hakkında TEK KELİME bile üretme, sadece bilginin olmadığını söyle.
+1b. KİŞİ/İSİM UYDURMA YASAK: Bir öğrencinin, hocanın veya herhangi bir kişinin ismini ASLA uydurma. Sadece BÖLÜM BİLGİLERİ'nde BİREBİR yazan isimleri kullan. Örneğin TÜBİTAK 2209 projelerini kimin yaptığı sorulursa, SADECE BÖLÜM BİLGİLERİ'nde adı geçen gerçek öğrencileri say (örn. İrem Demir, Rojin Aydın gibi); listede olmayan hiçbir ismi (örneğin "Elif Kaya", "Mehmet Yıldız" gibi genel/rastgele isimler) ASLA ekleme. Emin değilsen, o kişiyi hiç anma.
 2. Eğer soru bu bilgiler içinde yoksa, samimi bir dille bilginin olmadığını söyle ve bölüm sekreterliğine yönlendir. Asla uydurma bilgi verme, asla dışarıdan bir isim veya detay ekleme.
 3. TUTARLILIK: Cevaba başlamadan önce BÖLÜM BİLGİLERİ'nde ilgili veri olup olmadığını kendi içinde kontrol et. Eğer veri VARSA, doğrudan o veriyle cevap ver; "böyle bir liste yok" gibi genel bir uyarı/hedge cümlesiyle BAŞLAYIP sonra o veriyi listeleme gibi kendi kendinle çelişen bir cevap verme. Ya net bilgi ver ya da net biçimde bilginin olmadığını söyle, ikisini karıştırma.
 4. UZUNLUK: Kullanıcı "detaylı anlat", "daha fazla bilgi ver" gibi özel olarak istemedikçe, normal bir yapay zeka sohbet asistanının vereceği türden orta uzunlukta bir cevap ver (yaklaşık 1 paragraf), konunun önemli noktalarına değinerek ama gereksiz uzatmadan. Kullanıcı detay isterse cümlelerini çeşitlendirip genişlet, farklı açılardan ele al, örnekler ekle.
