@@ -279,6 +279,26 @@
     font-size: 13.5px;
   }
 
+  .doc-upload-info {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+
+  .doc-file-input {
+    display: block;
+    width: 100%;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .menu-item.back:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .menu-card {
     align-self: stretch;
     background: rgba(255, 255, 255, 0.78);
@@ -558,6 +578,7 @@
     <p><strong>Hangi veriler işleniyor:</strong> Sohbet kutusuna yazdığınız mesajlar, size cevap üretebilmek amacıyla bir yapay zeka servisine iletilir.</p>
     <p><strong>Veriler nerede saklanıyor:</strong> Bu site, yazdığınız mesajları kendi sunucusunda kalıcı olarak saklamaz veya bir veritabanına kaydetmez. Sohbet geçmişiniz yalnızca tarayıcınızın hafızasında, o oturum boyunca tutulur; sayfayı yenilediğinizde veya kapattığınızda silinir.</p>
     <p><strong>Üçüncü taraflar:</strong> Mesajlarınız, cevap üretilmesi amacıyla bir yapay zeka servis sağlayıcısının altyapısına iletilir ve o sağlayıcının kendi gizlilik politikaları çerçevesinde işlenir. Bu asistan kişisel verilerinizi (ad, öğrenci numarası, iletişim bilgisi vb.) toplama veya saklama amacı gütmez; lütfen sohbet kutusuna bu tür hassas bilgileri paylaşmaktan kaçının.</p>
+    <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
     <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
     <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
     <button id="privacyCloseBtn" class="privacy-close" type="button">Kapat</button>
@@ -579,6 +600,10 @@
 
   // ---------- Konu / alt-konu menu verisi ----------
   const TOPICS = [
+    {
+      icon: '📲', label: '1. Sınıf WhatsApp Grubuna Katıl',
+      special: 'document-upload',
+    },
     {
       icon: '🏛️', label: 'Bölümümüz Hakkında',
       query: 'UTİC bölümü hakkında genel bilgi verir misin?',
@@ -758,7 +783,13 @@
       const chip = document.createElement('button');
       chip.className = 'chip';
       chip.textContent = topic.label;
-      chip.addEventListener('click', () => askTopic(topic, topic.query));
+      chip.addEventListener('click', () => {
+        if (topic.special === 'document-upload') {
+          openDocumentUpload();
+        } else {
+          askTopic(topic, topic.query);
+        }
+      });
       heroChipsEl.appendChild(chip);
     });
   }
@@ -814,12 +845,97 @@
       const btn = document.createElement('button');
       btn.className = 'menu-item';
       btn.textContent = topic.label;
-      btn.addEventListener('click', () => askTopic(topic, topic.query));
+      btn.addEventListener('click', () => {
+        if (topic.special === 'document-upload') {
+          openDocumentUpload();
+        } else {
+          askTopic(topic, topic.query);
+        }
+      });
       list.appendChild(btn);
     });
 
     wrap.appendChild(list);
     return wrap;
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function openDocumentUpload() {
+    revealChat();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'menu-card';
+
+    const title = document.createElement('p');
+    title.className = 'submenu-title';
+    title.textContent = '1. Sınıf WhatsApp Grubuna Katıl';
+    wrap.appendChild(title);
+
+    const info = document.createElement('p');
+    info.className = 'doc-upload-info';
+    info.textContent = 'e-Devlet üzerinden aldığın öğrenci belgenin net bir fotoğrafını veya ekran görüntüsünü yükle, seni doğrulayıp grup davet linkini hemen göndereyim.';
+    wrap.appendChild(info);
+
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.className = 'doc-file-input';
+    wrap.appendChild(fileInput);
+
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'menu-item back';
+    submitBtn.textContent = 'Belgeyi Yükle ve Doğrula';
+    submitBtn.disabled = true;
+    wrap.appendChild(submitBtn);
+
+    fileInput.addEventListener('change', () => {
+      submitBtn.disabled = !fileInput.files.length;
+    });
+
+    submitBtn.addEventListener('click', async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Kontrol ediliyor...';
+      fileInput.disabled = true;
+
+      try {
+        const base64 = await fileToBase64(file);
+        const res = await fetch('/.netlify/functions/verify-student', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ imageBase64: base64, mimeType: file.type || 'image/jpeg' })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          addError(data.error || 'Belge kontrol edilemedi, lütfen tekrar dene.');
+        } else if (data.approved) {
+          let msg = data.message;
+          if (data.inviteLink) msg += '\n\nGrup davet linkin: ' + data.inviteLink;
+          addMessage('bot', msg);
+        } else {
+          addMessage('bot', data.message || 'Belge doğrulanamadı, lütfen tekrar dener misin?');
+        }
+      } catch (err) {
+        addError('Bağlantı hatası, lütfen tekrar dener misin?');
+      } finally {
+        wrap.remove();
+        messagesEl.appendChild(createTopicListCard());
+        scrollToBottom();
+      }
+    });
+
+    messagesEl.appendChild(wrap);
+    scrollToBottom();
   }
 
   function askTopic(topic, query) {
