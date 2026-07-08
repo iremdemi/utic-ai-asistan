@@ -39,6 +39,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    padding-top: 52px;
   }
 
   /* ---------- Yavaşça hareket eden mavi/altın ışık (Gemini tarzı) ---------- */
@@ -85,16 +86,17 @@
 
   /* ---------- Üst bar ---------- */
   .topbar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 5;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    height: 52px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 18px 24px;
-    max-width: 720px;
-    width: 100%;
-    margin: 0 auto;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
+    box-shadow: 0 2px 12px rgba(10, 21, 40, 0.25);
   }
 
   .tico-mascot {
@@ -409,16 +411,16 @@
 
 <div class="topbar">
   <div class="tico-mascot" aria-label="Tico">
-    <svg viewBox="0 0 100 100" width="42" height="42">
-      <line x1="50" y1="6" x2="50" y2="17" stroke="#0f1e3d" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="50" cy="6" r="5" fill="#ffffff" stroke="#0f1e3d" stroke-width="2.5"/>
-      <rect x="12" y="40" width="10" height="20" rx="5" fill="#0f1e3d"/>
-      <rect x="78" y="40" width="10" height="20" rx="5" fill="#0f1e3d"/>
-      <rect x="20" y="18" width="60" height="58" rx="24" fill="#0f1e3d"/>
-      <rect x="32" y="34" width="36" height="28" rx="12" fill="#ffffff"/>
-      <circle cx="43" cy="48" r="4.5" fill="#0f1e3d"/>
-      <circle cx="57" cy="48" r="4.5" fill="#0f1e3d"/>
-      <path d="M 43 57 Q 50 62 57 57" fill="none" stroke="#0f1e3d" stroke-width="3" stroke-linecap="round"/>
+    <svg viewBox="0 0 100 100" width="36" height="36">
+      <line x1="50" y1="18" x2="50" y2="29" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="50" cy="18" r="5" fill="#0f1e3d" stroke="#ffffff" stroke-width="2.5"/>
+      <rect x="12" y="52" width="10" height="20" rx="5" fill="#ffffff"/>
+      <rect x="78" y="52" width="10" height="20" rx="5" fill="#ffffff"/>
+      <rect x="20" y="30" width="60" height="58" rx="24" fill="#ffffff"/>
+      <rect x="32" y="46" width="36" height="28" rx="12" fill="#0f1e3d"/>
+      <circle cx="43" cy="60" r="4.5" fill="#ffffff"/>
+      <circle cx="57" cy="60" r="4.5" fill="#ffffff"/>
+      <path d="M 43 69 Q 50 74 57 69" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
     </svg>
   </div>
 </div>
