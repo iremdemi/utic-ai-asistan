@@ -2,7 +2,7 @@
 // İrem'in bölüm başkanlığı için biriken anonim öneri/şikayetleri görebilmesi içindir.
 // Basit bir gizli anahtarla korunur: ?key=... parametresi FEEDBACK_ADMIN_KEY ile eşleşmeli.
 
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 
 exports.handler = async function (event) {
   const headers = {
@@ -34,6 +34,7 @@ exports.handler = async function (event) {
   }
 
   try {
+    connectLambda(event);
     const store = getStore("oneri-sikayet");
     const { blobs } = await store.list();
 
