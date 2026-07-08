@@ -604,8 +604,6 @@ Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) Bölümü öğre
 
 UTİC Bölümü öğrencileri, mesleki deneyim kazanmak ve sosyal ağlarını genişletmek amacıyla bölümle entegre çalışan kulüplere katılım gösterebilirler.
 
-- **İşletLab:** Öğrencilerin aktif olarak katılım sağlayabileceği, kariyer ve iş dünyası odaklı faaliyet gösteren başlıca kulüplerden biridir.
-
 - **Sakarya Üniversitesi Topluluklar Sistemi (SABİS):** Üniversite bünyesinde faaliyet gösteren tüm aktif öğrenci topluluklarının listesine ulaşmak, kulüpleri incelemek ve kayıt süreçlerini takip etmek için Sakarya Üniversitesi'nin resmi **https://topluluk.sabis.sakarya.edu.tr/** adresi kullanılmalıdır.
 
 3. 21 Gün 37 Derece İş Topluluğu
