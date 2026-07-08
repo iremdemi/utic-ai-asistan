@@ -268,6 +268,9 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 340px;
+    overflow-y: auto;
+    padding-right: 2px;
   }
 
   .menu-item {
@@ -457,7 +460,7 @@
       ],
     },
     {
-      icon: '📋', label: '7+1 Staj Süreci',
+      icon: '📋', label: 'Staj Süreçleri',
       query: '7+1 staj süreci nasıl işliyor?',
       submenu: [
         { label: 'Zorunlu staj (İME) şartları neler?', query: 'Zorunlu stajım (İME) için GNO şartı ve başvuru süreci nedir?' },
@@ -467,8 +470,8 @@
       ],
     },
     {
-      icon: '✈️', label: 'Erasmus & Farabi',
-      query: 'Erasmus ve Farabi başvurusu nasıl yapılır?',
+      icon: '✈️', label: 'Değişim Programları',
+      query: 'Erasmus ve Farabi değişim programları hakkında genel bilgi verir misin?',
       submenu: [
         { label: 'Erasmus başvuru adımları neler?', query: 'Erasmus başvurusunun adımları neler?' },
         { label: 'Farabi programı nedir?', query: 'Farabi programı nedir, nasıl başvurulur?' },
@@ -497,21 +500,28 @@
         { label: '7. Yarıyıl dersleri neler?', query: '7. yarıyılda hangi dersler var, kimler veriyor?' },
         { label: '8. Yarıyıl dersleri neler?', query: '8. yarıyılda hangi dersler var, mezuniyet şartları neler?' },
         { label: 'Intro dersi ne demek?', query: 'Intro dersi ne demek, İntro öğrencisi kime denir?' },
-        { label: 'Araştırma projesi için destek var mı?', query: 'Öğrenci olarak araştırma projesi yapmak istesem TÜBİTAK 2209 gibi bir destek var mı?' },
+        { label: 'Bütünlemeye kimler giremez?', query: 'Bütünleme sınavına kimler giremez?' },
+        { label: 'Çakışma kuralı nasıl işliyor?', query: 'Ders tekrarında çakışma kuralı ve istisnaları nedir?' },
+        { label: 'Notlar nasıl hesaplanıyor?', query: 'Ders notları nasıl hesaplanıyor?' },
       ],
     },
     {
-      icon: '🔬', label: 'TÜBİTAK 2209 Projelerimiz',
-      query: 'TÜBİTAK 2209 nedir, öğrenciye faydası ne ve bölümümüzden hangi öğrenciler bu projeleri yapmış?',
+      icon: '🔬', label: 'TÜBİTAK Projeler',
+      query: 'Bölümümüzde TÜBİTAK ile ilgili neler var, kısaca bilgi verir misin?',
       submenu: [
         { label: 'TÜBİTAK 2209-A nedir, nasıl başvurulur?', query: 'TÜBİTAK 2209-A nedir, öğrenciye faydası ne ve nasıl başvurulur?' },
-        { label: 'Bölümümüzden hangi öğrenciler proje yapmış?', query: 'UTİC bölümünden hangi öğrenciler TÜBİTAK 2209 projesi yapmış, örnekler verir misin?' },
+        { label: 'Bölümümüzden hangi öğrenciler proje yapmış?', query: 'UTİC bölümünden hangi öğrenciler TÜBİTAK 2209 projesi yapmış, hepsini sayar mısın?' },
+        { label: 'TÜBİTAK 3005 projelerimiz neler?', query: 'Hocalarımızın yürüttüğü TÜBİTAK 3005 projeleri neler?' },
       ],
     },
     {
-      icon: '💼', label: '21 Gün 37 Derece İş Topluluğu',
-      query: '21 Gün 37 Derece İş Topluluğu hakkında bilgi verir misin?',
-      submenu: [],
+      icon: '📣', label: 'İletişim ve Sosyal Medya',
+      query: 'Bölümle ilgili iletişim kanalları ve sosyal medya hesapları neler?',
+      submenu: [
+        { label: 'Sosyal medya hesaplarımız neler?', query: 'Bölümün sosyal medya hesapları neler?' },
+        { label: 'Hangi öğrenci toplulukları var?', query: 'UTİC ile ilgili hangi öğrenci toplulukları/kulüpleri var?' },
+        { label: '21 Gün 37 Derece İş Topluluğu nedir?', query: '21 Gün 37 Derece İş Topluluğu hakkında bilgi verir misin?' },
+      ],
     },
     {
       icon: '👩‍🏫', label: 'Akademik Kadro',
@@ -520,33 +530,7 @@
         { label: 'Bölüm başkanı kim?', query: 'UTİC bölüm başkanı kim ve iletişim bilgisi nedir?' },
         { label: 'Danışmanlık nasıl işliyor?', query: 'Akademik danışmanlık sistemi nasıl işliyor, istisnalar var mı?' },
         { label: 'Öğretim üyeleri kimler?', query: 'UTİC bölümündeki öğretim üyeleri kimler?' },
-        { label: 'TÜBİTAK 3005 projelerimiz neler?', query: 'Hocalarımızın yürüttüğü TÜBİTAK 3005 projeleri neler?' },
-      ],
-    },
-    {
-      icon: '📣', label: 'Kulüpler & İletişim',
-      query: 'Bölümle ilgili kulüpler ve iletişim bilgileri neler?',
-      submenu: [
-        { label: 'Sosyal medya hesaplarımız neler?', query: 'Bölümün sosyal medya hesapları neler?' },
-        { label: 'Hangi öğrenci toplulukları var?', query: 'UTİC ile ilgili hangi öğrenci toplulukları/kulüpleri var?' },
-      ],
-    },
-    {
-      icon: '🗂️', label: 'Komisyonlar',
-      query: 'Bölüm komisyonları ve üyeleri kimler?',
-      submenu: [
-        { label: 'Burs komisyonunda kimler var?', query: 'Burs komisyonunda kimler görev yapıyor?' },
-        { label: 'Erasmus komisyonu kim?', query: 'Erasmus komisyonunda kimler görev yapıyor?' },
-        { label: 'Akreditasyon komisyonu kim?', query: 'Akreditasyon komisyonunda kimler görev yapıyor?' },
-      ],
-    },
-    {
-      icon: '📝', label: 'Sınav & Not Geçme',
-      query: 'Sınavlardan geçme notu kaç ve nasıl hesaplanıyor?',
-      submenu: [
-        { label: 'Bütünlemeye kimler giremez?', query: 'Bütünleme sınavına kimler giremez?' },
-        { label: 'Çakışma kuralı nasıl işliyor?', query: 'Ders tekrarında çakışma kuralı ve istisnaları nedir?' },
-        { label: 'Notlar nasıl hesaplanıyor?', query: 'Ders notları nasıl hesaplanıyor?' },
+        { label: 'Bölüm komisyonlarımız kimlerden oluşuyor?', query: 'Bölüm komisyonları ve üyeleri kimler?' },
       ],
     },
   ];
@@ -750,7 +734,7 @@
       isLoading = false;
       sendBtn.disabled = false;
       inputEl.focus();
-      if (topic && topic.submenu && topic.submenu.length) {
+      if (topic) {
         messagesEl.appendChild(createMenuCard(topic));
       }
       scrollToBottom();
