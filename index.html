@@ -85,8 +85,9 @@
 
   /* ---------- Üst bar ---------- */
   .topbar {
-    position: relative;
-    z-index: 2;
+    position: sticky;
+    top: 0;
+    z-index: 5;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -97,7 +98,7 @@
   }
 
   .topbar img.logo {
-    height: 30px;
+    height: 26px;
     width: auto;
   }
 
@@ -224,6 +225,14 @@
   }
 
   .msg.bot strong { color: var(--navy-900); }
+
+  .msg-link {
+    color: #2563eb;
+    text-decoration: underline;
+    word-break: break-word;
+  }
+
+  .msg-link:hover { color: #1d4ed8; }
   .msg.bot ul { margin: 6px 0; padding-left: 18px; }
   .msg.bot li { margin: 3px 0; }
 
@@ -369,7 +378,7 @@
     border-radius: 50%;
     border: none;
     background: var(--navy-900);
-    color: var(--gold-400);
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -417,7 +426,7 @@
   <div class="pill">
     <textarea id="input" rows="1" placeholder="UTİC AI Asistanı'na sorun" aria-label="Mesajınızı yazın"></textarea>
     <button class="send-btn" id="sendBtn" aria-label="Gönder">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
     </button>
   </div>
   <div class="disclaimer">İrem Demir tarafından UTİC Bölümü için geliştirilmiştir.</div>
@@ -476,6 +485,30 @@
       ],
     },
     {
+      icon: '📚', label: 'Ders Planı (Müfredat)',
+      query: 'UTİC müfredatı ve ders planı hakkında genel bilgi verir misin?',
+      submenu: [
+        { label: '1. Yarıyıl dersleri neler?', query: '1. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '2. Yarıyıl dersleri neler?', query: '2. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '3. Yarıyıl dersleri neler?', query: '3. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '4. Yarıyıl dersleri neler?', query: '4. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '5. Yarıyıl dersleri neler?', query: '5. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '6. Yarıyıl dersleri neler?', query: '6. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '7. Yarıyıl dersleri neler?', query: '7. yarıyılda hangi dersler var, kimler veriyor?' },
+        { label: '8. Yarıyıl dersleri neler?', query: '8. yarıyılda hangi dersler var, mezuniyet şartları neler?' },
+        { label: 'Intro dersi ne demek?', query: 'Intro dersi ne demek, İntro öğrencisi kime denir?' },
+        { label: 'Araştırma projesi için destek var mı?', query: 'Öğrenci olarak araştırma projesi yapmak istesem TÜBİTAK 2209 gibi bir destek var mı?' },
+      ],
+    },
+    {
+      icon: '🔬', label: 'TÜBİTAK 2209 Projelerimiz',
+      query: 'TÜBİTAK 2209 nedir, öğrenciye faydası ne ve bölümümüzden hangi öğrenciler bu projeleri yapmış?',
+      submenu: [
+        { label: 'TÜBİTAK 2209-A nedir, nasıl başvurulur?', query: 'TÜBİTAK 2209-A nedir, öğrenciye faydası ne ve nasıl başvurulur?' },
+        { label: 'Bölümümüzden hangi öğrenciler proje yapmış?', query: 'UTİC bölümünden hangi öğrenciler TÜBİTAK 2209 projesi yapmış, örnekler verir misin?' },
+      ],
+    },
+    {
       icon: '💼', label: '21 Gün 37 Derece İş Topluluğu',
       query: '21 Gün 37 Derece İş Topluluğu hakkında bilgi verir misin?',
       submenu: [],
@@ -487,6 +520,7 @@
         { label: 'Bölüm başkanı kim?', query: 'UTİC bölüm başkanı kim ve iletişim bilgisi nedir?' },
         { label: 'Danışmanlık nasıl işliyor?', query: 'Akademik danışmanlık sistemi nasıl işliyor, istisnalar var mı?' },
         { label: 'Öğretim üyeleri kimler?', query: 'UTİC bölümündeki öğretim üyeleri kimler?' },
+        { label: 'TÜBİTAK 3005 projelerimiz neler?', query: 'Hocalarımızın yürüttüğü TÜBİTAK 3005 projeleri neler?' },
       ],
     },
     {
@@ -521,12 +555,31 @@
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
+  function linkify(text) {
+    // Markdown tarzı [metin](url) bağlantıları
+    text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, label, url) => {
+      return '<a href="' + url + '" target="_blank" rel="noopener" class="msg-link">' + label + '</a>';
+    });
+    // Düz yazılmış http(s) linkleri (zaten bir <a> etiketinin içinde olmayanlar)
+    text = text.replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, (m) => {
+      let url = m;
+      let trail = '';
+      while (/[.,;:!?)]$/.test(url)) {
+        trail = url.slice(-1) + trail;
+        url = url.slice(0, -1);
+      }
+      return '<a href="' + url + '" target="_blank" rel="noopener" class="msg-link">' + url + '</a>' + trail;
+    });
+    return text;
+  }
+
   function formatText(text) {
     let escaped = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
     escaped = escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    escaped = linkify(escaped);
 
     const lines = escaped.split('\n');
     let html = '';
