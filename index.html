@@ -113,9 +113,278 @@
     box-shadow: 0 2px 10px rgba(10, 21, 40, 0.10);
   }
 
+  .menu-toggle-btn {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--navy-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .menu-toggle-btn:hover { background: var(--navy-900); color: #fff; }
+
+  .side-panel-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1400;
+    background: rgba(10, 21, 40, 0.45);
+  }
+
+  .side-panel-backdrop.open { display: block; }
+
+  .side-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 86vw;
+    background: #fff;
+    z-index: 1500;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    box-shadow: 8px 0 24px rgba(10, 21, 40, 0.18);
+    overflow-y: auto;
+  }
+
+  .side-panel.open { transform: translateX(0); }
+
+  .side-panel-inner { padding: 16px 18px 32px; }
+
+  .side-panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .panel-new-chat {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--navy-900);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .panel-new-chat:hover { background: var(--navy-800); }
+
+  .side-panel-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--paper);
+    color: var(--navy-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .side-panel-close:hover { background: var(--border); }
+
+  .panel-section {
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .panel-section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+  .panel-section-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    padding: 8px 2px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+
+  .panel-section-toggle .chev { transition: transform 0.2s ease; color: var(--ink-soft); }
+  .panel-section-toggle.open .chev { transform: rotate(180deg); }
+
+  .panel-section-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 2px 4px;
+  }
+
+  .panel-section-body.collapsed { display: none; }
+
+  .quick-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--navy-900);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .quick-link:hover { border-color: var(--gold-500); background: #fff; }
+
+  .feedback-note {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  .feedback-input, .feedback-textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--paper);
+    resize: vertical;
+    box-sizing: border-box;
+  }
+
+  .feedback-input:focus, .feedback-textarea:focus { border-color: var(--gold-500); outline: none; background: #fff; }
+
+  .settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: var(--ink);
+    padding: 4px 2px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .switch input { opacity: 0; width: 0; height: 0; }
+
+  .switch-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: var(--border);
+    border-radius: 999px;
+    transition: 0.2s;
+  }
+
+  .switch-slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .switch input:checked + .switch-slider { background: var(--navy-900); }
+  .switch input:checked + .switch-slider::before { transform: translateX(18px); }
+
+  .today-widget {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
+    color: #fff;
+    font-size: 12.5px;
+    display: none;
+  }
+
+  .today-widget.visible { display: block; }
+
+  .today-widget .today-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gold-400);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .announcements-list, .academic-calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .announcement-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-decoration: none;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    transition: 0.15s ease;
+  }
+
+  .announcement-item:hover { background: #fff; border-color: var(--gold-500); }
+
+  .announcement-date {
+    font-size: 11px;
+    color: var(--gold-500);
+    font-weight: 600;
+  }
+
+  .announcement-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy-900);
+    line-height: 1.35;
+  }
+
+  .announcement-excerpt {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .muted {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
   .reset-btn {
     position: absolute;
-    right: 18px;
     top: 50%;
     transform: translateY(-50%);
     width: 30px;
@@ -522,6 +791,51 @@
     .hero h1 { font-size: 22px; }
     main { padding-bottom: 150px; }
   }
+  /* ---------- Karanlık mod (ek katman, mevcut açık tema değişmiyor) ---------- */
+  body.dark-mode {
+    --paper: #16233f;
+    --ink: #e9ecf3;
+    --ink-soft: #9aa4bb;
+    --border: rgba(255, 255, 255, 0.14);
+    background: #0b1526;
+  }
+
+  body.dark-mode .glow {
+    background: linear-gradient(180deg, #0b1526 0%, #0e1a30 55%, #10203d 100%);
+  }
+
+  body.dark-mode .topbar {
+    background: rgba(11, 21, 38, 0.9);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  body.dark-mode .side-panel {
+    background: #101d36;
+  }
+
+  body.dark-mode .menu-toggle-btn,
+  body.dark-mode .reset-btn,
+  body.dark-mode .side-panel-close {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--ink);
+  }
+
+  body.dark-mode .msg.bot,
+  body.dark-mode .menu-card,
+  body.dark-mode .welcome-card,
+  body.dark-mode .pill {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink);
+  }
+
+  body.dark-mode .pill textarea { color: var(--ink); background: transparent; }
+
+  body.dark-mode .chip,
+  body.dark-mode .menu-item {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink);
+  }
+
 </style>
 </head>
 <body>
@@ -529,6 +843,9 @@
 <div class="glow"></div>
 
 <div class="topbar">
+  <button id="menuToggleBtn" class="menu-toggle-btn" type="button" aria-label="Duyurular ve takvim" title="Duyurular ve takvim">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
   <div class="tico-mascot" aria-label="Tico">
     <svg viewBox="0 0 100 100" width="28" height="28">
       <line x1="50" y1="18" x2="50" y2="29" stroke="#0f1e3d" stroke-width="4" stroke-linecap="round"/>
@@ -546,6 +863,95 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 2.6 6.4"/><path d="M3 21v-6h6"/></svg>
   </button>
 </div>
+
+<div class="side-panel-backdrop" id="sidePanelBackdrop"></div>
+<aside class="side-panel" id="sidePanel">
+  <div class="side-panel-inner">
+    <div class="side-panel-top">
+      <button id="sidePanelNewChat" class="panel-new-chat" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Yeni Sohbet
+      </button>
+      <button id="sidePanelClose" class="side-panel-close" type="button" aria-label="Kapat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="panel-section">
+      <button class="panel-section-toggle open" data-target="announcementsSection" type="button">
+        <span>Bölüm Duyuruları</span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="panel-section-body" id="announcementsSection">
+        <div id="announcementsList" class="announcements-list">
+          <p class="muted">Yükleniyor...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <button class="panel-section-toggle" data-target="calendarSection" type="button">
+        <span>2026-2027 Akademik Takvim</span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="panel-section-body collapsed" id="calendarSection">
+        <div id="todayWidget" class="today-widget"></div>
+        <div id="academicCalendar" class="academic-calendar">
+          <!-- AKADEMİK_TAKVİM_İÇERİĞİ: takvim yayınlandığında buraya eklenecek -->
+          <p class="muted">Akademik takvim yayınlandığında burada görünecek.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <button class="panel-section-toggle" data-target="linksSection" type="button">
+        <span>Hızlı Linkler</span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="panel-section-body collapsed" id="linksSection">
+        <a class="quick-link" href="https://sabis.sakarya.edu.tr/" target="_blank" rel="noopener">SABİS</a>
+        <a class="quick-link" href="https://utic.sakarya.edu.tr/" target="_blank" rel="noopener">UTİC Web Sitesi</a>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <button class="panel-section-toggle" data-target="feedbackSection" type="button">
+        <span>Öneri / Şikayet Kutusu</span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="panel-section-body collapsed" id="feedbackSection">
+        <p class="muted feedback-note">Bu form tamamen anonimdir. Kim gönderdiğine dair hiçbir bilgi (isim, IP, cihaz vb.) kaydedilmez veya saklanmaz, sadece yazdığın metin iletilir.</p>
+        <input id="feedbackTopic" class="feedback-input" type="text" placeholder="Konu (opsiyonel, örn. Ders Programı)" />
+        <textarea id="feedbackMessage" class="feedback-textarea" rows="4" placeholder="Öneri veya şikayetini yaz..."></textarea>
+        <button id="feedbackSubmit" class="menu-item back" type="button">Gönder</button>
+        <p id="feedbackStatus" class="muted" style="display:none;"></p>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <button class="panel-section-toggle" data-target="settingsSection" type="button">
+        <span>Ayarlar</span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="panel-section-body collapsed" id="settingsSection">
+        <div class="settings-row">
+          <span>Karanlık Mod</span>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle" />
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+        <div class="settings-row">
+          <span>English</span>
+          <label class="switch">
+            <input type="checkbox" id="langToggle" />
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
 
 <main>
   <div class="hero" id="hero">
@@ -868,21 +1274,19 @@
     });
   }
 
-  function openDocumentUpload() {
-    revealChat();
-
+  function createUploadCard({ title, info, buttonText, onSubmit }) {
     const wrap = document.createElement('div');
     wrap.className = 'menu-card';
 
-    const title = document.createElement('p');
-    title.className = 'submenu-title';
-    title.textContent = '1. Sınıf WhatsApp Grubuna Katıl';
-    wrap.appendChild(title);
+    const titleEl = document.createElement('p');
+    titleEl.className = 'submenu-title';
+    titleEl.textContent = title;
+    wrap.appendChild(titleEl);
 
-    const info = document.createElement('p');
-    info.className = 'doc-upload-info';
-    info.textContent = 'e-Devlet üzerinden aldığın öğrenci belgenin net bir fotoğrafını veya ekran görüntüsünü yükle, seni doğrulayıp grup davet linkini hemen göndereyim.';
-    wrap.appendChild(info);
+    const infoEl = document.createElement('p');
+    infoEl.className = 'doc-upload-info';
+    infoEl.textContent = info;
+    wrap.appendChild(infoEl);
 
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -892,7 +1296,7 @@
 
     const submitBtn = document.createElement('button');
     submitBtn.className = 'menu-item back';
-    submitBtn.textContent = 'Belgeyi Yükle ve Doğrula';
+    submitBtn.textContent = buttonText;
     submitBtn.disabled = true;
     wrap.appendChild(submitBtn);
 
@@ -906,35 +1310,90 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Kontrol ediliyor...';
       fileInput.disabled = true;
+      await onSubmit(file, wrap);
+    });
 
-      try {
-        const base64 = await fileToBase64(file);
-        const res = await fetch('/.netlify/functions/verify-student', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ imageBase64: base64, mimeType: file.type || 'image/jpeg' })
-        });
-        const data = await res.json();
+    return wrap;
+  }
 
-        if (!res.ok) {
-          addError(data.error || 'Belge kontrol edilemedi, lütfen tekrar dene.');
-        } else if (data.approved) {
-          let msg = data.message;
-          if (data.inviteLink) msg += '\n\nGrup davet linkin: ' + data.inviteLink;
-          addMessage('bot', msg);
-        } else {
-          addMessage('bot', data.message || 'Belge doğrulanamadı, lütfen tekrar dener misin?');
+  function openTranscriptUpload() {
+    const card = createUploadCard({
+      title: 'Not Döküm Belgeni Yükle',
+      info: '1. sınıftan alttan kalan bir dersin olduğunu gösteren e-Devlet not döküm belgeni (transkript) yükle.',
+      buttonText: 'Transkripti Yükle ve Doğrula',
+      onSubmit: async (file, wrap) => {
+        try {
+          const base64 = await fileToBase64(file);
+          const res = await fetch('/.netlify/functions/verify-student', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ imageBase64: base64, mimeType: file.type || 'image/jpeg', step: 2 })
+          });
+          const data = await res.json();
+          wrap.remove();
+
+          if (!res.ok) {
+            addError(data.error || 'Belge kontrol edilemedi, lütfen tekrar dene.');
+          } else {
+            addMessage('bot', data.message);
+          }
+        } catch (err) {
+          wrap.remove();
+          addError('Bağlantı hatası, lütfen tekrar dener misin?');
+        } finally {
+          messagesEl.appendChild(createTopicListCard());
+          scrollToBottom();
         }
-      } catch (err) {
-        addError('Bağlantı hatası, lütfen tekrar dener misin?');
-      } finally {
-        wrap.remove();
-        messagesEl.appendChild(createTopicListCard());
-        scrollToBottom();
+      }
+    });
+    messagesEl.appendChild(card);
+    scrollToBottom();
+  }
+
+  function openDocumentUpload() {
+    revealChat();
+
+    const card = createUploadCard({
+      title: '1. Sınıf WhatsApp Grubuna Katıl',
+      info: 'e-Devlet üzerinden aldığın öğrenci belgenin net bir fotoğrafını veya ekran görüntüsünü yükle, seni doğrulayıp grup davet linkini hemen göndereyim.',
+      buttonText: 'Belgeyi Yükle ve Doğrula',
+      onSubmit: async (file, wrap) => {
+        try {
+          const base64 = await fileToBase64(file);
+          const res = await fetch('/.netlify/functions/verify-student', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ imageBase64: base64, mimeType: file.type || 'image/jpeg', step: 1 })
+          });
+          const data = await res.json();
+          wrap.remove();
+
+          if (!res.ok) {
+            addError(data.error || 'Belge kontrol edilemedi, lütfen tekrar dene.');
+            messagesEl.appendChild(createTopicListCard());
+            scrollToBottom();
+          } else if (data.approved) {
+            addMessage('bot', data.message + (data.inviteLink ? '\n\nGrup davet linkin: ' + data.inviteLink : ''));
+            messagesEl.appendChild(createTopicListCard());
+            scrollToBottom();
+          } else if (data.needsSecondDoc) {
+            addMessage('bot', data.message);
+            openTranscriptUpload();
+          } else {
+            addMessage('bot', data.message || 'Belge doğrulanamadı, lütfen tekrar dener misin?');
+            messagesEl.appendChild(createTopicListCard());
+            scrollToBottom();
+          }
+        } catch (err) {
+          wrap.remove();
+          addError('Bağlantı hatası, lütfen tekrar dener misin?');
+          messagesEl.appendChild(createTopicListCard());
+          scrollToBottom();
+        }
       }
     });
 
-    messagesEl.appendChild(wrap);
+    messagesEl.appendChild(card);
     scrollToBottom();
   }
 
@@ -942,8 +1401,28 @@
     sendMessage(query, topic);
   }
 
+  function isWhatsappGroupIntent(text) {
+    const t = text
+      .toLowerCase()
+      .replace(/i̇/g, 'i')
+      .replace(/[çğıöşü]/g, (c) => ({ ç: 'c', ğ: 'g', ı: 'i', ö: 'o', ş: 's', ü: 'u' }[c] || c));
+    const mentionsGroup = /(grub|grup|whatsapp|wp)/.test(t);
+    const mentionsFirstYear = /(1\.?\s*sinif|birinci\s*sinif)/.test(t);
+    const mentionsIntent = /(katil|nasil|istiyorum|uye|ekle|gir)/.test(t);
+    return mentionsGroup && mentionsFirstYear && mentionsIntent;
+  }
+
   async function sendMessage(text, topic) {
     if (!text || !text.trim() || isLoading) return;
+
+    if (!topic && isWhatsappGroupIntent(text)) {
+      addMessage('user', text);
+      history.push({ role: 'user', text });
+      inputEl.value = '';
+      inputEl.style.height = 'auto';
+      openDocumentUpload();
+      return;
+    }
 
     revealChat();
 
@@ -960,7 +1439,7 @@
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: history.slice(0, -1) })
+        body: JSON.stringify({ message: text, history: history.slice(0, -1), lang: currentLang })
       });
 
       const data = await res.json();
@@ -1013,7 +1492,7 @@
   });
 
   const resetBtn = document.getElementById('resetBtn');
-  resetBtn.addEventListener('click', () => {
+  function startNewChat() {
     history = [];
     messagesEl.innerHTML = '';
     messagesEl.classList.add('hidden');
@@ -1022,6 +1501,239 @@
     inputEl.value = '';
     inputEl.style.height = 'auto';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  resetBtn.addEventListener('click', startNewChat);
+
+  const menuToggleBtn = document.getElementById('menuToggleBtn');
+  const sidePanel = document.getElementById('sidePanel');
+  const sidePanelBackdrop = document.getElementById('sidePanelBackdrop');
+  const sidePanelClose = document.getElementById('sidePanelClose');
+  const sidePanelNewChat = document.getElementById('sidePanelNewChat');
+  const announcementsListEl = document.getElementById('announcementsList');
+
+  let announcementsLoaded = false;
+
+  function openSidePanel() {
+    sidePanel.classList.add('open');
+    sidePanelBackdrop.classList.add('open');
+    if (!announcementsLoaded) loadAnnouncements();
+  }
+
+  function closeSidePanel() {
+    sidePanel.classList.remove('open');
+    sidePanelBackdrop.classList.remove('open');
+  }
+
+  menuToggleBtn.addEventListener('click', openSidePanel);
+  sidePanelClose.addEventListener('click', closeSidePanel);
+  sidePanelBackdrop.addEventListener('click', closeSidePanel);
+  sidePanelNewChat.addEventListener('click', () => {
+    startNewChat();
+    closeSidePanel();
+  });
+
+  // ---------- Açılır/kapanır panel bölümleri ----------
+  document.querySelectorAll('.panel-section-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const targetId = toggle.dataset.target;
+      const body = document.getElementById(targetId);
+      const isOpen = toggle.classList.contains('open');
+      toggle.classList.toggle('open', !isOpen);
+      body.classList.toggle('collapsed', isOpen);
+    });
+  });
+
+  async function loadAnnouncements() {
+    try {
+      const res = await fetch('/.netlify/functions/get-announcements');
+      const data = await res.json();
+
+      if (!res.ok || !data.announcements || !data.announcements.length) {
+        announcementsListEl.innerHTML = '<p class="muted">Şu an duyuru gösterilemiyor, daha sonra tekrar dene.</p>';
+        return;
+      }
+
+      announcementsLoaded = true;
+      announcementsListEl.innerHTML = '';
+      data.announcements.slice(0, 2).forEach((a) => {
+        const item = document.createElement('a');
+        item.href = a.url;
+        item.target = '_blank';
+        item.rel = 'noopener';
+        item.className = 'announcement-item';
+
+        const dateEl = document.createElement('span');
+        dateEl.className = 'announcement-date';
+        dateEl.textContent = a.date || '';
+        item.appendChild(dateEl);
+
+        const titleEl = document.createElement('span');
+        titleEl.className = 'announcement-title';
+        titleEl.textContent = a.title || '';
+        item.appendChild(titleEl);
+
+        if (a.excerpt) {
+          const excerptEl = document.createElement('span');
+          excerptEl.className = 'announcement-excerpt';
+          excerptEl.textContent = a.excerpt;
+          item.appendChild(excerptEl);
+        }
+
+        announcementsListEl.appendChild(item);
+      });
+    } catch (err) {
+      announcementsListEl.innerHTML = '<p class="muted">Duyurular yüklenemedi, lütfen tekrar dene.</p>';
+    }
+  }
+
+  // ---------- Karanlık mod ----------
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const savedDarkMode = localStorage.getItem('tico-dark-mode') === '1';
+  if (savedDarkMode) {
+    document.body.classList.add('dark-mode');
+    darkModeToggle.checked = true;
+  }
+  darkModeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+    localStorage.setItem('tico-dark-mode', darkModeToggle.checked ? '1' : '0');
+  });
+
+  // ---------- Dil (TR/EN) ----------
+  let currentLang = localStorage.getItem('tico-lang') || 'tr';
+  const langToggle = document.getElementById('langToggle');
+
+  const TRANSLATIONS = {
+    en: {
+      heroTitle: 'Hello! I\'m UTİC AI Assistant Tico',
+      heroP1: 'Glad you\'re here. I answer your questions about internships, Erasmus, ÇAP, minors, courses, exams, graduation and other academic processes based on official department information.',
+      heroP2: 'Whether you want a quick answer or detailed help, you can pick a topic below or type your question directly.',
+      inputPlaceholder: 'Ask UTİC AI Assistant...',
+      disclaimer1: 'Tico can make mistakes, please verify important information with the department secretariat.',
+      newChat: 'New Chat',
+      announcements: 'Department Announcements',
+      calendar: '2026-2027 Academic Calendar',
+      quickLinks: 'Quick Links',
+      feedback: 'Suggestion / Complaint Box',
+      settings: 'Settings',
+      darkMode: 'Dark Mode',
+    },
+    tr: {
+      heroTitle: 'Merhaba! Ben UTİC AI Asistanı Tico',
+      heroP1: 'Burada olduğuna sevindim. Staj, Erasmus, ÇAP, Yandal, dersler, sınavlar, mezuniyet ve diğer akademik süreçlerle ilgili sorularını resmi bilgi ve yönergeleri esas alarak yanıtlıyorum.',
+      heroP2: 'İster kısa bir bilgi almak iste, ister detaylı bir konuda yardım arıyor ol, aşağıdan bir konu seçebilir veya sorunu doğrudan yazabilirsin.',
+      inputPlaceholder: 'UTİC AI Asistanı\'na sorun',
+      disclaimer1: 'Tico yanılabilir, önemli bilgileri bölüm sekreterliğinden teyit et.',
+      newChat: 'Yeni Sohbet',
+      announcements: 'Bölüm Duyuruları',
+      calendar: '2026-2027 Akademik Takvim',
+      quickLinks: 'Hızlı Linkler',
+      feedback: 'Öneri / Şikayet Kutusu',
+      settings: 'Ayarlar',
+      darkMode: 'Karanlık Mod',
+    },
+  };
+
+  function applyLanguage(lang) {
+    const t = TRANSLATIONS[lang];
+    const heroTitleEl = heroEl.querySelector('h1');
+    const heroPs = heroEl.querySelectorAll('p');
+    if (heroTitleEl) heroTitleEl.textContent = t.heroTitle;
+    if (heroPs[0]) heroPs[0].textContent = t.heroP1;
+    if (heroPs[1]) heroPs[1].textContent = t.heroP2;
+    inputEl.placeholder = t.inputPlaceholder;
+    const disclaimerP = document.querySelector('.disclaimer p');
+    if (disclaimerP) disclaimerP.textContent = t.disclaimer1;
+    sidePanelNewChat.lastChild.textContent = ' ' + t.newChat;
+
+    document.querySelectorAll('.panel-section-toggle span').forEach((span, i) => {
+      const keys = ['announcements', 'calendar', 'quickLinks', 'feedback', 'settings'];
+      if (t[keys[i]]) span.textContent = t[keys[i]];
+    });
+
+    const darkModeLabel = document.querySelector('.settings-row span');
+    if (darkModeLabel) darkModeLabel.textContent = t.darkMode;
+  }
+
+  if (currentLang === 'en') {
+    langToggle.checked = true;
+    applyLanguage('en');
+  }
+
+  langToggle.addEventListener('change', () => {
+    currentLang = langToggle.checked ? 'en' : 'tr';
+    localStorage.setItem('tico-lang', currentLang);
+    applyLanguage(currentLang);
+  });
+
+  // ---------- "Bugün Ne Var" akademik takvim widget'ı ----------
+  // AKADEMİK_TAKVİM_VERİSİ: takvim yayınlandığında buraya {date:'YYYY-AA-GG', title:'...'} şeklinde eklenecek
+  const CALENDAR_EVENTS = [
+    // { date: '2026-09-15', title: 'Güz dönemi ders kayıtları başlıyor' },
+  ];
+
+  function renderTodayWidget() {
+    const widget = document.getElementById('todayWidget');
+    if (!widget || !CALENDAR_EVENTS.length) return;
+
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+    const todays = CALENDAR_EVENTS.filter((e) => e.date === todayStr);
+
+    if (todays.length) {
+      widget.innerHTML = '<span class="today-label">Bugün</span>' + todays.map((e) => e.title).join('<br>');
+      widget.classList.add('visible');
+      return;
+    }
+
+    const upcoming = CALENDAR_EVENTS
+      .filter((e) => e.date > todayStr)
+      .sort((a, b) => a.date.localeCompare(b.date))[0];
+
+    if (upcoming) {
+      const days = Math.ceil((new Date(upcoming.date) - today) / 86400000);
+      widget.innerHTML = '<span class="today-label">Yaklaşan</span>' + upcoming.title + ' (' + days + ' gün kaldı)';
+      widget.classList.add('visible');
+    }
+  }
+
+  renderTodayWidget();
+
+  // ---------- Öneri / Şikayet kutusu ----------
+  const feedbackTopic = document.getElementById('feedbackTopic');
+  const feedbackMessage = document.getElementById('feedbackMessage');
+  const feedbackSubmit = document.getElementById('feedbackSubmit');
+  const feedbackStatus = document.getElementById('feedbackStatus');
+
+  feedbackSubmit.addEventListener('click', async () => {
+    const message = feedbackMessage.value.trim();
+    if (!message) return;
+
+    feedbackSubmit.disabled = true;
+    feedbackSubmit.textContent = 'Gönderiliyor...';
+
+    try {
+      const res = await fetch('/.netlify/functions/submit-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: feedbackTopic.value.trim(), message }),
+      });
+
+      feedbackStatus.style.display = 'block';
+      if (res.ok) {
+        feedbackStatus.textContent = 'Teşekkürler, anonim olarak iletildi.';
+        feedbackTopic.value = '';
+        feedbackMessage.value = '';
+      } else {
+        feedbackStatus.textContent = 'Gönderilemedi, lütfen tekrar dener misin?';
+      }
+    } catch (err) {
+      feedbackStatus.style.display = 'block';
+      feedbackStatus.textContent = 'Bağlantı hatası, lütfen tekrar dener misin?';
+    } finally {
+      feedbackSubmit.disabled = false;
+      feedbackSubmit.textContent = 'Gönder';
+    }
   });
 </script>
 
