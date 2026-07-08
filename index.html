@@ -136,27 +136,6 @@
 
   .hero.hidden { display: none; }
 
-  .sparkle {
-    width: 44px;
-    height: 44px;
-    position: relative;
-    margin-bottom: 22px;
-  }
-
-  .sparkle::before,
-  .sparkle::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--gold-500), var(--navy-800));
-    clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
-  }
-
-  .sparkle::after {
-    transform: scale(0.55) rotate(20deg);
-    opacity: 0.55;
-  }
-
   .hero h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
@@ -425,7 +404,6 @@
 
 <main>
   <div class="hero" id="hero">
-    <div class="sparkle"></div>
     <h1>Merhaba! Ben UTİC AI Asistanı</h1>
     <p>Burada olduğuna sevindim. Staj, Erasmus, ÇAP, Yandal, dersler, sınavlar, mezuniyet ve diğer akademik süreçlerle ilgili sorularını resmi bilgi ve yönergeleri esas alarak yanıtlıyorum.</p>
     <p>İster kısa bir bilgi almak iste, ister detaylı bir konuda yardım arıyor ol, aşağıdan bir konu seçebilir veya sorunu doğrudan yazabilirsin.</p>
@@ -498,13 +476,9 @@
       ],
     },
     {
-      icon: '📝', label: 'Sınav & Not Geçme',
-      query: 'Sınavlardan geçme notu kaç ve nasıl hesaplanıyor?',
-      submenu: [
-        { label: 'Bütünlemeye kimler giremez?', query: 'Bütünleme sınavına kimler giremez?' },
-        { label: 'Çakışma kuralı nasıl işliyor?', query: 'Ders tekrarında çakışma kuralı ve istisnaları nedir?' },
-        { label: 'Notlar nasıl hesaplanıyor?', query: 'Ders notları nasıl hesaplanıyor?' },
-      ],
+      icon: '💼', label: '21 Gün 37 Derece İş Topluluğu',
+      query: '21 Gün 37 Derece İş Topluluğu hakkında bilgi verir misin?',
+      submenu: [],
     },
     {
       icon: '👩‍🏫', label: 'Akademik Kadro',
@@ -533,9 +507,13 @@
       ],
     },
     {
-      icon: '💼', label: '21 Gün 37 Derece İş Topluluğu',
-      query: '21 Gün 37 Derece İş Topluluğu hakkında bilgi verir misin?',
-      submenu: [],
+      icon: '📝', label: 'Sınav & Not Geçme',
+      query: 'Sınavlardan geçme notu kaç ve nasıl hesaplanıyor?',
+      submenu: [
+        { label: 'Bütünlemeye kimler giremez?', query: 'Bütünleme sınavına kimler giremez?' },
+        { label: 'Çakışma kuralı nasıl işliyor?', query: 'Ders tekrarında çakışma kuralı ve istisnaları nedir?' },
+        { label: 'Notlar nasıl hesaplanıyor?', query: 'Ders notları nasıl hesaplanıyor?' },
+      ],
     },
   ];
 
