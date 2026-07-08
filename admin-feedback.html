@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Öneri / Şikayet Paneli</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #f6f4ef; margin: 0; padding: 24px; color: #16213a; }
+  .wrap { max-width: 700px; margin: 0 auto; }
+  h1 { font-size: 20px; }
+  .key-form { display: flex; gap: 8px; margin-bottom: 24px; }
+  input[type="password"] { flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px; }
+  button { padding: 10px 16px; border-radius: 8px; border: none; background: #0f1e3d; color: #fff; font-weight: 600; cursor: pointer; }
+  .entry { background: #fff; border: 1px solid #e4dfd2; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+  .entry .topic { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #c39a4d; font-weight: 700; }
+  .entry .date { font-size: 11px; color: #888; float: right; }
+  .entry .message { margin-top: 6px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
+  .muted { color: #888; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Öneri / Şikayet Paneli</h1>
+  <p class="muted">Bu sayfa gizlidir, ana siteden bağlantısı yoktur. Sadece anahtarı bilenler görebilir.</p>
+  <div class="key-form">
+    <input type="password" id="keyInput" placeholder="Gizli anahtarı gir..." />
+    <button id="loadBtn">Getir</button>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script>
+  const keyInput = document.getElementById('keyInput');
+  const loadBtn = document.getElementById('loadBtn');
+  const listEl = document.getElementById('list');
+
+  loadBtn.addEventListener('click', async () => {
+    const key = keyInput.value.trim();
+    if (!key) return;
+    listEl.innerHTML = '<p class="muted">Yükleniyor...</p>';
+
+    try {
+      const res = await fetch('/.netlify/functions/list-feedback?key=' + encodeURIComponent(key));
+      const data = await res.json();
+
+      if (!res.ok) {
+        listEl.innerHTML = '<p class="muted">' + (data.error || 'Bir hata oluştu.') + '</p>';
+        return;
+      }
+
+      if (!data.entries || !data.entries.length) {
+        listEl.innerHTML = '<p class="muted">Henüz gönderim yok.</p>';
+        return;
+      }
+
+      listEl.innerHTML = '';
+      data.entries.forEach((e) => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        const dateStr = e.date ? new Date(e.date).toLocaleString('tr-TR') : '';
+        div.innerHTML =
+          '<span class="topic">' + (e.topic || 'Genel') + '</span>' +
+          '<span class="date">' + dateStr + '</span>' +
+          '<div class="message"></div>';
+        div.querySelector('.message').textContent = e.message || '';
+        listEl.appendChild(div);
+      });
+    } catch (err) {
+      listEl.innerHTML = '<p class="muted">Bağlantı hatası.</p>';
+    }
+  });
+</script>
+</body>
+</html>
