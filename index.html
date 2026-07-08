@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>UTİC AI Asistanı</title>
 <meta name="description" content="Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik Bölümü öğrencileri için yapay zeka destekli bilgi asistanı." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KPGxpbmUgeDE9IjUwIiB5MT0iMTgiIHgyPSI1MCIgeTI9IjI5IiBzdHJva2U9IiMwZjFlM2QiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMTgiIHI9IjUiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzBmMWUzZCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHJlY3QgeD0iMTIiIHk9IjUyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSI1IiBmaWxsPSIjMGYxZTNkIi8+CjxyZWN0IHg9Ijc4IiB5PSI1MiIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iNSIgZmlsbD0iIzBmMWUzZCIvPgo8cmVjdCB4PSIyMCIgeT0iMzAiIHdpZHRoPSI2MCIgaGVpZ2h0PSI1OCIgcng9IjI0IiBmaWxsPSIjMGYxZTNkIi8+CjxyZWN0IHg9IjMyIiB5PSI0NiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjI4IiByeD0iMTIiIGZpbGw9IiNmZmZmZmYiLz4KPGNpcmNsZSBjeD0iNDMiIGN5PSI2MCIgcj0iNC41IiBmaWxsPSIjMGYxZTNkIi8+CjxjaXJjbGUgY3g9IjU3IiBjeT0iNjAiIHI9IjQuNSIgZmlsbD0iIzBmMWUzZCIvPgo8cGF0aCBkPSJNIDQzIDY5IFEgNTAgNzQgNTcgNjkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzBmMWUzZCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="UTİC AI Asistanı, Tico" />
+<meta property="og:description" content="Staj, Erasmus, ÇAP, ders planı ve daha fazlası hakkında UTİC bölümünün resmi belgeleriyle eğitilen yapay zeka asistanı." />
+<meta property="og:image" content="https://utic.info/utic-logo.png" />
+<meta property="og:url" content="https://utic.info" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="UTİC AI Asistanı, Tico" />
+<meta name="twitter:description" content="Staj, Erasmus, ÇAP, ders planı ve daha fazlası hakkında UTİC bölümünün resmi belgeleriyle eğitilen yapay zeka asistanı." />
+<meta name="twitter:image" content="https://utic.info/utic-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -101,6 +112,26 @@
     border-bottom: 1px solid var(--border);
     box-shadow: 0 2px 10px rgba(10, 21, 40, 0.10);
   }
+
+  .reset-btn {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--navy-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .reset-btn:hover { background: var(--navy-900); color: #fff; }
 
   .tico-mascot {
     animation: ticoPulse 2.6s ease-in-out infinite;
@@ -401,6 +432,72 @@
     text-align: center;
   }
 
+  .privacy-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .privacy-link:hover { color: var(--navy-900); }
+
+  .privacy-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(10, 21, 40, 0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .privacy-overlay.open { display: flex; }
+
+  .privacy-modal {
+    background: #fff;
+    border-radius: 18px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 26px 24px;
+  }
+
+  .privacy-modal h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: var(--navy-900);
+    margin: 0 0 14px;
+  }
+
+  .privacy-modal p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+
+  .privacy-close {
+    margin-top: 6px;
+    width: 100%;
+    padding: 11px;
+    border-radius: 12px;
+    border: none;
+    background: var(--navy-900);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .privacy-close:hover { background: var(--navy-800); }
+
   @media (max-width: 480px) {
     .hero h1 { font-size: 22px; }
     main { padding-bottom: 150px; }
@@ -425,6 +522,9 @@
       <path d="M 43 69 Q 50 74 57 69" fill="none" stroke="#0f1e3d" stroke-width="3" stroke-linecap="round"/>
     </svg>
   </div>
+  <button id="resetBtn" class="reset-btn" type="button" aria-label="Yeni sohbet başlat" title="Yeni sohbet başlat">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 2.6 6.4"/><path d="M3 21v-6h6"/></svg>
+  </button>
 </div>
 
 <main>
@@ -435,7 +535,7 @@
     <div class="hero-chips" id="heroChips"></div>
   </div>
 
-  <div class="messages hidden" id="messages"></div>
+  <div class="messages hidden" id="messages" aria-live="polite" aria-relevant="additions"></div>
 </main>
 
 <div class="input-dock">
@@ -445,7 +545,23 @@
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
     </button>
   </div>
-  <div class="disclaimer">İrem Demir tarafından UTİC Bölümü için geliştirilmiştir.</div>
+  <div class="disclaimer">
+    <p style="margin: 0 0 3px;">Tico yanılabilir, önemli bilgileri bölüm sekreterliğinden teyit et.</p>
+    <p style="margin: 0;">İrem Demir tarafından UTİC Bölümü için geliştirilmiştir. <button id="privacyBtn" class="privacy-link" type="button">Gizlilik Bildirimi</button></p>
+  </div>
+</div>
+
+<div class="privacy-overlay" id="privacyOverlay">
+  <div class="privacy-modal">
+    <h2>Gizlilik ve Aydınlatma Metni</h2>
+    <p>Tico, Sakarya Üniversitesi UTİC Bölümü öğrencilerine bilgi sağlamak amacıyla İrem Demir tarafından geliştirilmiş bağımsız bir öğrenci projesidir.</p>
+    <p><strong>Hangi veriler işleniyor:</strong> Sohbet kutusuna yazdığınız mesajlar, size cevap üretebilmek amacıyla bir yapay zeka servisine iletilir.</p>
+    <p><strong>Veriler nerede saklanıyor:</strong> Bu site, yazdığınız mesajları kendi sunucusunda kalıcı olarak saklamaz veya bir veritabanına kaydetmez. Sohbet geçmişiniz yalnızca tarayıcınızın hafızasında, o oturum boyunca tutulur; sayfayı yenilediğinizde veya kapattığınızda silinir.</p>
+    <p><strong>Üçüncü taraflar:</strong> Mesajlarınız, cevap üretilmesi amacıyla bir yapay zeka servis sağlayıcısının altyapısına iletilir ve o sağlayıcının kendi gizlilik politikaları çerçevesinde işlenir. Bu asistan kişisel verilerinizi (ad, öğrenci numarası, iletişim bilgisi vb.) toplama veya saklama amacı gütmez; lütfen sohbet kutusuna bu tür hassas bilgileri paylaşmaktan kaçının.</p>
+    <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
+    <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
+    <button id="privacyCloseBtn" class="privacy-close" type="button">Kapat</button>
+  </div>
 </div>
 
 <script>
@@ -769,6 +885,28 @@
   });
 
   renderHeroChips();
+
+  const privacyBtn = document.getElementById('privacyBtn');
+  const privacyOverlay = document.getElementById('privacyOverlay');
+  const privacyCloseBtn = document.getElementById('privacyCloseBtn');
+
+  privacyBtn.addEventListener('click', () => privacyOverlay.classList.add('open'));
+  privacyCloseBtn.addEventListener('click', () => privacyOverlay.classList.remove('open'));
+  privacyOverlay.addEventListener('click', (e) => {
+    if (e.target === privacyOverlay) privacyOverlay.classList.remove('open');
+  });
+
+  const resetBtn = document.getElementById('resetBtn');
+  resetBtn.addEventListener('click', () => {
+    history = [];
+    messagesEl.innerHTML = '';
+    messagesEl.classList.add('hidden');
+    heroEl.classList.remove('hidden');
+    heroVisible = true;
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 </body>
