@@ -39,7 +39,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 52px;
+    padding-top: 40px;
   }
 
   /* ---------- Yavaşça hareket eden mavi/altın ışık (Gemini tarzı) ---------- */
@@ -91,22 +91,24 @@
     left: 0;
     right: 0;
     z-index: 999;
-    height: 52px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
-    box-shadow: 0 2px 12px rgba(10, 21, 40, 0.25);
+    background: rgba(246, 244, 239, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(10, 21, 40, 0.10);
   }
 
   .tico-mascot {
-    animation: ticoFloat 3s ease-in-out infinite;
-    filter: drop-shadow(0 6px 8px rgba(15, 30, 61, 0.35));
+    animation: ticoPulse 2.6s ease-in-out infinite;
   }
 
-  @keyframes ticoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+  @keyframes ticoPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
   }
 
   /* ---------- Ana içerik ---------- */
@@ -411,16 +413,16 @@
 
 <div class="topbar">
   <div class="tico-mascot" aria-label="Tico">
-    <svg viewBox="0 0 100 100" width="36" height="36">
-      <line x1="50" y1="18" x2="50" y2="29" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="50" cy="18" r="5" fill="#0f1e3d" stroke="#ffffff" stroke-width="2.5"/>
-      <rect x="12" y="52" width="10" height="20" rx="5" fill="#ffffff"/>
-      <rect x="78" y="52" width="10" height="20" rx="5" fill="#ffffff"/>
-      <rect x="20" y="30" width="60" height="58" rx="24" fill="#ffffff"/>
-      <rect x="32" y="46" width="36" height="28" rx="12" fill="#0f1e3d"/>
-      <circle cx="43" cy="60" r="4.5" fill="#ffffff"/>
-      <circle cx="57" cy="60" r="4.5" fill="#ffffff"/>
-      <path d="M 43 69 Q 50 74 57 69" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <svg viewBox="0 0 100 100" width="28" height="28">
+      <line x1="50" y1="18" x2="50" y2="29" stroke="#0f1e3d" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="50" cy="18" r="5" fill="#ffffff" stroke="#0f1e3d" stroke-width="2.5"/>
+      <rect x="12" y="52" width="10" height="20" rx="5" fill="#0f1e3d"/>
+      <rect x="78" y="52" width="10" height="20" rx="5" fill="#0f1e3d"/>
+      <rect x="20" y="30" width="60" height="58" rx="24" fill="#0f1e3d"/>
+      <rect x="32" y="46" width="36" height="28" rx="12" fill="#ffffff"/>
+      <circle cx="43" cy="60" r="4.5" fill="#0f1e3d"/>
+      <circle cx="57" cy="60" r="4.5" fill="#0f1e3d"/>
+      <path d="M 43 69 Q 50 74 57 69" fill="none" stroke="#0f1e3d" stroke-width="3" stroke-linecap="round"/>
     </svg>
   </div>
 </div>
