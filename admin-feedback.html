@@ -7,14 +7,24 @@
 <meta name="robots" content="noindex, nofollow" />
 <style>
   body { font-family: 'Inter', -apple-system, sans-serif; background: #f6f4ef; margin: 0; padding: 24px; color: #16213a; }
-  .wrap { max-width: 700px; margin: 0 auto; }
-  h1 { font-size: 20px; }
-  .key-form { display: flex; gap: 8px; margin-bottom: 24px; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .key-form { display: flex; gap: 8px; margin: 16px 0 20px; }
   input[type="password"] { flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px; }
-  button { padding: 10px 16px; border-radius: 8px; border: none; background: #0f1e3d; color: #fff; font-weight: 600; cursor: pointer; }
-  .entry { background: #fff; border: 1px solid #e4dfd2; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+  button { padding: 10px 16px; border-radius: 8px; border: none; background: #0f1e3d; color: #fff; font-weight: 600; cursor: pointer; font-size: 13px; }
+  button:hover { background: #17294f; }
+
+  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .summary { font-size: 13px; color: #5a6172; }
+  .summary strong { color: #16213a; }
+  select { padding: 8px 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 13px; background: #fff; }
+
+  .entry { background: #fff; border: 1px solid #e4dfd2; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: 0.15s ease; }
+  .entry:hover { border-color: #c39a4d; }
+  .entry.unread { border-left: 4px solid #c39a4d; background: #fffdf7; }
   .entry .topic { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #c39a4d; font-weight: 700; }
   .entry .date { font-size: 11px; color: #888; float: right; }
+  .entry .unread-badge { font-size: 10px; background: #c39a4d; color: #fff; padding: 2px 7px; border-radius: 999px; margin-left: 8px; }
   .entry .message { margin-top: 6px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
   .muted { color: #888; font-size: 13px; }
 </style>
@@ -22,11 +32,20 @@
 <body>
 <div class="wrap">
   <h1>Öneri / Şikayet Paneli</h1>
-  <p class="muted">Bu sayfa gizlidir, ana siteden bağlantısı yoktur. Sadece anahtarı bilenler görebilir.</p>
+  <p class="muted">Bu sayfa gizlidir, ana siteden bağlantısı yoktur. Bir gönderime tıklayınca okundu olarak işaretlenir.</p>
+
   <div class="key-form">
     <input type="password" id="keyInput" placeholder="Gizli anahtarı gir..." />
     <button id="loadBtn">Getir</button>
   </div>
+
+  <div class="toolbar" id="toolbar" style="display:none;">
+    <div class="summary" id="summary"></div>
+    <select id="topicFilter">
+      <option value="">Tüm konular</option>
+    </select>
+  </div>
+
   <div id="list"></div>
 </div>
 
@@ -34,42 +53,94 @@
   const keyInput = document.getElementById('keyInput');
   const loadBtn = document.getElementById('loadBtn');
   const listEl = document.getElementById('list');
+  const toolbarEl = document.getElementById('toolbar');
+  const summaryEl = document.getElementById('summary');
+  const topicFilterEl = document.getElementById('topicFilter');
 
-  loadBtn.addEventListener('click', async () => {
-    const key = keyInput.value.trim();
-    if (!key) return;
+  let currentKey = '';
+  let allEntries = [];
+
+  loadBtn.addEventListener('click', () => {
+    currentKey = keyInput.value.trim();
+    if (!currentKey) return;
+    fetchEntries();
+  });
+
+  async function fetchEntries() {
     listEl.innerHTML = '<p class="muted">Yükleniyor...</p>';
-
     try {
-      const res = await fetch('/.netlify/functions/list-feedback?key=' + encodeURIComponent(key));
+      const res = await fetch('/.netlify/functions/list-feedback?key=' + encodeURIComponent(currentKey));
       const data = await res.json();
 
       if (!res.ok) {
         listEl.innerHTML = '<p class="muted">' + (data.error || 'Bir hata oluştu.') + '</p>';
+        toolbarEl.style.display = 'none';
         return;
       }
 
-      if (!data.entries || !data.entries.length) {
-        listEl.innerHTML = '<p class="muted">Henüz gönderim yok.</p>';
-        return;
-      }
-
-      listEl.innerHTML = '';
-      data.entries.forEach((e) => {
-        const div = document.createElement('div');
-        div.className = 'entry';
-        const dateStr = e.date ? new Date(e.date).toLocaleString('tr-TR') : '';
-        div.innerHTML =
-          '<span class="topic">' + (e.topic || 'Genel') + '</span>' +
-          '<span class="date">' + dateStr + '</span>' +
-          '<div class="message"></div>';
-        div.querySelector('.message').textContent = e.message || '';
-        listEl.appendChild(div);
-      });
+      allEntries = data.entries || [];
+      populateTopicFilter();
+      renderEntries();
     } catch (err) {
       listEl.innerHTML = '<p class="muted">Bağlantı hatası.</p>';
     }
-  });
+  }
+
+  function populateTopicFilter() {
+    const topics = Array.from(new Set(allEntries.map((e) => e.topic || 'Genel'))).sort();
+    topicFilterEl.innerHTML = '<option value="">Tüm konular</option>' +
+      topics.map((t) => '<option value="' + t + '">' + t + '</option>').join('');
+  }
+
+  topicFilterEl.addEventListener('change', renderEntries);
+
+  function renderEntries() {
+    if (!allEntries.length) {
+      listEl.innerHTML = '<p class="muted">Henüz gönderim yok.</p>';
+      toolbarEl.style.display = 'none';
+      return;
+    }
+
+    toolbarEl.style.display = 'flex';
+    const unreadCount = allEntries.filter((e) => !e.read).length;
+    summaryEl.innerHTML = 'Toplam <strong>' + allEntries.length + '</strong> gönderim, <strong>' + unreadCount + '</strong> tanesi okunmamış';
+
+    const filterVal = topicFilterEl.value;
+    const filtered = filterVal ? allEntries.filter((e) => (e.topic || 'Genel') === filterVal) : allEntries;
+
+    listEl.innerHTML = '';
+    filtered.forEach((e) => {
+      const div = document.createElement('div');
+      div.className = 'entry' + (e.read ? '' : ' unread');
+      const dateStr = e.date ? new Date(e.date).toLocaleString('tr-TR') : '';
+      div.innerHTML =
+        '<span class="topic">' + (e.topic || 'Genel') + (e.read ? '' : '<span class="unread-badge">YENİ</span>') + '</span>' +
+        '<span class="date">' + dateStr + '</span>' +
+        '<div class="message"></div>';
+      div.querySelector('.message').textContent = e.message || '';
+
+      if (!e.read) {
+        div.addEventListener('click', () => markAsRead(e.id, div));
+      }
+
+      listEl.appendChild(div);
+    });
+  }
+
+  async function markAsRead(id, el) {
+    try {
+      await fetch('/.netlify/functions/list-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: currentKey, id }),
+      });
+      const entry = allEntries.find((e) => e.id === id);
+      if (entry) entry.read = true;
+      renderEntries();
+    } catch (err) {
+      // sessizce yoksay, kullanıcı tekrar tıklayabilir
+    }
+  }
 </script>
 </body>
 </html>
