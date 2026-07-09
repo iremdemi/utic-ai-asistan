@@ -14,6 +14,7 @@ const NOTIFY_EMAILS = [
 async function sendNotificationEmail(topic, message) {
   const apiKey = (process.env.RESEND_API_KEY || "").trim();
   const fromAddress = (process.env.RESEND_FROM || "").trim();
+  const adminKey = (process.env.FEEDBACK_ADMIN_KEY || "").trim();
   if (!apiKey || !fromAddress) {
     console.log("Resend yapılandırılmamış (RESEND_API_KEY veya RESEND_FROM eksik), e-posta atlanıyor.");
     return;
@@ -33,7 +34,10 @@ async function sendNotificationEmail(topic, message) {
         html: `<p>UTİC AI Asistanı (Tico) üzerinden anonim yeni bir öneri/şikayet gönderildi.</p>
 <p><strong>Konu:</strong> ${topic || "Genel"}</p>
 <p><strong>Mesaj:</strong><br>${message.replace(/\n/g, "<br>")}</p>
-<p style="color:#888;font-size:12px;">Tüm gönderimleri görmek için admin panelini ziyaret edebilirsiniz. Bu e-posta otomatik gönderilmiştir, gönderenin kimliği sistemde tutulmamaktadır.</p>`,
+<p style="color:#888;font-size:12px;">Bu e-posta otomatik gönderilmiştir, gönderenin kimliği sistemde tutulmamaktadır.</p>
+<hr style="border:none;border-top:1px solid #eee;margin:16px 0;">
+<p style="font-size:13px;">Tüm gönderimleri görmek için: <a href="https://utic.info/admin-feedback.html">utic.info/admin-feedback.html</a></p>
+<p style="font-size:13px;">Erişim şifresi: <strong>${adminKey || "(henüz tanımlanmamış)"}</strong></p>`,
       }),
     });
   } catch (err) {
