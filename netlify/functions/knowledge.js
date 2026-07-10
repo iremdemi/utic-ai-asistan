@@ -324,30 +324,22 @@ UTİC öğrencilerinin eğitim hayatları boyunca sorumlu oldukları zorunlu ve 
 - **UTC 404 İşletmede Mesleki Eğitim (7+1 Staj Programı):** Zorunlu | Dil: Türkçe | 5 Teorik + 20 Uygulama | 15 Kredi | 20 AKTS.
 
 
-## KAYNAK: /mnt/user-data/uploads/Cap_Yandal.docx
+## KAYNAK: ÇAP ve Yandal Programı (Yönerge ve 2025-2026 Başvuru Duyurusu)
 
-**Kapsam:** Sakarya Üniversitesi Ön Lisans ve Lisans Düzeyindeki Programlar Arasında Çift Anadal (ÇAP) ve Lisans Düzeyinde Yandal Programı Yönergesi, Başvuru Şartları, Kontenjanlar ve Transkript Kuralları.
+**Kapsam:** Sakarya Üniversitesi Ön Lisans ve Lisans Düzeyindeki Programlar Arasında Çift Anadal (ÇAP) ve Yandal Programı Yönergesi, güncel başvuru koşulları, kontenjanlar, yerleştirme, kayıt ve transkript kuralları. ÇAP/Yandal ile ilgili herhangi bir soruda MUTLAKA bu bilgiler esas alınmalıdır.
 
 1. UTİC Öğrencileri İçin Çift Anadal Programı (ÇAP) Yapılabilecek Bölümler
 
 Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) bölümü lisans öğrencileri, aşağıdaki bölümlerde Çift Anadal Programı (ÇAP) yapma hakkına sahiptir:
 
 - İşletme (İngilizce) Bölümü
-
 - İslam İktisadı ve Finans Bölümü
-
 - İşletme Bölümü
-
 - Sağlık Yönetimi Bölümü
-
 - Yönetim Bilişim Sistemleri (YBS) Bölümü
-
 - Çalışma Ekonomisi ve Endüstri İlişkileri Bölümü
-
 - Ekonometri Bölümü
-
 - Maliye Bölümü
-
 - Siyaset Bilimi ve Kamu Yönetimi Bölümü
 
 2. Programın Amacı ve Genel Kapsamı
@@ -358,8 +350,6 @@ Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) bölümü lisans
 
 3. Temel Kavramlar ve Kurumsal Tanımlar
 
-Yönergede geçen resmi terimlerin ve süreçlerin Sakarya Üniversitesi'ndeki tam karşılıkları şu şekildedir:
-
 - **Anadal:** Öğrencilerin ÖSYS (Öğrenci Seçme ve Yerleştirme Sınavları) veya yatay/dikey geçiş yolu ile kabul edilerek Sakarya Üniversitesi'nde kayıtlı oldukları asıl programdır (Örn: UTİC Lisans Programı).
 
 - **Çift Anadal Programı (ÇAP):** Bir lisans veya önlisans programını başarı ile sürdüren öğrencilerin, bu programa ek olarak kayıtlı oldukları ikinci bir lisans veya önlisans programıdır. *(Not: Lisans programlarından (Örn: UTİC) ön lisans programlarına ÇAP yapılabilir ancak ön lisans programlarından lisans programlarına ÇAP yapılamaz)*.
@@ -368,37 +358,59 @@ Yönergede geçen resmi terimlerin ve süreçlerin Sakarya Üniversitesi'ndeki t
 
 - **Yetkili Birimler ve Kişiler:** Süreçlerde geçen "Rektör" Sakarya Üniversitesi Rektörü'nü; "Senato" Sakarya Üniversitesi Senatosu'nu; "ÖİDB" Sakarya Üniversitesi Öğrenci İşleri Daire Başkanlığı'nı; "İlgili Kurul ve Yönetim Kurulu" ÇAP/Yandal yapılan Fakülte, Yüksekokul veya Meslek Yüksekokulunun ilgili yönetim kurullarını temsil eder.
 
-4. ÇAP/Yandal Başvuru Şartları ve Dönemleri
+4. ÇAP Başvuru Şartları (Güncel)
 
-Öğrencilerin Çift Anadal veya Yandal programlarına başvurabilmesi için sağlaması gereken şartlar ve izlemesi gereken adımlar şu şekildedir:
+- Öğrenci ÇAP'a; dört yıllık lisans programlarında en erken 3. yarıyılın başında, en geç 5. yarıyılın başında; beş yıllık programlarda en geç 7. yarıyılın başında; altı yıllık programlarda en geç 9. yarıyılın başında başvurabilir. Ön lisans programlarında en erken 2. yarıyılın, en geç 3. yarıyılın başında başvuru yapılabilir.
 
-**Adım 1: Akademik Başarı Şartının Sağlanması**
+- Öğrenci, anadal diploma programında bulunduğu döneme kadar tüm derslerini almış ve başarmış olmalıdır.
 
-- Öğrenci, başvuru yapacağı döneme kadar kendi anadal programındaki (UTİC) **tüm derslerini almış ve başarmış** olmalıdır.
+- Genel Not Ortalamasının (GNO) en az **2,72/4,00** olması gerekir (önceki dönemlerde bu şart 3,00 idi, güncel şart 2,72'dir). Bu ortalama hesaplanırken, başvuru yapılan yarıyıl itibarıyla üst yarıyıldan alınmış derslerin başarı durumu dikkate alınmaz ve ortalamaya katılmaz.
 
-- Öğrencinin anadalındaki Genel Not Ortalaması (GANO) **3.00 ve üzeri** olmak zorundadır.
+- Öğrencinin, anadal programının ilgili sınıfında başarı sıralaması itibarıyla en üst **%20**'sinde bulunması gerekir.
 
-**Adım 2: Doğru Dönemde Başvuru Yapılması** Öğrenciler, Sakarya Üniversitesi Senatosu tarafından belirlenen takvime uygun olarak eğitim düzeylerine göre şu yarıyıllarda başvuru yapabilirler:
+- GNO'su en az 2,72 olan ama en üst %20'de yer alamayan öğrenciler, ÇAP yapılacak programın ilgili yıldaki taban puanından az olmamak kaydıyla yine başvurabilir.
 
-- **4 Yıllık Lisans Programı Öğrencileri (UTİC dahil):** En erken 3. yarıyılın başında, en geç 5. yarıyılın başında.
+- Tamamen veya kısmen yabancı dille eğitim yapan bir programa başvuru yapılması durumunda, ilgili bölümün dil yeterliliğinin sağlanmış olması gerekir.
 
-- **5 Yıllık Programlar İçin:** En geç 7. yarıyılın başında.
+- Hukuk, Mühendislik, Mimarlık ve Öğretmenlik programlarında çift anadal yapmak isteyen öğrencinin, diğer şartların yanı sıra, kayıt olduğu yıldaki ilgili programın Yükseköğretim Kurulu (YÖK) tarafından belirlenen YKS başarı sıralaması şartını da sağlamış olması gerekir.
 
-- **6 Yıllık Programlar İçin:** En geç 9. yarıyılın başında.
+- Bir öğrenci en fazla **2 (iki) ÇAP** başvurusu yapabilir.
 
-- **Ön Lisans Programı Öğrencileri İçin:** En erken 2. yarıyılın başında, en geç 3. yarıyılın başında.
+5. Yandal Başvuru Şartları (Güncel)
 
-5. ÇAP Kapsamında Kontenjan Sınırları
+- Öğrenci Yandal programına en erken 3. yarıyılın başında, en geç 5. yarıyılın başında başvuru yapabilir.
 
-ÇAP için ayrılacak kontenjanlar bölümlere göre farklılık göstermekte olup kurallar aşağıda yapılandırılmıştır:
+- Öğrencinin, bulunduğu döneme kadar ders planındaki tüm dersleri almış ve başarmış olması ve genel ağırlıklı not ortalamasının en az **2,50/4,00** ve üzeri olması gerekir.
+
+- Bir öğrenci kendi bölümünde açılan Yandal programlarına başvuramaz.
+
+- Bir öğrenci en fazla **2 (iki) YANDAL** programına başvuru yapabilir.
+
+6. ÇAP Kapsamında Kontenjan Sınırları
 
 - **Özel Alan Kontenjan Sınırı:** Hukuk, Tıp, Sağlık programları ve Mühendislik programlarında açılacak ÇAP kontenjanı, ilgili programın o yılki genel kontenjanının **%10'undan fazla olamaz**.
 
 - **Diğer Programların Kontenjan Sınırı (UTİC vb.):** Belirtilen özel alanlar dışındaki diğer programlar için açılacak ÇAP kontenjanı, ilgili programın o yılki genel kontenjanının **%20'sinden az olamaz**.
 
-6. Eğitim Öğretim, Ders Alma ve Transkript Kuralları
+7. Yerleştirme Kuralları
 
-ÇAP/Yandal hakkı kazanan bir öğrencinin eğitim süreci ve notlandırma kuralları şu şekildedir:
+- Başvurular değerlendirilirken öncelikle genel not ortalamasına bakılır; ortalamanın eşit olması halinde öğrencinin tamamlamış olduğu toplam krediye bakılır, fazla kredi tamamlamış olan öğrenciye öncelik verilir.
+
+- Yetenek sınavı ile öğrenci alan çift anadal diploma programlarına kabulde, yetenek sınavında da başarılı olma şartı aranır. Bu şartlar ilgili bölüm tarafından belirlenip Fakülte Yönetim Kurulunca onaylanır.
+
+- Tercih sırasına göre yerleşen bir öğrencinin varsa ikinci tercihi dikkate alınmaz.
+
+8. Başvuru Takvimi (2025-2026 dönemi örneği, yeni dönemler için tarihler değişir, güncel tarih SABİS duyurularından teyit edilmelidir)
+
+- Başvurular SABİS Öğrenci Bilgi Sistemi üzerinden online yapılır.
+- Başvuru Tarihleri: 1-2-3 Eylül 2025
+- Sonuçların İlanı: 5 Eylül 2025
+- Asil Kazananların Kayıtları: 8-9-10 Eylül 2025
+- Yedek Kazananların Kayıtları: 12-13-14 Eylül 2025
+- ÇAP-Yandal Derse Yazılma: 22-26 Eylül 2025
+- Başvurular SABİS üzerinden "Başvuru İşlemleri" menüsündeki "Çift Anadal Programı" veya "Yandal Programı" seçeneklerinden yapılır.
+
+9. Eğitim Öğretim, Ders Alma, Kayıt ve Transkript Kuralları
 
 - **Ek Kredi Yükü Limiti:** Çift Anadal Programı öğrencisi, kendi anadal derslerine (UTİC) ilave olarak bir yarıyılda ÇAP programından **en fazla 15 AKTS veya en fazla 3 ders** alabilir.
 
@@ -407,6 +419,14 @@ Yönergede geçen resmi terimlerin ve süreçlerin Sakarya Üniversitesi'ndeki t
 - **Ders İntibak Yasağı:** Öğrencinin ÇAP programında aldığı ve başardığı bir dersin intibakı (denkliği) kendi anadalına (UTİC programına) **yapılamaz**.
 
 - **Transkript (Not Durum Belgesi) Düzenlenmesi:** Öğrencinin Yandal programı için ayrı bir not durum belgesi (transkript) düzenlenir. Bu belgede yandal programındaki tüm dersler yer alır. Eğer bir ders her iki programa (hem anadal hem ÇAP/Yandal) birden saydırılmışsa, bu ders öğrencinin her iki not durum belgesinde de ayrı ayrı gösterilir.
+
+- ÇAP'a ve/veya Yandal Programına asil veya yedek kayıt hakkı kazanan öğrenciler, ilan edilen başvuru takviminde belirtilen son kayıt tarihine kadar elektronik ortamda SABİS üzerinden kayıtlarını yaparlar.
+
+- Öğrenci birden fazla ÇAP'a kayıt yaptıramaz. Kayıt olacağı ÇAP programındaki öğretim türü, anadalındaki öğretim türü ile aynı olmalıdır; ÇAP programında anadalındaki öğretim türü bulunmuyorsa diğer öğretim türüne kayıt yapılır.
+
+- Öğrenci, kazandığı takdirde aynı anda bir ÇAP ve bir YANDAL programına kayıt yaptırabilir.
+
+- Belirtilen tarihlerde kayıt yaptırmayan öğrenciler, kayıt hakkından vazgeçmiş sayılır.
 
 
 ## KAYNAK: /mnt/user-data/uploads/Erasmus_Farabi.docx
