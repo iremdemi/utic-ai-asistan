@@ -7,7 +7,6 @@ const { getStore, connectLambda } = require("@netlify/blobs");
 
 const NOTIFY_EMAILS = [
   "irem.demir9@ogr.sakarya.edu.tr",
-  "ayersoy@sakarya.edu.tr",
   "oylume@sakarya.edu.tr",
 ];
 
