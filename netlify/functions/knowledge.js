@@ -1057,4 +1057,70 @@ UTİC bölümü öğrencilerinin bugüne kadar yürüttüğü veya yer aldığı
 
 - **Avrupa Yeşil Mutabakatı Kapsamında "Fit for 55" Paketinin Türk Lojistik Sektörüne Etkisi** (2021-2022): Avrupa Yeşil Mutabakatı ve "Fit for 55" paketinin Türk lojistik sektörü üzerindeki etkilerini incelemekte, AB'nin karbon azaltım hedefleri doğrultusunda Türkiye'nin uyum sürecinin önemini vurgulamaktadır. Uluslararası taşımacılık yapan firmalar, sektör örgütleri ve kamu kurumlarında konuya ilişkin bilgi düzeyi, görüşler ve hazırlıklar belirlenmiştir; Türk lojistik sektörünün bu dönüşüme yönelik ilk akademik değerlendirmelerinden biridir. Yürütücü: Gülenay Atakan. Danışman: Dr. Öğr. Üyesi Büşra Garip.
 
+
+
+## KAYNAK: 2026-2027 Öğretim Yılı Akademik Takvimi
+
+Sakarya Üniversitesi'nin resmi 2026-2027 Öğretim Yılı Akademik Takvimi aşağıdaki gibidir. Akademik takvimle ilgili herhangi bir soru geldiğinde bu bilgilerle cevap ver ve cevabının sonunda MUTLAKA şu tam PDF dosyasını da öner: https://utic.info/assets/akademik-takvim-2026-2027.pdf (öğrenci tüm takvimi indirip inceleyebilir).
+
+**Önceki Öğrenmelerin Tanınmasına İlişkin Muafiyet Sınavları (Güz):**
+- Başvuru: 31 Ağustos - 2 Eylül 2026
+- Değerlendirme ve uygulama şeklinin ilanı: 4 Eylül 2026
+- Sınavların uygulanması: 7-8 Eylül 2026
+- Sonuçların açıklanması: 11 Eylül 2026
+
+**ÇAP - Yandal Programlarına Başvuru, Değerlendirme ve Derse Yazılma:**
+- Başvurular: 31 Ağustos - 2 Eylül 2026
+- Sonuçların ilanı: 4 Eylül 2026
+- Asil kazananların kaydı: 7-8-9 Eylül 2026
+- Yedek kazananların kaydı: 11-12-13 Eylül 2026
+- Derse yazılma: 21-25 Eylül 2026
+
+**Güz Yarıyılı (21 Eylül - 27 Aralık 2026):**
+- Güz Yarıyılı ders programlarının ilanı: 31 Ağustos 2026
+- Derse Yazılma İşlemleri: 14-15-16 Eylül 2026
+- Kapatılacak derslerin ilanı: 17 Eylül 2026
+- Yabancı dil muafiyet ve yeterlik sınavı: 16 Eylül 2026
+- Açılmayan ders yerine yeni ders seçimi / ilave ders kaydı: 18-19-20 Eylül 2026
+- Mazeretli derse yazılma başvuruları: 21-25 Eylül 2026
+- Güz Yarıyılı Öğretim Başlangıcı: 21 Eylül 2026
+- Ekle-Sil Tarihi: 1-2 Ekim 2026
+- Ara Sınavlar: 9-15 Kasım 2026 (eğitim birimleri gerekli hallerde farklı tarihte yapabilir)
+- Güz Yarıyılı Bitişi: 27 Aralık 2026
+- Final sınavları: 28 Aralık 2026 - 10 Ocak 2027
+- Bütünleme Sınavları: 18-24 Ocak 2027
+- Üç Ders Mezuniyet Sınavları: 10-11-12 Şubat 2027
+- Güz yarıyılı %10'luk başarı grubuna giren öğrencilerin ilanı: 22 Şubat 2027
+- Diplomaların öğrencilere teslim tarihinin başlangıcı: 1 Mart 2027
+
+**Önceki Öğrenmelerin Tanınmasına İlişkin Muafiyet Sınavları (Bahar dönemi öncesi):**
+- Başvuru: 4-5-6 Ocak 2027
+- Değerlendirme ve uygulama şeklinin ilanı: 8 Ocak 2027
+- Sınavların uygulanması: 11-12 Ocak 2027
+- Sonuçların açıklanması: 15 Ocak 2027
+
+**Bahar Yarıyılı (8 Şubat - 30 Mayıs 2027):**
+- Bahar yarıyılı ders programlarının ilanı: 18 Ocak 2027
+- Derse Yazılma İşlemleri: 1-2-3 Şubat 2027
+- Kapatılacak derslerin ilanı: 4 Şubat 2027
+- Açılmayan ders yerine yeni ders seçimi / ilave ders kaydı: 5-6-7 Şubat 2027
+- Bahar Yarıyılı Öğretim Başlangıcı: 8 Şubat 2027
+- Mazeretli derse yazılma başvuruları: 8-12 Şubat 2027
+- Ekle-Sil Tarihi: 18-19 Şubat 2027
+- Ara Sınavlar: 5-11 Nisan 2027
+- Bahar Yarıyılı Bitişi: 30 Mayıs 2027
+- Final Sınavları: 31 Mayıs - 13 Haziran 2027
+- Mezuniyet Töreni: 14-18 Haziran 2027
+- Bütünleme Sınavları: 21-27 Haziran 2027
+- Üç Ders Mezuniyet Sınavları: 12-13-14 Temmuz 2027
+- Bahar Yarıyılı %10'luk Başarı Grubuna giren öğrencilerin ilanı: 2 Ağustos 2027
+- Diplomaların öğrencilere teslim tarihinin başlangıcı: 26 Temmuz 2027
+- Üç Ders Mezuniyet Sınavları (yaz stajı, intibak vb. nedenlerle mezun durumdaki öğrenciler için): 4 Ekim 2027
+
+**Azami Süre İşlemleri Başvuru ve Sınav Takvimi:**
+- Ek Süre Hakkı Kazanmış Öğrenciler için Güz Yarıyılı Sonu: Ek Süre Sınavı başvuru 30 Kasım-13 Aralık 2026, program ilanı 18 Aralık 2026, sınavlar 28 Aralık 2026-10 Ocak 2027, ilişik kesme 26 Şubat 2027.
+- 2026-2027 Güz Dönemi Sonunda Azami Süresi Dolacak Öğrenciler için: Ek Sınav başvuru 19 Nisan-9 Mayıs 2027, program ilanı 14 Mayıs 2027, Ek Sınav 1: 31 Mayıs-6 Haziran 2027, Ek Sınav 2: 7-13 Haziran 2027, ilişik kesme 30 Temmuz 2027.
+- Ek Süre Hakkı Kazanmış Öğrenciler için Bahar Yarıyılı Sonu: Ek Süre Sınavı başvuru 19 Nisan-9 Mayıs 2027, program ilanı 14 Mayıs 2027, sınavlar 31 Mayıs-6 Haziran 2027, ilişik kesme 30 Temmuz 2027.
+- 2026-2027 Bahar Dönemi Sonunda Azami Süresi Dolacak Öğrenciler için: Ek Sınav başvuru 16 Ağustos-29 Eylül 2027, program ilanı 3 Eylül 2027, Ek Sınav 1: 13-19 Eylül 2027, Ek Sınav 2: 20-26 Eylül 2027, ilişik kesme 5 Kasım 2027.
+
 `;
