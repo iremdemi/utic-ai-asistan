@@ -252,6 +252,14 @@
     text-decoration: none;
   }
 
+  .calendar-file-sub {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
   .quick-link:hover { border-color: var(--gold-500); background: #fff; }
 
   .feedback-note {
@@ -898,8 +906,10 @@
       <div class="panel-section-body collapsed" id="calendarSection">
         <div id="todayWidget" class="today-widget"></div>
         <div id="academicCalendar" class="academic-calendar">
-          <!-- AKADEMİK_TAKVİM_İÇERİĞİ: takvim yayınlandığında buraya eklenecek -->
-          <p class="muted">Akademik takvim yayınlandığında burada görünecek.</p>
+          <a class="quick-link calendar-file-link" href="assets/akademik-takvim-2026-2027.pdf" target="_blank" rel="noopener">
+            📅 2026-2027 Akademik Takvim (PDF)
+            <span class="calendar-file-sub">Görüntüle veya indir</span>
+          </a>
         </div>
       </div>
     </div>
@@ -1668,9 +1678,29 @@
   });
 
   // ---------- "Bugün Ne Var" akademik takvim widget'ı ----------
-  // AKADEMİK_TAKVİM_VERİSİ: takvim yayınlandığında buraya {date:'YYYY-AA-GG', title:'...'} şeklinde eklenecek
   const CALENDAR_EVENTS = [
-    // { date: '2026-09-15', title: 'Güz dönemi ders kayıtları başlıyor' },
+    { date: '2026-08-31', title: 'ÇAP-Yandal başvuruları ve Güz dönemi ders programlarının ilanı başlıyor' },
+    { date: '2026-09-04', title: 'ÇAP-Yandal sonuçlarının ilanı' },
+    { date: '2026-09-07', title: 'ÇAP-Yandal asil kazananların kaydı başlıyor' },
+    { date: '2026-09-11', title: 'ÇAP-Yandal yedek kazananların kaydı başlıyor' },
+    { date: '2026-09-14', title: 'Güz dönemi derse yazılma işlemleri başlıyor' },
+    { date: '2026-09-16', title: 'Yabancı dil muafiyet ve yeterlik sınavı' },
+    { date: '2026-09-21', title: 'Güz Yarıyılı Öğretim Başlangıcı' },
+    { date: '2026-10-01', title: 'Ekle-Sil Tarihi başlıyor' },
+    { date: '2026-11-09', title: 'Ara Sınavlar başlıyor (Güz)' },
+    { date: '2026-12-27', title: 'Güz Yarıyılı Bitişi' },
+    { date: '2026-12-28', title: 'Final sınavları başlıyor (Güz)' },
+    { date: '2027-01-10', title: 'Final sınavları bitiyor (Güz)' },
+    { date: '2027-01-18', title: 'Bütünleme Sınavları başlıyor (Güz) ve Bahar dönemi ders programlarının ilanı' },
+    { date: '2027-02-01', title: 'Bahar dönemi derse yazılma işlemleri başlıyor' },
+    { date: '2027-02-08', title: 'Bahar Yarıyılı Öğretim Başlangıcı' },
+    { date: '2027-02-18', title: 'Ekle-Sil Tarihi başlıyor (Bahar)' },
+    { date: '2027-04-05', title: 'Ara Sınavlar başlıyor (Bahar)' },
+    { date: '2027-05-30', title: 'Bahar Yarıyılı Bitişi' },
+    { date: '2027-05-31', title: 'Final Sınavları başlıyor (Bahar)' },
+    { date: '2027-06-13', title: 'Final Sınavları bitiyor (Bahar)' },
+    { date: '2027-06-14', title: 'Mezuniyet Töreni başlıyor' },
+    { date: '2027-06-21', title: 'Bütünleme Sınavları başlıyor (Bahar)' },
   ];
 
   function renderTodayWidget() {
