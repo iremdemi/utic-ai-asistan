@@ -19,43 +19,31 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy-950: #0a1528;
-    --navy-900: #0f1e3d;
-    --navy-800: #17294f;
-    --navy-700: #223862;
-    --gold-500: #c39a4d;
-    --gold-400: #d9b877;
-    --ink: #16213a;
-    --ink-soft: #5c6478;
-    --border: rgba(15, 30, 61, 0.12);
-    --danger: #a3402f;
-  }
-
-  /* ==================================================================
-     DESIGN SYSTEM v2 — Aşama 1 (token hazırlığı)
-     Bu blok SADECE yeni CSS custom property'ler tanımlar.
-     Hiçbir mevcut kural bu tokenleri henüz TÜKETMİYOR, bu yüzden
-     görünüm şu an değişmiyor. Sonraki aşamalarda mevcut kurallar
-     adım adım bu tokenlere bağlanacak.
-     Not: "--border" ismi mevcut kodda zaten (açık tema için) kullanıldığı
-     için çakışmayı önlemek adına "--border-subtle" olarak eklendi.
+/* ==================================================================
+     AŞAMA 1: Global Design Tokens, Aurora Arka Plan ve Minimalist Topbar
      ================================================================== */
   :root {
-    --bg-primary: #080B12;
-    --bg-secondary: #0D111A;
-    --bg-elevated: #111722;
-    --navy-dark: #14294A;
-    --accent-muted: #315A9B;
-    --text-primary: #F5F7FA;
-    --text-secondary: #9BA4B4;
-    --text-muted: #687386;
+    /* Referans Görselden Alınan Premium Dark Token'lar */
+    --bg-primary: #000000;
+    --bg-secondary: #0A0A0A;
+    --bg-elevated: rgba(255, 255, 255, 0.06);
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E93;
     --border-subtle: rgba(255, 255, 255, 0.08);
-    --accent: var(--gold-500);
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 22px;
+    --accent: #5E5CE6; /* Referanstaki mor/mavi ışık tonu */
+
+    /* Mevcut sistemin bozulmaması için eski değişkenleri yeni temaya yönlendiriyoruz */
+    --navy-950: var(--bg-primary);
+    --navy-900: rgba(255, 255, 255, 0.08);
+    --navy-800: rgba(255, 255, 255, 0.12);
+    --navy-700: rgba(255, 255, 255, 0.16);
+    --gold-500: var(--accent);
+    --gold-400: #7D7AFF;
+    --ink: var(--text-primary);
+    --ink-soft: var(--text-secondary);
+    --border: var(--border-subtle);
+    --danger: #FF453A;
+    --paper: var(--bg-elevated);
   }
 
   * { box-sizing: border-box; }
@@ -64,10 +52,11 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #f9f8f5;
+    background: var(--bg-primary); /* Tam siyah zemin */
     font-family: 'Inter', -apple-system, sans-serif;
-    color: var(--ink);
+    color: var(--text-primary);
     overflow-x: hidden;
+    color-scheme: dark; /* Tarayıcı scrollbar'ını vs. karanlık moda zorlar */
   }
 
   body {
@@ -75,17 +64,17 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 40px;
+    padding-top: 56px; /* Topbar için biraz daha rahat boşluk */
   }
 
-  /* ---------- Yavaşça hareket eden mavi/altın ışık (Gemini tarzı) ---------- */
+  /* ---------- Referanstaki "Aurora / AI" Arka Plan Işığı ---------- */
   .glow {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
-    background: linear-gradient(180deg, #fbfaf7 0%, #f3f0ec 55%, #e6ecf5 100%);
+    background: var(--bg-primary);
   }
 
   .glow::before,
@@ -93,351 +82,93 @@
     content: "";
     position: absolute;
     border-radius: 50%;
-    filter: blur(90px);
+    filter: blur(80px);
     animation: float 20s ease-in-out infinite;
   }
 
   .glow::before {
-    width: 680px;
-    height: 680px;
+    /* Referans görseldeki alttan vuran güçlü mavi/mor gradyan */
+    width: 120vw;
+    height: 70vh;
     left: 50%;
-    bottom: -420px;
-    background: radial-gradient(circle, rgba(23, 41, 79, 0.38), rgba(23, 41, 79, 0) 70%);
+    bottom: -30vh;
+    background: radial-gradient(ellipse at bottom, rgba(70, 60, 240, 0.25), transparent 70%);
     transform: translateX(-50%);
   }
 
   .glow::after {
-    width: 420px;
-    height: 420px;
-    right: 8%;
-    top: 6%;
-    background: radial-gradient(circle, rgba(195, 154, 77, 0.28), rgba(195, 154, 77, 0) 70%);
+    /* Sağ üstten gelen daha hafif dengeleyici ışık */
+    width: 300px;
+    height: 300px;
+    right: -10%;
+    top: 5%;
+    background: radial-gradient(circle, rgba(140, 100, 255, 0.12), transparent 70%);
     animation-delay: -9s;
   }
 
   @keyframes float {
     0%, 100% { transform: translate(-50%, 0) scale(1); }
-    50% { transform: translate(-46%, -40px) scale(1.08); }
+    50% { transform: translate(-48%, -20px) scale(1.05); }
   }
 
-  /* ---------- Üst bar ---------- */
+  /* ---------- Üst bar (Cam Efekti & Çizgisiz Minimalist) ---------- */
   .topbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    height: 40px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(246, 244, 239, 0.92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 2px 10px rgba(10, 21, 40, 0.10);
+    background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: none; /* Sert çizgiyi referanstaki gibi kaldırdık */
   }
 
-  .menu-toggle-btn {
+  /* Referanstaki yarı saydam daire butonlar */
+  .menu-toggle-btn, .reset-btn {
     position: absolute;
-    left: 18px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.6);
-    color: var(--navy-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.15s ease;
-  }
-
-  .menu-toggle-btn:hover { background: var(--navy-900); color: #fff; }
-
-  .side-panel-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1400;
-    background: rgba(10, 21, 40, 0.45);
-  }
-
-  .side-panel-backdrop.open { display: block; }
-
-  .side-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 320px;
-    max-width: 86vw;
-    background: #fff;
-    z-index: 1500;
-    transform: translateX(-100%);
-    transition: transform 0.28s ease;
-    box-shadow: 8px 0 24px rgba(10, 21, 40, 0.18);
-    overflow-y: auto;
-  }
-
-  .side-panel.open { transform: translateX(0); }
-
-  .side-panel-inner { padding: 16px 18px 32px; }
-
-  .side-panel-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .panel-new-chat {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--navy-900);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 13.5px;
-    cursor: pointer;
-    transition: 0.15s ease;
-  }
-
-  .panel-new-chat:hover { background: var(--navy-800); }
-
-  .side-panel-close {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     border: none;
-    background: var(--paper);
-    color: var(--navy-900);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .menu-toggle-btn { left: 16px; }
+  .reset-btn { right: 16px; }
+
+  .menu-toggle-btn:hover, .reset-btn:hover { 
+    background: rgba(255, 255, 255, 0.15); 
   }
 
-  .side-panel-close:hover { background: var(--border); }
-
-  .panel-section {
-    border-top: 1px solid var(--border);
-    padding-top: 10px;
-    margin-top: 10px;
-  }
-
-  .panel-section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
-
-  .panel-section-toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    border: none;
-    padding: 8px 2px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy-900);
-  }
-
-  .panel-section-toggle .chev { transition: transform 0.2s ease; color: var(--ink-soft); }
-  .panel-section-toggle.open .chev { transform: rotate(180deg); }
-
-  .panel-section-body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 8px 2px 4px;
-  }
-
-  .panel-section-body.collapsed { display: none; }
-
-  .quick-link {
-    display: block;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--paper);
-    color: var(--navy-900);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  .calendar-file-sub {
-    display: block;
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--ink-soft);
-    margin-top: 2px;
-  }
-
-  .quick-link:hover { border-color: var(--gold-500); background: #fff; }
-
-  .feedback-note {
-    font-size: 11.5px;
-    line-height: 1.5;
-  }
-
-  .feedback-input, .feedback-textarea {
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--ink);
-    background: var(--paper);
-    resize: vertical;
-    box-sizing: border-box;
-  }
-
-  .feedback-input:focus, .feedback-textarea:focus { border-color: var(--gold-500); outline: none; background: #fff; }
-
-  .settings-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13.5px;
-    color: var(--ink);
-    padding: 4px 2px;
-  }
-
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 22px;
-    flex-shrink: 0;
-  }
-
-  .switch input { opacity: 0; width: 0; height: 0; }
-
-  .switch-slider {
-    position: absolute;
-    cursor: pointer;
-    inset: 0;
-    background: var(--border);
-    border-radius: 999px;
-    transition: 0.2s;
-  }
-
-  .switch-slider::before {
-    content: "";
-    position: absolute;
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    top: 3px;
-    background: #fff;
-    border-radius: 50%;
-    transition: 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  }
-
-  .switch input:checked + .switch-slider { background: var(--navy-900); }
-  .switch input:checked + .switch-slider::before { transform: translateX(18px); }
-
-  .today-widget {
-    padding: 12px 14px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
-    color: #fff;
-    font-size: 12.5px;
-    display: none;
-  }
-
-  .today-widget.visible { display: block; }
-
-  .today-widget .today-label {
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--gold-400);
-    display: block;
-    margin-bottom: 3px;
-  }
-
-  .announcements-list, .academic-calendar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .announcement-item {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-decoration: none;
-    padding: 11px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--paper);
-    transition: 0.15s ease;
-  }
-
-  .announcement-item:hover { background: #fff; border-color: var(--gold-500); }
-
-  .announcement-date {
-    font-size: 11px;
-    color: var(--gold-500);
-    font-weight: 600;
-  }
-
-  .announcement-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--navy-900);
-    line-height: 1.35;
-  }
-
-  .announcement-excerpt {
-    font-size: 12px;
-    color: var(--ink-soft);
-    line-height: 1.4;
-  }
-
-  .muted {
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-
-  .reset-btn {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.6);
-    color: var(--navy-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.15s ease;
-  }
-
-  .reset-btn:hover { background: var(--navy-900); color: #fff; }
-
+  /* Mevcut Tico ikonunu kod değiştirmeden CSS ile beyaza çeviriyoruz */
   .tico-mascot {
     animation: ticoPulse 2.6s ease-in-out infinite;
+  }
+
+  .tico-mascot svg {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+  }
+  .tico-mascot svg line, .tico-mascot svg path { stroke: var(--text-primary) !important; }
+  .tico-mascot svg rect[fill="#0f1e3d"], .tico-mascot svg circle[fill="#0f1e3d"] { fill: var(--text-primary) !important; }
+  .tico-mascot svg rect[fill="#ffffff"] { fill: var(--bg-primary) !important; stroke: var(--text-primary) !important; }
+  .tico-mascot svg circle[fill="#ffffff"] { fill: var(--bg-primary) !important; stroke: var(--text-primary) !important; stroke-width: 2px !important; }
+
+  @keyframes ticoPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
   }
 
   @keyframes ticoPulse {
