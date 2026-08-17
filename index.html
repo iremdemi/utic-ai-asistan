@@ -21,8 +21,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ==================================================================
-     AŞAMA 1: Global Design Tokens, Aurora Arka Plan ve Minimalist Topbar
+  /* ==================================================================
+     AŞAMA 1: Global Design Tokens, Aurora Arka Plan
      ================================================================== */
   :root {
     /* Referans Görselden Alınan Premium Dark Token'lar */
@@ -32,7 +32,7 @@
     --text-primary: #FFFFFF;
     --text-secondary: #8E8E93;
     --border-subtle: rgba(255, 255, 255, 0.08);
-    --accent: #5E5CE6; /* Referanstaki mor/mavi ışık tonu */
+    --accent: #5E5CE6; 
 
     /* Mevcut sistemin bozulmaması için eski değişkenleri yeni temaya yönlendiriyoruz */
     --navy-950: var(--bg-primary);
@@ -54,11 +54,11 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    background: var(--bg-primary); /* Tam siyah zemin */
+    background: var(--bg-primary); 
     font-family: 'Inter', -apple-system, sans-serif;
     color: var(--text-primary);
     overflow-x: hidden;
-    color-scheme: dark; /* Tarayıcı scrollbar'ını vs. karanlık moda zorlar */
+    color-scheme: dark; 
   }
 
   body {
@@ -66,7 +66,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 56px; /* Topbar için biraz daha rahat boşluk */
+    padding-top: 56px; 
   }
 
   /* ---------- Referanstaki "Aurora / AI" Arka Plan Işığı ---------- */
@@ -89,7 +89,6 @@
   }
 
   .glow::before {
-    /* Referans görseldeki alttan vuran güçlü mavi/mor gradyan */
     width: 120vw;
     height: 70vh;
     left: 50%;
@@ -99,7 +98,6 @@
   }
 
   .glow::after {
-    /* Sağ üstten gelen daha hafif dengeleyici ışık */
     width: 300px;
     height: 300px;
     right: -10%;
@@ -127,10 +125,9 @@
     background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: none; /* Sert çizgiyi referanstaki gibi kaldırdık */
+    border-bottom: none; 
   }
 
-  /* Referanstaki yarı saydam daire butonlar */
   .menu-toggle-btn, .reset-btn {
     position: absolute;
     top: 50%;
@@ -155,7 +152,6 @@
     background: rgba(255, 255, 255, 0.15); 
   }
 
-  /* Mevcut Tico ikonunu kod değiştirmeden CSS ile beyaza çeviriyoruz */
   .tico-mascot {
     animation: ticoPulse 2.6s ease-in-out infinite;
   }
@@ -173,10 +169,239 @@
     50% { opacity: 0.6; }
   }
 
-  @keyframes ticoPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+  /* ---------- Sidebar (Yan Menü - Eski yapı korundu) ---------- */
+  .side-panel-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1400;
+    background: rgba(10, 21, 40, 0.45);
   }
+
+  .side-panel-backdrop.open { display: block; }
+
+  .side-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 86vw;
+    background: #16233f; /* Koyu temaya uygun panel */
+    z-index: 1500;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+  }
+
+  .side-panel.open { transform: translateX(0); }
+  .side-panel-inner { padding: 16px 18px 32px; }
+
+  .side-panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .panel-new-chat {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--navy-900);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .panel-new-chat:hover { background: var(--navy-800); }
+
+  .side-panel-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--paper);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .side-panel-close:hover { background: var(--border); }
+
+  .panel-section {
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .panel-section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+  .panel-section-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    padding: 8px 2px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .panel-section-toggle .chev { transition: transform 0.2s ease; color: var(--ink-soft); }
+  .panel-section-toggle.open .chev { transform: rotate(180deg); }
+
+  .panel-section-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 2px 4px;
+  }
+
+  .panel-section-body.collapsed { display: none; }
+
+  .quick-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .calendar-file-sub {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  .quick-link:hover { border-color: var(--gold-500); background: var(--navy-800); }
+
+  .feedback-note { font-size: 11.5px; line-height: 1.5; }
+
+  .feedback-input, .feedback-textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--paper);
+    resize: vertical;
+    box-sizing: border-box;
+  }
+
+  .feedback-input:focus, .feedback-textarea:focus { border-color: var(--gold-500); outline: none; background: var(--navy-800); }
+
+  .settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: var(--ink);
+    padding: 4px 2px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .switch input { opacity: 0; width: 0; height: 0; }
+
+  .switch-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: var(--border);
+    border-radius: 999px;
+    transition: 0.2s;
+  }
+
+  .switch-slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .switch input:checked + .switch-slider { background: var(--navy-900); }
+  .switch input:checked + .switch-slider::before { transform: translateX(18px); }
+
+  .today-widget {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
+    color: #fff;
+    font-size: 12.5px;
+    display: none;
+  }
+
+  .today-widget.visible { display: block; }
+
+  .today-widget .today-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gold-400);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .announcements-list, .academic-calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .announcement-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-decoration: none;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    transition: 0.15s ease;
+  }
+
+  .announcement-item:hover { background: var(--navy-800); border-color: var(--gold-500); }
+  .announcement-date { font-size: 11px; color: var(--gold-500); font-weight: 600; }
+  .announcement-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.35; }
+  .announcement-excerpt { font-size: 12px; color: var(--ink-soft); line-height: 1.4; }
+  .muted { font-size: 13px; color: var(--ink-soft); margin: 0; }
 
   /* ---------- Ana içerik ---------- */
   main {
@@ -192,7 +417,7 @@
     overflow-y: auto;
   }
 
-  /* ---------- Karşılama (hero) ekranı ---------- */
+  /* ---------- AŞAMA 2: Karşılama (hero) ekranı ---------- */
   .hero {
     flex: 1;
     display: flex;
@@ -211,7 +436,7 @@
     font-weight: 600;
     font-size: 26px;
     line-height: 1.4;
-    color: var(--navy-900);
+    color: var(--text-primary); 
     margin: 0 0 14px;
     max-width: 480px;
   }
@@ -219,7 +444,7 @@
   .hero p {
     font-size: 14.5px;
     line-height: 1.6;
-    color: var(--ink-soft);
+    color: var(--text-secondary); 
     max-width: 440px;
     margin: 0 0 8px;
   }
@@ -234,25 +459,26 @@
   }
 
   .chip {
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.7);
-    color: var(--navy-900);
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 500;
     padding: 10px 16px;
     border-radius: 999px;
     cursor: pointer;
-    transition: 0.15s ease;
+    transition: 0.2s ease;
     white-space: normal;
     max-width: 100%;
     text-align: center;
   }
 
   .chip:hover {
-    background: var(--navy-900);
-    color: #fff;
-    border-color: var(--navy-900);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
   /* ---------- Sohbet mesajları ---------- */
@@ -279,7 +505,7 @@
 
   .msg.user {
     align-self: flex-end;
-    background: var(--navy-900);
+    background: var(--accent);
     color: #fff;
     padding: 11px 16px;
     border-radius: 18px 18px 4px 18px;
@@ -287,28 +513,22 @@
 
   .msg.bot {
     align-self: flex-start;
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--border);
     padding: 13px 17px;
     border-radius: 4px 18px 18px 18px;
   }
 
-  .msg.bot strong { color: var(--navy-900); }
-
-  .msg-link {
-    color: #2563eb;
-    text-decoration: underline;
-    word-break: break-word;
-  }
-
-  .msg-link:hover { color: #1d4ed8; }
+  .msg.bot strong { color: #fff; }
+  .msg-link { color: #60a5fa; text-decoration: underline; word-break: break-word; }
+  .msg-link:hover { color: #93c5fd; }
   .msg.bot ul { margin: 6px 0; padding-left: 18px; }
   .msg.bot li { margin: 3px 0; }
 
   .msg.error {
     align-self: flex-start;
-    background: #fbeceb;
-    border: 1px solid #ecc7c1;
+    background: rgba(255, 69, 58, 0.1);
+    border: 1px solid var(--danger);
     color: var(--danger);
     padding: 11px 16px;
     border-radius: 4px 18px 18px 18px;
@@ -337,7 +557,7 @@
 
   .menu-card {
     align-self: stretch;
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 16px;
@@ -369,7 +589,7 @@
     width: 100%;
     text-align: left;
     border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.04);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     font-size: 13.5px;
@@ -381,9 +601,9 @@
   }
 
   .menu-item:hover {
-    background: var(--navy-900);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    border-color: var(--navy-900);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   .menu-item.back {
@@ -402,7 +622,7 @@
     display: flex;
     gap: 4px;
     padding: 15px 17px;
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--border);
     border-radius: 4px 18px 18px 18px;
   }
@@ -411,7 +631,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--gold-500);
+    background: var(--accent);
     animation: bounce 1.1s infinite ease-in-out;
   }
   .typing span:nth-child(2) { animation-delay: 0.15s; }
@@ -422,7 +642,7 @@
     30% { transform: translateY(-4px); opacity: 1; }
   }
 
-  /* ---------- Alt sabit giriş çubuğu (pill) ---------- */
+  /* ---------- AŞAMA 2: Alt sabit giriş çubuğu (pill) ---------- */
   .input-dock {
     position: fixed;
     left: 0; right: 0; bottom: 0;
@@ -431,7 +651,7 @@
     flex-direction: column;
     align-items: center;
     padding: 14px 24px 20px;
-    background: linear-gradient(180deg, rgba(249,248,245,0), rgba(249,248,245,0.92) 30%);
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,1) 100%);
   }
 
   .pill {
@@ -440,11 +660,13 @@
     display: flex;
     align-items: flex-end;
     gap: 10px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 28px;
     padding: 8px 8px 8px 20px;
-    box-shadow: 0 12px 32px rgba(15, 30, 61, 0.14);
-    border: 1px solid var(--border);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .pill textarea {
@@ -458,10 +680,10 @@
     max-height: 100px;
     padding: 10px 0;
     background: transparent;
-    color: var(--ink);
+    color: var(--text-primary);
   }
 
-  .pill textarea::placeholder { color: #9aa1b0; }
+  .pill textarea::placeholder { color: var(--text-secondary); }
 
   .send-btn {
     flex-shrink: 0;
@@ -469,7 +691,7 @@
     height: 42px;
     border-radius: 50%;
     border: none;
-    background: var(--navy-900);
+    background: var(--accent); 
     color: #ffffff;
     cursor: pointer;
     display: flex;
@@ -478,13 +700,16 @@
     transition: 0.15s ease;
   }
 
-  .send-btn:hover:not(:disabled) { background: var(--navy-800); }
+  .send-btn:hover:not(:disabled) { 
+    background: #7D7AFF; 
+    transform: scale(1.05);
+  }
   .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .disclaimer {
     margin-top: 10px;
     font-size: 11px;
-    color: var(--ink-soft);
+    color: var(--text-secondary);
     text-align: center;
   }
 
@@ -493,20 +718,21 @@
     border: none;
     padding: 0;
     font-size: 11px;
-    color: var(--ink-soft);
+    color: var(--text-secondary);
     text-decoration: underline;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
   }
 
-  .privacy-link:hover { color: var(--navy-900); }
+  .privacy-link:hover { color: var(--text-primary); }
 
+  /* ---------- Gizlilik Modalı ---------- */
   .privacy-overlay {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: rgba(10, 21, 40, 0.55);
+    background: rgba(10, 21, 40, 0.75);
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -515,19 +741,20 @@
   .privacy-overlay.open { display: flex; }
 
   .privacy-modal {
-    background: #fff;
+    background: #16233f;
     border-radius: 18px;
     max-width: 480px;
     width: 100%;
     max-height: 80vh;
     overflow-y: auto;
     padding: 26px 24px;
+    border: 1px solid var(--border);
   }
 
   .privacy-modal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    color: var(--navy-900);
+    color: #fff;
     margin: 0 0 14px;
   }
 
@@ -558,51 +785,14 @@
     .hero h1 { font-size: 22px; }
     main { padding-bottom: 150px; }
   }
-  /* ---------- Karanlık mod (ek katman, mevcut açık tema değişmiyor) ---------- */
+
+  /* Eski karanlık mod mantığını olduğu gibi koruyoruz ki switch bozulmasın */
   body.dark-mode {
     --paper: #16233f;
     --ink: #e9ecf3;
     --ink-soft: #9aa4bb;
     --border: rgba(255, 255, 255, 0.14);
-    background: #0b1526;
   }
-
-  body.dark-mode .glow {
-    background: linear-gradient(180deg, #0b1526 0%, #0e1a30 55%, #10203d 100%);
-  }
-
-  body.dark-mode .topbar {
-    background: rgba(11, 21, 38, 0.9);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-mode .side-panel {
-    background: #101d36;
-  }
-
-  body.dark-mode .menu-toggle-btn,
-  body.dark-mode .reset-btn,
-  body.dark-mode .side-panel-close {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--ink);
-  }
-
-  body.dark-mode .msg.bot,
-  body.dark-mode .menu-card,
-  body.dark-mode .welcome-card,
-  body.dark-mode .pill {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink);
-  }
-
-  body.dark-mode .pill textarea { color: var(--ink); background: transparent; }
-
-  body.dark-mode .chip,
-  body.dark-mode .menu-item {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink);
-  }
-
 </style>
 </head>
 <body>
