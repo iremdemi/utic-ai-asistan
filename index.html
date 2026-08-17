@@ -22,38 +22,43 @@
 
 <style>
   /* ==================================================================
-     AŞAMA 2: Premium Mobile AI Assistant Typography & Surfaces
+     AŞAMA 2.1: Gerçek Premium AI Görsel Dili (Glassmorphism & Glow)
      ================================================================== */
   :root {
-    /* Sophisticated Near-Black Backgrounds & Surfaces */
-    --bg-base: #090D14;
-    --bg-surface: #0D1118;
-    --bg-elevated: #111722;
-    --bg-interactive: #151B25;
+    /* Daha derin bir arka plan ki ışıklar patlasın */
+    --bg-base: #06090e; 
+    
+    /* Yarı saydam yüzey renkleri (Solid gri yerine cam efekti) */
+    --surface-light: rgba(255, 255, 255, 0.03);
+    --surface-medium: rgba(255, 255, 255, 0.06);
+    --surface-heavy: rgba(255, 255, 255, 0.1);
+    
+    /* İnce, zarif kenarlıklar */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(255, 255, 255, 0.15);
+    
+    /* Referanstaki o tatlı soft blue / periwinkle */
+    --accent: #8A9CFF; 
+    --accent-hover: #A3B1FF;
     
     /* Editorial Typography */
-    --text-primary: #F4F6F8;
-    --text-secondary: #A5ACB8;
-    --text-muted: #707989;
-    --text-disabled: #555E6C;
-    
-    /* Subtle Borders & Accents */
-    --border-subtle: rgba(255, 255, 255, 0.06);
-    --accent: #7B8FD1; 
-    --accent-hover: #8498D8;
+    --text-primary: #FFFFFF;
+    --text-secondary: #9BA4B5;
+    --text-muted: #647082;
+    --text-disabled: #475161;
 
-    /* Legacy Map (Mevcut mantığı kırmamak için) */
+    /* Legacy Map (Mevcut kodun kırılmaması için) */
     --navy-950: var(--bg-base);
-    --navy-900: var(--bg-interactive);
-    --navy-800: var(--bg-elevated);
-    --navy-700: rgba(255, 255, 255, 0.08);
+    --navy-900: var(--surface-medium);
+    --navy-800: var(--surface-heavy);
+    --navy-700: rgba(255, 255, 255, 0.12);
     --gold-500: var(--accent);
     --gold-400: var(--accent-hover);
     --ink: var(--text-primary);
     --ink-soft: var(--text-secondary);
     --border: var(--border-subtle);
     --danger: #E06C75;
-    --paper: var(--bg-surface);
+    --paper: var(--surface-light);
   }
 
   * { box-sizing: border-box; }
@@ -62,7 +67,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    background: var(--bg-base);
+    background-color: var(--bg-base);
     font-family: 'Inter', -apple-system, sans-serif;
     color: var(--text-primary);
     overflow-x: hidden;
@@ -79,64 +84,44 @@
     padding-top: 56px; 
   }
 
-  /* ---------- Ambient Background Glow ---------- */
-  .glow {
+  /* ---------- Ambient Background Glow (Daha belirgin ve estetik) ---------- */
+  .glow-top {
     position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-    background: var(--bg-base);
-  }
-
-  .glow::before,
-  .glow::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    animation: float 22s ease-in-out infinite;
-  }
-
-  .glow::before {
-    width: 120vw;
+    top: -20vh;
+    left: -20vw;
+    width: 140vw;
     height: 70vh;
-    left: 50%;
-    bottom: -35vh;
-    /* Soft, muted indigo glow, very low opacity */
-    background: radial-gradient(ellipse at bottom, rgba(111, 134, 200, 0.12), transparent 70%);
-    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(138, 156, 255, 0.18) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .glow::after {
-    width: 300px;
-    height: 300px;
-    right: -10%;
-    top: 5%;
-    background: radial-gradient(circle, rgba(123, 143, 209, 0.06), transparent 70%);
-    animation-delay: -11s;
+  .glow-bottom {
+    position: fixed;
+    bottom: -30vh;
+    right: -20vw;
+    width: 140vw;
+    height: 80vh;
+    background: radial-gradient(ellipse at center, rgba(138, 156, 255, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translate(-50%, 0) scale(1); }
-    50% { transform: translate(-48%, -20px) scale(1.05); }
-  }
-
-  /* ---------- Minimalist Topbar ---------- */
+  /* ---------- Minimalist Topbar (Blur efekti artırıldı) ---------- */
   .topbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    height: 56px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, rgba(9, 13, 20, 0.9) 0%, rgba(9, 13, 20, 0) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: none; 
+    background: linear-gradient(180deg, rgba(6, 9, 14, 0.8) 0%, rgba(6, 9, 14, 0) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
   }
 
   .menu-toggle-btn, .reset-btn {
@@ -156,40 +141,40 @@
     transition: 0.2s ease;
   }
   
-  .menu-toggle-btn { left: 12px; }
-  .reset-btn { right: 12px; }
+  .menu-toggle-btn { left: 16px; }
+  .reset-btn { right: 16px; }
 
   .menu-toggle-btn:hover, .reset-btn:hover { 
-    background: var(--bg-interactive);
+    background: var(--surface-light);
     color: var(--text-primary);
   }
 
   .tico-mascot {
-    animation: ticoPulse 3s ease-in-out infinite;
+    animation: ticoPulse 4s ease-in-out infinite;
   }
 
   .tico-mascot svg {
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.08));
+    filter: drop-shadow(0 0 10px rgba(138, 156, 255, 0.3));
   }
   .tico-mascot svg line, .tico-mascot svg path { stroke: var(--text-primary) !important; }
   .tico-mascot svg rect[fill="#0f1e3d"], .tico-mascot svg circle[fill="#0f1e3d"] { fill: var(--text-primary) !important; }
-  .tico-mascot svg rect[fill="#ffffff"] { fill: var(--bg-base) !important; stroke: var(--text-primary) !important; }
+  .tico-mascot svg rect[fill="#ffffff"] { fill: transparent !important; stroke: var(--text-primary) !important; }
   .tico-mascot svg circle[fill="#ffffff"] { fill: var(--bg-base) !important; stroke: var(--text-primary) !important; stroke-width: 2px !important; }
 
   @keyframes ticoPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(0.97); }
   }
 
-  /* ---------- Sidebar (Mevcut mantık korundu, renkler revize edildi) ---------- */
+  /* ---------- Sidebar (Cam Efektleri Eklendi) ---------- */
   .side-panel-backdrop {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 1400;
-    background: rgba(9, 13, 20, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .side-panel-backdrop.open { display: block; }
@@ -199,51 +184,54 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 320px;
+    width: 340px;
     max-width: 86vw;
-    background: var(--bg-surface);
+    background: rgba(14, 18, 26, 0.85); /* Hafif saydam panel */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     z-index: 1500;
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 12px 0 32px rgba(0, 0, 0, 0.5);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.6);
     overflow-y: auto;
     border-right: 1px solid var(--border-subtle);
   }
 
   .side-panel.open { transform: translateX(0); }
-  .side-panel-inner { padding: 20px 18px 40px; }
+  .side-panel-inner { padding: 24px 20px 40px; }
 
   .side-panel-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 32px;
   }
 
   .panel-new-chat {
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 12px 16px;
-    border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-interactive);
+    border-radius: 14px;
+    border: 1px solid var(--border-glow);
+    background: var(--surface-medium);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
     cursor: pointer;
-    transition: 0.15s ease;
+    transition: 0.2s ease;
   }
 
-  .panel-new-chat:hover { background: var(--bg-elevated); }
+  .panel-new-chat:hover { background: var(--surface-heavy); border-color: var(--accent); }
 
   .side-panel-close {
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid var(--border-subtle);
     background: transparent;
@@ -252,18 +240,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 0.15s ease;
+    transition: 0.2s ease;
   }
 
   .side-panel-close:hover { 
-    background: var(--bg-interactive); 
+    background: var(--surface-light); 
     color: var(--text-primary);
   }
 
   .panel-section {
-    border-top: 1px solid var(--border-subtle);
-    padding-top: 12px;
-    margin-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 16px;
+    margin-top: 16px;
   }
 
   .panel-section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
@@ -275,38 +263,39 @@
     justify-content: space-between;
     background: none;
     border: none;
-    padding: 10px 4px;
+    padding: 8px 4px;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--text-primary);
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 
-  .panel-section-toggle .chev { transition: transform 0.2s ease; color: var(--text-secondary); }
-  .panel-section-toggle.open .chev { transform: rotate(180deg); }
+  .panel-section-toggle .chev { transition: transform 0.2s ease; color: var(--text-muted); }
+  .panel-section-toggle.open .chev { transform: rotate(180deg); color: var(--text-primary); }
 
   .panel-section-body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 4px 4px 8px;
+    padding: 12px 4px 8px;
   }
 
   .panel-section-body.collapsed { display: none; }
 
   .quick-link {
     display: block;
-    padding: 10px 14px;
-    border-radius: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
     border: 1px solid var(--border-subtle);
-    background: var(--bg-elevated);
+    background: var(--surface-light);
     color: var(--text-primary);
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 500;
     text-decoration: none;
-    transition: 0.15s ease;
+    transition: 0.2s ease;
   }
 
   .calendar-file-sub {
@@ -317,7 +306,7 @@
     margin-top: 4px;
   }
 
-  .quick-link:hover { border-color: rgba(255,255,255,0.15); background: var(--bg-interactive); }
+  .quick-link:hover { border-color: var(--border-glow); background: var(--surface-medium); }
 
   .feedback-note { font-size: 12px; line-height: 1.5; color: var(--text-muted); margin-bottom: 8px; }
 
@@ -325,11 +314,11 @@
     width: 100%;
     border: 1px solid var(--border-subtle);
     border-radius: 12px;
-    padding: 12px 14px;
+    padding: 14px;
     font-family: 'Inter', sans-serif;
     font-size: 13.5px;
     color: var(--text-primary);
-    background: var(--bg-elevated);
+    background: rgba(0,0,0,0.2);
     resize: vertical;
     box-sizing: border-box;
     transition: 0.2s ease;
@@ -338,7 +327,7 @@
   .feedback-input:focus, .feedback-textarea:focus { 
     border-color: var(--accent); 
     outline: none; 
-    background: var(--bg-interactive); 
+    background: rgba(0,0,0,0.4); 
   }
 
   .settings-row {
@@ -364,7 +353,7 @@
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background: var(--bg-elevated);
+    background: var(--surface-heavy);
     border: 1px solid var(--border-subtle);
     border-radius: 999px;
     transition: 0.2s;
@@ -386,10 +375,10 @@
   .switch input:checked + .switch-slider::before { transform: translateX(20px); background: #fff; }
 
   .today-widget {
-    padding: 14px 16px;
-    border-radius: 12px;
-    background: var(--bg-interactive);
-    border: 1px solid var(--border-subtle);
+    padding: 16px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(138, 156, 255, 0.1), rgba(138, 156, 255, 0.02));
+    border: 1px solid var(--border-glow);
     color: var(--text-primary);
     font-size: 13px;
     display: none;
@@ -401,7 +390,7 @@
   .today-widget .today-label {
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.8px;
     color: var(--accent);
     display: block;
     margin-bottom: 6px;
@@ -411,24 +400,24 @@
   .announcements-list, .academic-calendar {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .announcement-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     text-decoration: none;
-    padding: 12px 14px;
+    padding: 14px;
     border-radius: 12px;
     border: 1px solid var(--border-subtle);
-    background: var(--bg-elevated);
-    transition: 0.15s ease;
+    background: var(--surface-light);
+    transition: 0.2s ease;
   }
 
-  .announcement-item:hover { background: var(--bg-interactive); border-color: rgba(255,255,255,0.15); }
+  .announcement-item:hover { background: var(--surface-medium); border-color: var(--border-glow); }
   .announcement-date { font-size: 11.5px; color: var(--accent); font-weight: 500; }
-  .announcement-title { font-size: 13.5px; font-weight: 500; color: var(--text-primary); line-height: 1.4; }
+  .announcement-title { font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.4; }
   .announcement-excerpt { font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
   .muted { font-size: 13px; color: var(--text-muted); margin: 0; }
 
@@ -438,11 +427,11 @@
     z-index: 1;
     flex: 1;
     width: 100%;
-    max-width: 720px;
+    max-width: 760px; /* Desktop'ta çok ince durmaması için biraz genişletildi */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 160px; /* Safe padding for mobile */
+    padding: 0 20px 180px; 
     overflow-y: auto;
   }
 
@@ -454,7 +443,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 24px 0 12px;
+    padding: 40px 0 20px;
     transition: opacity 0.35s ease;
   }
 
@@ -462,92 +451,101 @@
 
   .hero h1 {
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 26px;
-    letter-spacing: -0.4px;
-    line-height: 1.3;
-    color: var(--text-primary); 
-    margin: 0 0 12px;
-    max-width: 480px;
+    font-weight: 600;
+    font-size: 32px; /* Başlık büyütüldü */
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    /* Gradient metin ile premium hissiyat */
+    background: linear-gradient(180deg, #FFFFFF 0%, #9BA4B5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 16px;
+    max-width: 520px;
   }
 
   .hero p {
-    font-size: 14.5px;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--text-secondary); 
-    max-width: 440px;
+    max-width: 480px;
     margin: 0 0 12px;
   }
 
-  /* Quick Action Chips */
+  /* Quick Action Chips (Sıkıcı griler yerine Glassmorphism) */
   .hero-chips {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-    max-width: 560px;
+    gap: 10px;
+    margin-top: 32px;
+    max-width: 600px;
   }
 
   .chip {
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-interactive); 
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Hafif iç gölge ile derinlik */
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     color: var(--text-secondary);
     font-family: 'Inter', sans-serif;
     font-size: 13.5px;
     font-weight: 500;
-    padding: 10px 16px;
-    border-radius: 24px; /* Pill shape for compact look */
+    padding: 12px 18px;
+    border-radius: 100px; 
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: normal;
-    max-width: 100%;
     text-align: center;
   }
 
   .chip:hover {
-    background: var(--bg-elevated);
+    background: rgba(255, 255, 255, 0.07);
     color: var(--text-primary);
     border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
   /* ---------- Sohbet Mesajları ---------- */
   .messages {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding-top: 16px;
+    gap: 20px;
+    padding-top: 24px;
   }
 
   .messages.hidden { display: none; }
 
   .msg {
     max-width: 88%;
-    line-height: 1.6;
-    font-size: 14.5px;
+    line-height: 1.65;
+    font-size: 15px;
     letter-spacing: 0.1px;
-    animation: rise 0.25s ease;
+    animation: rise 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @keyframes rise {
-    from { opacity: 0; transform: translateY(6px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .msg.user {
     align-self: flex-end;
-    background: var(--bg-interactive);
+    background: var(--surface-heavy);
     color: var(--text-primary);
     border: 1px solid var(--border-subtle);
-    padding: 12px 16px;
-    border-radius: 20px 20px 4px 20px;
+    padding: 14px 18px;
+    border-radius: 24px 24px 4px 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
   .msg.bot {
     align-self: flex-start;
     background: transparent;
     color: var(--text-secondary);
-    padding: 10px 14px 10px 0; /* Minimal padding left, feels like part of the flow */
+    padding: 10px 14px 10px 0; 
     border-radius: 0;
   }
 
@@ -562,16 +560,16 @@
 
   .msg.error {
     align-self: flex-start;
-    background: rgba(224, 108, 117, 0.1);
+    background: rgba(224, 108, 117, 0.08);
     border: 1px solid rgba(224, 108, 117, 0.2);
     color: var(--danger);
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 13.5px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
   }
 
   .doc-upload-info {
-    font-size: 13.5px;
+    font-size: 14px;
     color: var(--text-secondary);
     margin: 0 0 16px;
     line-height: 1.6;
@@ -580,7 +578,7 @@
   .doc-file-input {
     display: block;
     width: 100%;
-    font-size: 13.5px;
+    font-size: 14px;
     margin-bottom: 12px;
     color: var(--text-primary);
   }
@@ -593,27 +591,29 @@
   /* Submenu Kartları */
   .menu-card {
     align-self: stretch;
-    background: var(--bg-surface);
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-subtle);
-    border-radius: 20px;
-    padding: 18px;
-    margin-top: 4px;
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 8px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .submenu-title {
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
     color: var(--text-muted);
-    margin: 0 0 12px;
+    margin: 0 0 16px;
     font-weight: 600;
   }
 
   .menu-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     max-height: 340px;
     overflow-y: auto;
     padding-right: 4px;
@@ -626,22 +626,22 @@
     width: 100%;
     text-align: left;
     border: 1px solid var(--border-subtle);
-    background: var(--bg-elevated);
+    background: var(--surface-light);
     color: var(--text-secondary);
     font-family: 'Inter', sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 500;
-    padding: 14px 16px;
-    border-radius: 14px;
+    padding: 16px 18px;
+    border-radius: 16px;
     cursor: pointer;
-    transition: 0.15s ease;
+    transition: 0.2s ease;
     line-height: 1.4;
   }
 
   .menu-item:hover {
-    background: var(--bg-interactive);
+    background: var(--surface-medium);
     color: var(--text-primary);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-glow);
   }
 
   .menu-item.back {
@@ -650,11 +650,11 @@
     border: 1px solid transparent;
     justify-content: center;
     font-weight: 500;
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
   .menu-item.back:hover { 
-    background: var(--bg-interactive); 
+    background: var(--surface-light); 
     color: var(--text-primary); 
     border-color: var(--border-subtle);
   }
@@ -663,7 +663,7 @@
   .typing {
     align-self: flex-start;
     display: flex;
-    gap: 5px;
+    gap: 6px;
     padding: 12px 4px;
     border-radius: 16px;
   }
@@ -673,17 +673,17 @@
     height: 6px;
     border-radius: 50%;
     background: var(--text-muted);
-    animation: bounce 1.1s infinite ease-in-out;
+    animation: bounce 1.2s infinite ease-in-out;
   }
-  .typing span:nth-child(2) { animation-delay: 0.15s; }
-  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
 
   @keyframes bounce {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-    30% { transform: translateY(-4px); opacity: 1; background: var(--accent); }
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+    30% { transform: translateY(-5px); opacity: 1; background: var(--accent); }
   }
 
-  /* ---------- Alt Sabit Giriş Çubuğu (Dock) ---------- */
+  /* ---------- Alt Sabit Giriş Çubuğu (Glass Dock) ---------- */
   .input-dock {
     position: fixed;
     left: 0; right: 0; bottom: 0;
@@ -691,9 +691,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* iPhone safe-area padding for fluid spacing */
-    padding: 12px 20px calc(16px + env(safe-area-inset-bottom));
-    background: linear-gradient(180deg, rgba(9, 13, 20, 0) 0%, rgba(9, 13, 20, 0.85) 30%, var(--bg-base) 100%);
+    padding: 16px 20px calc(20px + env(safe-area-inset-bottom));
+    /* Arka plandaki içeriği yavaşça solduran gradient */
+    background: linear-gradient(180deg, rgba(6, 9, 14, 0) 0%, rgba(6, 9, 14, 0.9) 35%, var(--bg-base) 100%);
   }
 
   .pill {
@@ -702,13 +702,14 @@
     display: flex;
     align-items: flex-end;
     gap: 12px;
-    background: var(--bg-surface);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 28px;
-    padding: 8px 8px 8px 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border: 1px solid var(--border-subtle);
+    /* Belirgin Glassmorphism Efekti */
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border-radius: 32px;
+    padding: 10px 10px 10px 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .pill textarea {
@@ -720,7 +721,7 @@
     font-size: 15px;
     line-height: 1.5;
     max-height: 120px;
-    padding: 10px 0;
+    padding: 12px 0;
     background: transparent;
     color: var(--text-primary);
   }
@@ -729,31 +730,32 @@
 
   .send-btn {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: none;
     background: var(--accent); 
-    color: #ffffff;
+    color: var(--bg-base); /* İkon rengi koyu, buton parlak */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.2s ease;
+    transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .send-btn:hover:not(:disabled) { 
     background: var(--accent-hover); 
-    transform: scale(1.04);
+    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(138, 156, 255, 0.4);
   }
-  .send-btn:disabled { opacity: 0.3; cursor: not-allowed; background: var(--text-muted); }
+  .send-btn:disabled { opacity: 0.2; cursor: not-allowed; background: var(--text-muted); color: #fff;}
 
   .disclaimer {
-    margin-top: 12px;
+    margin-top: 14px;
     font-size: 11px;
     color: var(--text-disabled);
     text-align: center;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .privacy-link {
@@ -765,6 +767,7 @@
     text-decoration: underline;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
+    transition: 0.2s;
   }
 
   .privacy-link:hover { color: var(--text-secondary); }
@@ -775,9 +778,9 @@
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: rgba(9, 13, 20, 0.7);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -786,15 +789,15 @@
   .privacy-overlay.open { display: flex; }
 
   .privacy-modal {
-    background: var(--bg-surface);
-    border-radius: 20px;
+    background: rgba(14, 18, 26, 0.95);
+    border-radius: 24px;
     max-width: 480px;
     width: 100%;
     max-height: 80vh;
     overflow-y: auto;
-    padding: 28px 24px;
-    border: 1px solid var(--border-subtle);
-    box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+    padding: 32px 28px;
+    border: 1px solid var(--border-glow);
+    box-shadow: 0 32px 64px rgba(0,0,0,0.6);
   }
 
   .privacy-modal h2 {
@@ -807,50 +810,53 @@
   }
 
   .privacy-modal p {
-    font-size: 13.5px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.65;
     color: var(--text-secondary);
-    margin: 0 0 14px;
+    margin: 0 0 16px;
   }
 
   .privacy-modal strong { color: var(--text-primary); font-weight: 500; }
 
   .privacy-close {
-    margin-top: 12px;
+    margin-top: 16px;
     width: 100%;
-    padding: 12px;
-    border-radius: 14px;
+    padding: 14px;
+    border-radius: 16px;
     border: 1px solid var(--border-subtle);
-    background: var(--bg-interactive);
+    background: var(--surface-light);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14.5px;
     cursor: pointer;
-    transition: 0.15s ease;
+    transition: 0.2s ease;
   }
 
-  .privacy-close:hover { background: var(--bg-elevated); }
+  .privacy-close:hover { background: var(--surface-heavy); border-color: var(--accent); }
 
   /* Mobile Tweaks */
   @media (max-width: 480px) {
-    .hero h1 { font-size: 24px; }
-    main { padding-bottom: 140px; }
+    .hero h1 { font-size: 26px; }
+    main { padding-bottom: 160px; }
     .msg { max-width: 92%; }
+    .hero-chips { gap: 8px; }
+    .chip { padding: 10px 16px; font-size: 13px; }
   }
 
 </style>
 </head>
 <body>
 
-<div class="glow"></div>
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
 
 <div class="topbar">
   <button id="menuToggleBtn" class="menu-toggle-btn" type="button" aria-label="Menü" title="Menü">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
   <div class="tico-mascot" aria-label="Tico">
-    <svg viewBox="0 0 100 100" width="28" height="28">
+    <svg viewBox="0 0 100 100" width="30" height="30">
       <line x1="50" y1="18" x2="50" y2="29" stroke="#0f1e3d" stroke-width="4" stroke-linecap="round"/>
       <circle cx="50" cy="18" r="5" fill="#ffffff" stroke="#0f1e3d" stroke-width="2.5"/>
       <rect x="12" y="52" width="10" height="20" rx="5" fill="#0f1e3d"/>
@@ -939,8 +945,6 @@
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="panel-section-body collapsed" id="settingsSection">
-        <!-- Karanlık Mod toggle'ını bu aşamada tamamen iptal etmedik ama görsel olarak gizleyebiliriz ya da açık tutabiliriz, çünkü artık sistem default karanlık -->
-        <!-- Mevcut yapıyı bozmamak için bırakıldı -->
         <div class="settings-row" style="display:none;">
           <span>Karanlık Mod</span>
           <label class="switch">
@@ -975,7 +979,7 @@
   <div class="pill">
     <textarea id="input" rows="1" placeholder="UTİC AI Asistanı'na sorun" aria-label="Mesajınızı yazın"></textarea>
     <button class="send-btn" id="sendBtn" aria-label="Gönder">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
     </button>
   </div>
   <div class="disclaimer">
