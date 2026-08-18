@@ -23,16 +23,21 @@ const FIRST_YEAR_COURSES = [
   "Teknoloji ve Uluslararası Ticaret (UTC 112)",
 ];
 
-const STEP1_PROMPT = `Sana bir görsel verilecek. Bu görsel, Türkiye'deki e-Devlet sisteminden alınmış resmi bir "öğrenci belgesi" olmalı.
+const STEP1_PROMPT = `Sana bir görsel verilecek. Bu görsel şu iki belge türünden biri olabilir:
+
+1. Türkiye'deki e-Devlet sisteminden alınmış resmi bir "öğrenci belgesi", VEYA
+2. ÖSYM'nin (YKS) "Yerleştiği Program Bilgileri" / "Yerleştirme Sonuç Belgesi" — yeni yerleşen adaylara verilen, genelde "Kodu", "Adı", "Tercih Sırası", "Puan Türü", "Yerleşme Puanı", "Yerleşme Türü", "Kayıt Tarihi", "Kayıt Adresi" gibi alanlar içeren, altında genelde "sonuc.osym.gov.tr/BelgeKontrol.aspx" adresi ve bir "Sonuç Belgesi Kontrol Kodu" bulunan resmi belge.
 
 Şunları kontrol et:
-1. Görsel gerçekten bir e-Devlet öğrenci belgesine benziyor mu (resmi format, T.C. Cumhurbaşkanlığı / e-Devlet Kapısı ibaresi, üniversite ve öğrenci bilgisi içeren resmi bir belge)?
+1. Görsel gerçekten bu iki belge türünden birine benziyor mu (resmi format, T.C./ÖSYM ibaresi, üniversite ve öğrenci/aday bilgisi içeren resmi bir belge)?
 2. Belgede "Sakarya Üniversitesi" ve "Uluslararası Ticaret ve Lojistik" (ya da UTİC, İşletme Fakültesi Uluslararası Ticaret ve Lojistik Bölümü) ibaresi geçiyor mu?
-3. Belgede öğrencinin kaçıncı sınıf olduğu yazıyor mu (genelde "Sınıfı" veya "Öğretim Yılı" alanında 1, 2, 3 veya 4 şeklinde belirtilir)?
+3. Belge türünü belirle:
+   - Eğer bu bir ÖĞRENCİ BELGESİYSE: öğrencinin kaçıncı sınıf olduğu yazıyor mu (genelde "Sınıfı" veya "Öğretim Yılı" alanında 1, 2, 3 veya 4 şeklinde belirtilir)?
+   - Eğer bu bir YKS YERLEŞTİRME SONUÇ BELGESİYSE: bu belge SADECE yeni yerleşen adaylara verilir, bu yüzden bu öğrenci otomatik olarak 1. sınıf kabul edilmelidir.
 4. Belge okunaklı ve eksiksiz mi (kırpılmamış, bulanık değil)?
 
 SADECE aşağıdaki JSON formatında cevap ver, başka hiçbir şey yazma:
-{"valid": true veya false, "sinif": "1" veya "2" veya "3" veya "4" veya "bilinmiyor", "reason": "kısa, öğrenciye gösterilecek nazik bir açıklama (1 cümle, Türkçe)"}`;
+{"valid": true veya false, "belgeTuru": "ogrenci_belgesi" veya "yks_yerlestirme" veya "bilinmiyor", "sinif": "1" veya "2" veya "3" veya "4" veya "bilinmiyor", "reason": "kısa, öğrenciye gösterilecek nazik bir açıklama (1 cümle, Türkçe)"}`;
 
 function buildStep2Prompt() {
   return `Sana bir görsel verilecek. Bu görsel, Türkiye'deki e-Devlet sisteminden alınmış resmi bir "not döküm belgesi" (transkript) olmalı, Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) bölümüne ait olmalı.
