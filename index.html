@@ -33,6 +33,31 @@
     --danger: #a3402f;
   }
 
+  /* ==================================================================
+     DESIGN SYSTEM v2 — Aşama 1 (token hazırlığı)
+     Bu blok SADECE yeni CSS custom property'ler tanımlar.
+     Hiçbir mevcut kural bu tokenleri henüz TÜKETMİYOR, bu yüzden
+     görünüm şu an değişmiyor. Sonraki aşamalarda mevcut kurallar
+     adım adım bu tokenlere bağlanacak.
+     Not: "--border" ismi mevcut kodda zaten (açık tema için) kullanıldığı
+     için çakışmayı önlemek adına "--border-subtle" olarak eklendi.
+     ================================================================== */
+  :root {
+    --bg-primary: #080B12;
+    --bg-secondary: #0D111A;
+    --bg-elevated: #111722;
+    --navy-dark: #14294A;
+    --accent-muted: #315A9B;
+    --text-primary: #F5F7FA;
+    --text-secondary: #9BA4B4;
+    --text-muted: #687386;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --accent: var(--gold-500);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+  }
+
   * { box-sizing: border-box; }
 
   html, body {
@@ -995,7 +1020,7 @@
     <p><strong>Hangi veriler işleniyor:</strong> Sohbet kutusuna yazdığınız mesajlar, size cevap üretebilmek amacıyla bir yapay zeka servisine iletilir.</p>
     <p><strong>Veriler nerede saklanıyor:</strong> Bu site, yazdığınız mesajları kendi sunucusunda kalıcı olarak saklamaz veya bir veritabanına kaydetmez. Sohbet geçmişiniz yalnızca tarayıcınızın hafızasında, o oturum boyunca tutulur; sayfayı yenilediğinizde veya kapattığınızda silinir.</p>
     <p><strong>Üçüncü taraflar:</strong> Mesajlarınız, cevap üretilmesi amacıyla bir yapay zeka servis sağlayıcısının altyapısına iletilir ve o sağlayıcının kendi gizlilik politikaları çerçevesinde işlenir. Bu asistan kişisel verilerinizi (ad, öğrenci numarası, iletişim bilgisi vb.) toplama veya saklama amacı gütmez; lütfen sohbet kutusuna bu tür hassas bilgileri paylaşmaktan kaçının.</p>
-    <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
+    <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi ya da YKS yerleştirme sonuç belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
     <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
     <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
     <button id="privacyCloseBtn" class="privacy-close" type="button">Kapat</button>
@@ -1111,11 +1136,9 @@
   }
 
   function linkify(text) {
-    // Markdown tarzı [metin](url) bağlantıları
     text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, label, url) => {
       return '<a href="' + url + '" target="_blank" rel="noopener" class="msg-link">' + label + '</a>';
     });
-    // Düz yazılmış http(s) linkleri (zaten bir <a> etiketinin içinde olmayanlar)
     text = text.replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, (m) => {
       let url = m;
       let trail = '';
@@ -1366,7 +1389,7 @@
 
     const card = createUploadCard({
       title: '1. Sınıf WhatsApp Grubuna Katıl',
-      info: 'e-Devlet üzerinden aldığın öğrenci belgenin net bir fotoğrafını veya ekran görüntüsünü yükle, seni doğrulayıp grup davet linkini hemen göndereyim.',
+      info: 'e-Devlet üzerinden aldığın öğrenci belgeni ya da ÖSYM\'nin YKS yerleştirme sonuç belgeni (yeni yerleşen adaylar için, öğrenci belgen henüz çıkmadıysa bu da geçerli) yükle, seni doğrulayıp grup davet linkini hemen göndereyim.',
       buttonText: 'Belgeyi Yükle ve Doğrula',
       onSubmit: async (file, wrap) => {
         try {
