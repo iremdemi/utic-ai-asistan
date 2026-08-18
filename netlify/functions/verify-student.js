@@ -6,6 +6,8 @@
 //   kalmış (FF/FD/DZ vb.) bir ders var mı kontrol edilir, varsa onaylanır.
 // Hiçbir görsel sunucuda saklanmaz, sadece anlık kontrol için kullanılır.
 
+const { resolveCorsOrigin, checkRateLimit } = require("./_shared");
+
 const PRIMARY_MODEL = "gemini-2.5-flash";
 const FALLBACK_MODEL = "gemini-2.5-flash-lite"; // birincil model yoğunsa (503) buna geçilir
 const geminiUrl = (model) => `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
@@ -124,7 +126,7 @@ async function callGemini(parts, apiKey) {
 
 exports.handler = async function (event) {
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": resolveCorsOrigin(event),
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
   };
@@ -138,6 +140,22 @@ exports.handler = async function (event) {
       statusCode: 405,
       headers,
       body: JSON.stringify({ error: "Sadece POST isteği kabul edilir." }),
+    };
+  }
+
+  // Hız sınırlama: aynı IP'den 10 dakikada en fazla 10 belge kontrolü
+  const rateCheck = await checkRateLimit(event, {
+    storeName: "ratelimit-verify",
+    windowMs: 10 * 60 * 1000,
+    maxRequests: 10,
+  });
+  if (!rateCheck.allowed) {
+    return {
+      statusCode: 429,
+      headers,
+      body: JSON.stringify({
+        error: "Çok sık belge kontrolü deniyorsun, birkaç dakika sonra tekrar dener misin? 🙏",
+      }),
     };
   }
 
