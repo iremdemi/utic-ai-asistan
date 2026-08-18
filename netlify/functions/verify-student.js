@@ -31,13 +31,19 @@ const STEP1_PROMPT = `Sana bir görsel verilecek. Bu görsel şu iki belge tür�
 Şunları kontrol et:
 1. Görsel gerçekten bu iki belge türünden birine benziyor mu (resmi format, T.C./ÖSYM ibaresi, üniversite ve öğrenci/aday bilgisi içeren resmi bir belge)?
 2. Belgede "Sakarya Üniversitesi" ve "Uluslararası Ticaret ve Lojistik" (ya da UTİC, İşletme Fakültesi Uluslararası Ticaret ve Lojistik Bölümü) ibaresi geçiyor mu?
-3. Belge türünü belirle:
+3. SAHTECİLİK/DÜZENLEME KONTROLÜ (çok önemli): Üniversite/bölüm adının yazdığı alanı dikkatlice incele. Aşağıdaki düzenleme belirtilerinden herhangi biri var mı?
+   - Bu kısmın font'u, boyutu, rengi veya hizası belgenin geri kalanından farklı mı?
+   - Bu alanda piksel bozulması, bulanıklık, keskin kenar farkı veya "üstüne yapıştırılmış" gibi bir görünüm var mı?
+   - Yazı, belgenin doğal satır/sütun hizasının dışına taşıyor mu?
+   - Belgenin başka bir yerinde (örneğin farklı bir üniversite/bölüm adı, orijinal metnin silinmeye çalışıldığına dair iz) tutarsızlık var mı?
+   Eğer bu belirtilerden BİRİ BİLE varsa, "valid" alanını false yap ve "reason" alanında nazikçe belgeyi tekrar, düzenlenmemiş haliyle yüklemesini iste; şüpheni açıkça belirtme (örn. "sahte" deme), sadece "belgeni net bir şekilde tekrar yükler misin" gibi nötr bir dille iste.
+4. Belge türünü belirle:
    - Eğer bu bir ÖĞRENCİ BELGESİYSE: öğrencinin kaçıncı sınıf olduğu yazıyor mu (genelde "Sınıfı" veya "Öğretim Yılı" alanında 1, 2, 3 veya 4 şeklinde belirtilir)?
    - Eğer bu bir YKS YERLEŞTİRME SONUÇ BELGESİYSE: bu belge SADECE yeni yerleşen adaylara verilir, bu yüzden bu öğrenci otomatik olarak 1. sınıf kabul edilmelidir.
-4. Belge okunaklı ve eksiksiz mi (kırpılmamış, bulanık değil)?
+5. Belge okunaklı ve eksiksiz mi (kırpılmamış, bulanık değil)?
 
 SADECE aşağıdaki JSON formatında cevap ver, başka hiçbir şey yazma:
-{"valid": true veya false, "belgeTuru": "ogrenci_belgesi" veya "yks_yerlestirme" veya "bilinmiyor", "sinif": "1" veya "2" veya "3" veya "4" veya "bilinmiyor", "reason": "kısa, öğrenciye gösterilecek nazik bir açıklama (1 cümle, Türkçe)"}`;
+{"valid": true veya false, "supheliDuzenleme": true veya false, "belgeTuru": "ogrenci_belgesi" veya "yks_yerlestirme" veya "bilinmiyor", "sinif": "1" veya "2" veya "3" veya "4" veya "bilinmiyor", "reason": "kısa, öğrenciye gösterilecek nazik bir açıklama (1 cümle, Türkçe)"}`;
 
 function buildStep2Prompt() {
   return `Sana bir görsel verilecek. Bu görsel, Türkiye'deki e-Devlet sisteminden alınmış resmi bir "not döküm belgesi" (transkript) olmalı, Sakarya Üniversitesi Uluslararası Ticaret ve Lojistik (UTİC) bölümüne ait olmalı.
@@ -184,7 +190,7 @@ exports.handler = async function (event) {
 
       console.log(
         "Belge doğrulama (1. adım):",
-        JSON.stringify({ valid: result.valid, sinif: result.sinif }),
+        JSON.stringify({ valid: result.valid, sinif: result.sinif, supheliDuzenleme: result.supheliDuzenleme || false }),
         "| Zaman:",
         new Date().toISOString()
       );
