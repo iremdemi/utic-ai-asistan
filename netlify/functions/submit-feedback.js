@@ -4,6 +4,7 @@
 // Yeni bir gönderim geldiğinde ilgili hocalara/geliştiriciye bilgilendirme e-postası atılır.
 
 const { getStore, connectLambda } = require("@netlify/blobs");
+const { resolveCorsOrigin } = require("./_shared");
 
 const NOTIFY_EMAILS = [
   "irem.demir9@ogr.sakarya.edu.tr",
@@ -48,7 +49,7 @@ async function sendNotificationEmail(topic, message) {
 
 exports.handler = async function (event) {
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": resolveCorsOrigin(event),
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
   };
