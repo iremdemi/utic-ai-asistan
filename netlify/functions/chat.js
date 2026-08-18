@@ -5,6 +5,7 @@
 // API anahtarı asla tarayıcıya (frontend'e) gönderilmez.
 
 const knowledgeBase = require("./knowledge");
+const { resolveCorsOrigin, checkRateLimit } = require("./_shared");
 
 // ---------- 1. Bilgi bankasını kaynak belgelere göre parçalara ayır ----------
 const HEADER_RE = /## KAYNAK: (.+)\n/g;
@@ -155,7 +156,7 @@ async function callGemini(body, apiKey, model, timeoutMs = 9000) {
 
 exports.handler = async function (event) {
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": resolveCorsOrigin(event),
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
   };
@@ -169,6 +170,22 @@ exports.handler = async function (event) {
       statusCode: 405,
       headers,
       body: JSON.stringify({ error: "Sadece POST isteği kabul edilir." }),
+    };
+  }
+
+  // Hız sınırlama: aynı IP'den 5 dakikada en fazla 15 istek
+  const rateCheck = await checkRateLimit(event, {
+    storeName: "ratelimit-chat",
+    windowMs: 5 * 60 * 1000,
+    maxRequests: 15,
+  });
+  if (!rateCheck.allowed) {
+    return {
+      statusCode: 429,
+      headers,
+      body: JSON.stringify({
+        error: "Çok sık soru soruyorsun, birkaç dakika sonra tekrar dener misin? 🙏",
+      }),
     };
   }
 
