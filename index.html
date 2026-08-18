@@ -1182,8 +1182,14 @@
   ];
 
   function scrollToBottom() {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      });
+    });
   }
+
+  const isFinePointerDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   function linkify(text) {
     text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, label, url) => {
@@ -1568,7 +1574,7 @@
     } finally {
       isLoading = false;
       sendBtn.disabled = false;
-      inputEl.focus();
+      if (isFinePointerDevice) inputEl.focus();
       if (topic) {
         messagesEl.appendChild(createMenuCard(topic));
       }
