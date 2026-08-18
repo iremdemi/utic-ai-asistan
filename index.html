@@ -866,6 +866,77 @@
     main { padding-bottom: 150px; }
   }
 
+  /* ==================================================================
+     MASAÜSTÜ GÖRÜNÜMÜ (yalnızca geniş ekranlar, min-width tabanlı)
+     Bu blok SADECE masaüstü/geniş ekran düzenini geliştirir.
+     Mobil kurallarının hiçbirine dokunmuyor, hepsi olduğu gibi kalıyor.
+     ================================================================== */
+  @media (min-width: 900px) {
+    main {
+      max-width: 920px;
+    }
+
+    .hero {
+      padding: 40px 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      max-width: 680px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      max-width: 520px;
+    }
+
+    .hero-chips {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 920px;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .chip {
+      padding: 18px 18px 16px;
+      font-size: 13.5px;
+    }
+
+    .chip-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .chip-featured {
+      max-width: 920px;
+      margin-top: 32px;
+      padding: 17px 20px !important;
+      font-size: 14.5px !important;
+    }
+
+    .messages {
+      max-width: 920px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .msg {
+      max-width: 620px;
+    }
+
+    .menu-card {
+      max-width: 620px;
+    }
+
+    .input-dock .pill {
+      max-width: 760px;
+    }
+
+    .side-panel {
+      width: 360px;
+    }
+  }
+
 </style>
 </head>
 <body>
