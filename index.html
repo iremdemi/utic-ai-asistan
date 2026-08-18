@@ -958,7 +958,7 @@
   </div>
   <div class="disclaimer">
     <p style="margin: 0 0 3px;">Tico yanılabilir, önemli bilgileri bölüm sekreterliğinden teyit et.</p>
-    <p style="margin: 0;">İrem Demir tarafından UTİC Bölümü için geliştirilmiştir. <button id="privacyBtn" class="privacy-link" type="button">Gizlilik Bildirimi</button></p>
+    <p style="margin: 0;">İrem Demir tarafından UTİC Bölümü için geliştirilmiştir. <button id="privacyBtn" class="privacy-link" type="button">Gizlilik Bildirimi</button> <button id="termsBtn" class="privacy-link" type="button">Kullanım Şartları</button></p>
   </div>
 </div>
 
@@ -978,6 +978,26 @@
       <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi ya da YKS yerleştirme sonuç belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
       <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
       <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
+    </div>
+  </div>
+</div>
+
+<div class="privacy-overlay" id="termsOverlay">
+  <div class="privacy-modal">
+    <div class="privacy-modal-header">
+      <h2>Kullanım Şartları</h2>
+      <button id="termsCloseBtn" class="privacy-modal-close" type="button" aria-label="Kapat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="privacy-modal-body">
+      <p><strong>1. Genel:</strong> Bu site (utic.info, Tico), Sakarya Üniversitesi UTİC Bölümü öğrencilerine ve adaylarına bilgi sağlamak amacıyla, bölüm öğrencisi İrem Demir tarafından geliştirilmiş bağımsız bir öğrenci projesidir. Siteyi kullanarak bu şartları kabul etmiş sayılırsınız.</p>
+      <p><strong>2. Hizmetin niteliği:</strong> Tico, yapay zeka destekli bir bilgi asistanıdır. Verdiği cevaplar bölümün resmi belgelerine dayanır, ancak yapay zeka teknolojisinin doğası gereği hatalı, eksik veya güncel olmayan bilgi içerebilir. Tico'nun verdiği hiçbir cevap, bölümün veya üniversitenin resmi bir beyanı ya da taahhüdü niteliği taşımaz. Kesinlik gerektiren konularda (kayıt, mezuniyet, sınav sonuçları gibi) her zaman bölüm sekreterliği veya SABİS gibi resmi kaynaklara başvurulmalıdır.</p>
+      <p><strong>3. Kullanım koşulları:</strong> Bu siteyi kullanırken sistemi kötüye kullanmayacağınızı, öğrenci belgesi/YKS yerleştirme belgesi yükleme özelliğini yalnızca kendi gerçek belgenizle ve doğru amaçla kullanacağınızı, öneri/şikayet kutusuna veya sohbet kutusuna yasa dışı, hakaret içeren veya başkalarına zarar verebilecek içerik göndermeyeceğinizi kabul etmiş sayılırsınız.</p>
+      <p><strong>4. Fikri mülkiyet:</strong> Sitenin tasarımı ve içeriği İrem Demir'e ve UTİC Bölümü'ne aittir. Bölümün resmi belgelerinden derlenen bilgiler, ilgili kurumların mülkiyetindedir.</p>
+      <p><strong>5. Sorumluluk sınırı:</strong> Bu site en iyi niyetle, ücretsiz bir öğrenci projesi olarak sunulmaktadır. Sitenin kullanımından doğabilecek herhangi bir zarardan bölüm, üniversite veya geliştirici sorumlu tutulamaz.</p>
+      <p><strong>6. Değişiklikler:</strong> Bu şartlar zaman zaman güncellenebilir. Güncel sürüm her zaman bu sayfada yer alır.</p>
+      <p><strong>7. İletişim:</strong> Bu şartlarla ilgili sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
     </div>
   </div>
 </div>
@@ -1506,6 +1526,16 @@
   privacyCloseBtn.addEventListener('click', () => privacyOverlay.classList.remove('open'));
   privacyOverlay.addEventListener('click', (e) => {
     if (e.target === privacyOverlay) privacyOverlay.classList.remove('open');
+  });
+
+  const termsBtn = document.getElementById('termsBtn');
+  const termsOverlay = document.getElementById('termsOverlay');
+  const termsCloseBtn = document.getElementById('termsCloseBtn');
+
+  termsBtn.addEventListener('click', () => termsOverlay.classList.add('open'));
+  termsCloseBtn.addEventListener('click', () => termsOverlay.classList.remove('open'));
+  termsOverlay.addEventListener('click', (e) => {
+    if (e.target === termsOverlay) termsOverlay.classList.remove('open');
   });
 
   const resetBtn = document.getElementById('resetBtn');
