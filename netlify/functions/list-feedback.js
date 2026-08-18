@@ -5,10 +5,11 @@
 // POST -> bir gönderimi okundu olarak işaretler ({ key, id })
 
 const { getStore, connectLambda } = require("@netlify/blobs");
+const { resolveCorsOrigin } = require("./_shared");
 
 exports.handler = async function (event) {
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": resolveCorsOrigin(event),
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   };
