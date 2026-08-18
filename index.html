@@ -89,36 +89,14 @@
     background: #ffffff;
   }
 
-  .glow::before,
-  .glow::after {
+  .glow::before {
     content: "";
     position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    animation: float 20s ease-in-out infinite;
-  }
-
-  .glow::before {
-    width: 680px;
-    height: 680px;
-    left: 50%;
-    bottom: -420px;
-    background: radial-gradient(circle, rgba(23, 41, 79, 0.38), rgba(23, 41, 79, 0) 70%);
-    transform: translateX(-50%);
-  }
-
-  .glow::after {
-    width: 420px;
-    height: 420px;
-    right: 8%;
-    top: 6%;
-    background: radial-gradient(circle, rgba(195, 154, 77, 0.28), rgba(195, 154, 77, 0) 70%);
-    animation-delay: -9s;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translate(-50%, 0) scale(1); }
-    50% { transform: translate(-46%, -40px) scale(1.08); }
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(210, 225, 245, 0.35) 100%);
   }
 
   /* ---------- Üst bar ---------- */
