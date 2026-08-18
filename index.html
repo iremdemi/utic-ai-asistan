@@ -146,21 +146,24 @@
     left: 18px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--navy-900);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: 0.15s ease;
+    box-shadow: 0 3px 10px rgba(15, 30, 61, 0.08);
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .menu-toggle-btn:hover { background: var(--navy-900); color: #fff; }
+    .menu-toggle-btn:hover { background: rgba(255, 255, 255, 0.85); border-color: rgba(0, 0, 0, 0.15); }
   }
 
   .side-panel-backdrop {
@@ -168,7 +171,7 @@
     position: fixed;
     inset: 0;
     z-index: 1400;
-    background: rgba(10, 21, 40, 0.45);
+    background: rgba(10, 21, 40, 0.35);
   }
 
   .side-panel-backdrop.open { display: block; }
@@ -180,12 +183,15 @@
     bottom: 0;
     width: 320px;
     max-width: 86vw;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(26px) saturate(160%);
+    -webkit-backdrop-filter: blur(26px) saturate(160%);
     z-index: 1500;
     transform: translateX(-100%);
     transition: transform 0.28s ease;
-    box-shadow: 8px 0 24px rgba(10, 21, 40, 0.18);
+    box-shadow: 8px 0 32px rgba(10, 21, 40, 0.16);
     overflow-y: auto;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
   }
 
   .side-panel.open { transform: translateX(0); }
@@ -206,19 +212,20 @@
     align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--navy-900);
-    color: #fff;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    color: #1c1c1e;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 13.5px;
     cursor: pointer;
     transition: 0.15s ease;
+    box-shadow: 0 2px 8px rgba(15, 30, 61, 0.06);
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .panel-new-chat:hover { background: var(--navy-800); }
+    .panel-new-chat:hover { background: #f5f5f5; border-color: rgba(0, 0, 0, 0.18); }
   }
 
   .side-panel-close {
@@ -226,8 +233,10 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: none;
-    background: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--navy-900);
     display: flex;
     align-items: center;
@@ -236,7 +245,7 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .side-panel-close:hover { background: var(--border); }
+    .side-panel-close:hover { background: rgba(255, 255, 255, 0.9); border-color: rgba(0, 0, 0, 0.15); }
   }
 
   .panel-section {
@@ -256,9 +265,10 @@
     border: none;
     padding: 8px 2px;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     color: var(--navy-900);
   }
 
@@ -276,14 +286,24 @@
 
   .quick-link {
     display: block;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--paper);
+    padding: 11px 13px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     color: var(--navy-900);
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
+    box-shadow: 0 3px 12px rgba(15, 30, 61, 0.05);
+  }
+
+  .quick-link-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 9px;
   }
 
   .calendar-file-sub {
@@ -295,7 +315,7 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .quick-link:hover { border-color: var(--gold-500); background: #fff; }
+    .quick-link:hover { border-color: rgba(0, 0, 0, 0.18); background: rgba(255, 255, 255, 0.85); }
   }
 
   .feedback-note {
@@ -305,24 +325,31 @@
 
   .feedback-input, .feedback-textarea {
     width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 14px;
     padding: 10px 12px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     color: var(--ink);
-    background: var(--paper);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     resize: vertical;
     box-sizing: border-box;
   }
 
-  .feedback-input:focus, .feedback-textarea:focus { border-color: var(--gold-500); outline: none; background: #fff; }
+  .feedback-input:focus, .feedback-textarea:focus { border-color: rgba(0, 0, 0, 0.3); outline: none; background: rgba(255, 255, 255, 0.9); }
 
   .today-widget {
     padding: 12px 14px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
-    color: #fff;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 12px rgba(15, 30, 61, 0.05);
+    color: #1c1c1e;
+    font-family: 'Inter', sans-serif;
     font-size: 12.5px;
     display: none;
   }
@@ -333,7 +360,8 @@
     font-size: 10.5px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--gold-400);
+    color: #6b6b70;
+    font-weight: 700;
     display: block;
     margin-bottom: 3px;
   }
@@ -355,30 +383,24 @@
     right: 18px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--navy-900);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: 0.15s ease;
+    box-shadow: 0 3px 10px rgba(15, 30, 61, 0.08);
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .reset-btn:hover { background: var(--navy-900); color: #fff; }
-  }
-
-  .tico-mascot {
-    animation: ticoPulse 2.6s ease-in-out infinite;
-  }
-
-  @keyframes ticoPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    .reset-btn:hover { background: rgba(255, 255, 255, 0.85); border-color: rgba(0, 0, 0, 0.15); }
   }
 
   /* ---------- Ana içerik ---------- */
@@ -767,7 +789,7 @@
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: rgba(10, 21, 40, 0.55);
+    background: rgba(10, 21, 40, 0.45);
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -776,45 +798,67 @@
   .privacy-overlay.open { display: flex; }
 
   .privacy-modal {
-    background: #fff;
-    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(26px) saturate(160%);
+    -webkit-backdrop-filter: blur(26px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 22px;
     max-width: 480px;
     width: 100%;
     max-height: 80vh;
-    overflow-y: auto;
-    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(10, 21, 40, 0.25);
+    overflow: hidden;
   }
 
-  .privacy-modal h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    color: var(--navy-900);
-    margin: 0 0 14px;
+  .privacy-modal-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 20px 14px 24px;
+    border-bottom: 1px solid var(--border);
   }
 
-  .privacy-modal p {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--ink);
-    margin: 0 0 12px;
-  }
-
-  .privacy-close {
-    margin-top: 6px;
-    width: 100%;
-    padding: 11px;
-    border-radius: 12px;
-    border: none;
-    background: var(--navy-900);
-    color: #fff;
+  .privacy-modal-header h2 {
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 17px;
+    color: var(--navy-900);
+    margin: 0;
+  }
+
+  .privacy-modal-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--navy-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .privacy-close:hover { background: var(--navy-800); }
+    .privacy-modal-close:hover { background: #fff; border-color: rgba(0, 0, 0, 0.15); }
+  }
+
+  .privacy-modal-body {
+    overflow-y: auto;
+    padding: 18px 24px 26px;
+  }
+
+  .privacy-modal-body p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 12px;
   }
 
   @media (max-width: 480px) {
@@ -832,19 +876,6 @@
   <button id="menuToggleBtn" class="menu-toggle-btn" type="button" aria-label="Duyurular ve takvim" title="Duyurular ve takvim">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
-  <div class="tico-mascot" aria-label="Tico">
-    <svg viewBox="0 0 100 100" width="28" height="28">
-      <line x1="50" y1="18" x2="50" y2="29" stroke="#0f1e3d" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="50" cy="18" r="5" fill="#ffffff" stroke="#0f1e3d" stroke-width="2.5"/>
-      <rect x="12" y="52" width="10" height="20" rx="5" fill="#0f1e3d"/>
-      <rect x="78" y="52" width="10" height="20" rx="5" fill="#0f1e3d"/>
-      <rect x="20" y="30" width="60" height="58" rx="24" fill="#0f1e3d"/>
-      <rect x="32" y="46" width="36" height="28" rx="12" fill="#ffffff"/>
-      <circle cx="43" cy="60" r="4.5" fill="#0f1e3d"/>
-      <circle cx="57" cy="60" r="4.5" fill="#0f1e3d"/>
-      <path d="M 43 69 Q 50 74 57 69" fill="none" stroke="#0f1e3d" stroke-width="3" stroke-linecap="round"/>
-    </svg>
-  </div>
   <button id="resetBtn" class="reset-btn" type="button" aria-label="Yeni sohbet başlat" title="Yeni sohbet başlat">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 2.6 6.4"/><path d="M3 21v-6h6"/></svg>
   </button>
@@ -871,9 +902,9 @@
       <div class="panel-section-body" id="calendarSection">
         <div id="todayWidget" class="today-widget"></div>
         <div id="academicCalendar" class="academic-calendar">
-          <a class="quick-link calendar-file-link" href="assets/akademik-takvim-2026-2027.pdf" target="_blank" rel="noopener">
-            📅 2026-2027 Akademik Takvim (PDF)
-            <span class="calendar-file-sub">Görüntüle veya indir</span>
+          <a class="quick-link calendar-file-link quick-link-with-icon" href="assets/akademik-takvim-2026-2027.pdf" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>2026-2027 Akademik Takvim (PDF)<span class="calendar-file-sub">Görüntüle veya indir</span></span>
           </a>
         </div>
       </div>
@@ -887,7 +918,10 @@
       <div class="panel-section-body collapsed" id="linksSection">
         <a class="quick-link" href="https://sabis.sakarya.edu.tr/" target="_blank" rel="noopener">SABİS</a>
         <a class="quick-link" href="https://utic.sakarya.edu.tr/" target="_blank" rel="noopener">UTİC Web Sitesi</a>
-        <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=Sakarya+%C3%9Cniversitesi+Esentepe+Kamp%C3%BCs%C3%BC" target="_blank" rel="noopener">📍 Kampüs Konumu (Google Maps)</a>
+        <a class="quick-link quick-link-with-icon" href="https://www.google.com/maps/search/?api=1&query=Sakarya+%C3%9Cniversitesi+Esentepe+Kamp%C3%BCs%C3%BC" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Kampüs Konumu (Google Maps)
+        </a>
       </div>
     </div>
 
@@ -932,15 +966,21 @@
 
 <div class="privacy-overlay" id="privacyOverlay">
   <div class="privacy-modal">
-    <h2>Gizlilik ve Aydınlatma Metni</h2>
-    <p>Tico, Sakarya Üniversitesi UTİC Bölümü öğrencilerine bilgi sağlamak amacıyla İrem Demir tarafından geliştirilmiş bağımsız bir öğrenci projesidir.</p>
-    <p><strong>Hangi veriler işleniyor:</strong> Sohbet kutusuna yazdığınız mesajlar, size cevap üretebilmek amacıyla bir yapay zeka servisine iletilir.</p>
-    <p><strong>Veriler nerede saklanıyor:</strong> Bu site, yazdığınız mesajları kendi sunucusunda kalıcı olarak saklamaz veya bir veritabanına kaydetmez. Sohbet geçmişiniz yalnızca tarayıcınızın hafızasında, o oturum boyunca tutulur; sayfayı yenilediğinizde veya kapattığınızda silinir.</p>
-    <p><strong>Üçüncü taraflar:</strong> Mesajlarınız, cevap üretilmesi amacıyla bir yapay zeka servis sağlayıcısının altyapısına iletilir ve o sağlayıcının kendi gizlilik politikaları çerçevesinde işlenir. Bu asistan kişisel verilerinizi (ad, öğrenci numarası, iletişim bilgisi vb.) toplama veya saklama amacı gütmez; lütfen sohbet kutusuna bu tür hassas bilgileri paylaşmaktan kaçının.</p>
-    <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi ya da YKS yerleştirme sonuç belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
-    <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
-    <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
-    <button id="privacyCloseBtn" class="privacy-close" type="button">Kapat</button>
+    <div class="privacy-modal-header">
+      <h2>Gizlilik ve Aydınlatma Metni</h2>
+      <button id="privacyCloseBtn" class="privacy-modal-close" type="button" aria-label="Kapat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="privacy-modal-body">
+      <p>Tico, Sakarya Üniversitesi UTİC Bölümü öğrencilerine bilgi sağlamak amacıyla İrem Demir tarafından geliştirilmiş bağımsız bir öğrenci projesidir.</p>
+      <p><strong>Hangi veriler işleniyor:</strong> Sohbet kutusuna yazdığınız mesajlar, size cevap üretebilmek amacıyla bir yapay zeka servisine iletilir.</p>
+      <p><strong>Veriler nerede saklanıyor:</strong> Bu site, yazdığınız mesajları kendi sunucusunda kalıcı olarak saklamaz veya bir veritabanına kaydetmez. Sohbet geçmişiniz yalnızca tarayıcınızın hafızasında, o oturum boyunca tutulur; sayfayı yenilediğinizde veya kapattığınızda silinir.</p>
+      <p><strong>Üçüncü taraflar:</strong> Mesajlarınız, cevap üretilmesi amacıyla bir yapay zeka servis sağlayıcısının altyapısına iletilir ve o sağlayıcının kendi gizlilik politikaları çerçevesinde işlenir. Bu asistan kişisel verilerinizi (ad, öğrenci numarası, iletişim bilgisi vb.) toplama veya saklama amacı gütmez; lütfen sohbet kutusuna bu tür hassas bilgileri paylaşmaktan kaçının.</p>
+      <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi ya da YKS yerleştirme sonuç belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
+      <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
+      <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
+    </div>
   </div>
 </div>
 
