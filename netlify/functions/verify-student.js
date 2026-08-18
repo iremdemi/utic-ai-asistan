@@ -6,8 +6,9 @@
 //   kalmış (FF/FD/DZ vb.) bir ders var mı kontrol edilir, varsa onaylanır.
 // Hiçbir görsel sunucuda saklanmaz, sadece anlık kontrol için kullanılır.
 
-const MODEL = "gemini-2.5-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+const PRIMARY_MODEL = "gemini-2.5-flash";
+const FALLBACK_MODEL = "gemini-2.5-flash-lite"; // birincil model yoğunsa (503) buna geçilir
+const geminiUrl = (model) => `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
 const FIRST_YEAR_COURSES = [
   "İşletme Bilimine Giriş (ISL 101)",
@@ -46,6 +47,21 @@ SADECE aşağıdaki JSON formatında cevap ver, başka hiçbir şey yazma:
 {"approved": true veya false, "reason": "kısa, öğrenciye gösterilecek nazik bir açıklama (1 cümle, Türkçe), onaylandıysa hangi dersten kaldığını da belirt"}`;
 }
 
+async function fetchGemini(requestBody, apiKey, model, timeoutMs = 9000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(`${geminiUrl(model)}?key=${apiKey}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function callGemini(parts, apiKey) {
   const requestBody = {
     contents: [{ role: "user", parts }],
@@ -57,15 +73,37 @@ async function callGemini(parts, apiKey) {
     },
   };
 
-  const response = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(requestBody),
-  });
+  let response;
+  let lastErr;
+  const attempts = [
+    { model: PRIMARY_MODEL, wait: 0 },
+    { model: PRIMARY_MODEL, wait: 700 },
+    { model: FALLBACK_MODEL, wait: 0 },
+  ];
+
+  for (const { model, wait } of attempts) {
+    if (wait) await new Promise((r) => setTimeout(r, wait));
+    try {
+      response = await fetchGemini(requestBody, apiKey, model);
+      if (response.ok) break;
+      if (response.status === 429) break; // kota bittiyse tekrar denemek kotayı daha da tüketir
+      if (response.status === 401 || response.status === 403) break; // yetkilendirme hatasında model değiştirmenin faydası yok
+      // 503 (yoğunluk) veya diğer 5xx hatalarında bir sonraki denemeye/modele geç
+    } catch (err) {
+      lastErr = err;
+      response = null;
+    }
+  }
+
+  if (!response) {
+    console.error("Belge doğrulama - Gemini'ye ulaşılamadı:", lastErr);
+    throw new Error("gemini_unreachable");
+  }
 
   const data = await response.json();
   if (!response.ok) {
     console.error("Belge doğrulama - Gemini hatası:", JSON.stringify(data));
+    if (response.status === 429) throw new Error("gemini_quota");
     throw new Error("gemini_error");
   }
 
@@ -226,10 +264,15 @@ exports.handler = async function (event) {
     };
   } catch (err) {
     console.error("Belge doğrulama - sunucu hatası:", err);
+    const isQuota = err && err.message === "gemini_quota";
     return {
-      statusCode: 500,
+      statusCode: isQuota ? 429 : 500,
       headers,
-      body: JSON.stringify({ error: "Belge şu anda kontrol edilemedi, lütfen tekrar dene." }),
+      body: JSON.stringify({
+        error: isQuota
+          ? "Şu anda çok fazla belge kontrol ediliyor, birkaç dakika sonra tekrar dener misin? 🙏"
+          : "Belge şu anda kontrol edilemedi, lütfen tekrar dene.",
+      }),
     };
   }
 };
