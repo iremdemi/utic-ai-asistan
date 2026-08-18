@@ -307,50 +307,6 @@
 
   .feedback-input:focus, .feedback-textarea:focus { border-color: var(--gold-500); outline: none; background: #fff; }
 
-  .settings-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13.5px;
-    color: var(--ink);
-    padding: 4px 2px;
-  }
-
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 22px;
-    flex-shrink: 0;
-  }
-
-  .switch input { opacity: 0; width: 0; height: 0; }
-
-  .switch-slider {
-    position: absolute;
-    cursor: pointer;
-    inset: 0;
-    background: var(--border);
-    border-radius: 999px;
-    transition: 0.2s;
-  }
-
-  .switch-slider::before {
-    content: "";
-    position: absolute;
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    top: 3px;
-    background: #fff;
-    border-radius: 50%;
-    transition: 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  }
-
-  .switch input:checked + .switch-slider { background: var(--navy-900); }
-  .switch input:checked + .switch-slider::before { transform: translateX(18px); }
-
   .today-widget {
     padding: 12px 14px;
     border-radius: 12px;
@@ -371,43 +327,10 @@
     margin-bottom: 3px;
   }
 
-  .announcements-list, .academic-calendar {
+  .academic-calendar {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-
-  .announcement-item {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-decoration: none;
-    padding: 11px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--paper);
-    transition: 0.15s ease;
-  }
-
-  .announcement-item:hover { background: #fff; border-color: var(--gold-500); }
-
-  .announcement-date {
-    font-size: 11px;
-    color: var(--gold-500);
-    font-weight: 600;
-  }
-
-  .announcement-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--navy-900);
-    line-height: 1.35;
-  }
-
-  .announcement-excerpt {
-    font-size: 12px;
-    color: var(--ink-soft);
-    line-height: 1.4;
   }
 
   .muted {
@@ -825,50 +748,6 @@
     .hero h1 { font-size: 22px; }
     main { padding-bottom: 150px; }
   }
-  /* ---------- Karanlık mod (ek katman, mevcut açık tema değişmiyor) ---------- */
-  body.dark-mode {
-    --paper: #16233f;
-    --ink: #e9ecf3;
-    --ink-soft: #9aa4bb;
-    --border: rgba(255, 255, 255, 0.14);
-    background: #0b1526;
-  }
-
-  body.dark-mode .glow {
-    background: linear-gradient(180deg, #0b1526 0%, #0e1a30 55%, #10203d 100%);
-  }
-
-  body.dark-mode .topbar {
-    background: rgba(11, 21, 38, 0.9);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-mode .side-panel {
-    background: #101d36;
-  }
-
-  body.dark-mode .menu-toggle-btn,
-  body.dark-mode .reset-btn,
-  body.dark-mode .side-panel-close {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--ink);
-  }
-
-  body.dark-mode .msg.bot,
-  body.dark-mode .menu-card,
-  body.dark-mode .welcome-card,
-  body.dark-mode .pill {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink);
-  }
-
-  body.dark-mode .pill textarea { color: var(--ink); background: transparent; }
-
-  body.dark-mode .chip,
-  body.dark-mode .menu-item {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink);
-  }
 
 </style>
 </head>
@@ -912,23 +791,11 @@
     </div>
 
     <div class="panel-section">
-      <button class="panel-section-toggle open" data-target="announcementsSection" type="button">
-        <span>Bölüm Duyuruları</span>
-        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="panel-section-body" id="announcementsSection">
-        <div id="announcementsList" class="announcements-list">
-          <p class="muted">Yükleniyor...</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel-section">
-      <button class="panel-section-toggle" data-target="calendarSection" type="button">
+      <button class="panel-section-toggle open" data-target="calendarSection" type="button">
         <span>2026-2027 Akademik Takvim</span>
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
-      <div class="panel-section-body collapsed" id="calendarSection">
+      <div class="panel-section-body" id="calendarSection">
         <div id="todayWidget" class="today-widget"></div>
         <div id="academicCalendar" class="academic-calendar">
           <a class="quick-link calendar-file-link" href="assets/akademik-takvim-2026-2027.pdf" target="_blank" rel="noopener">
@@ -961,29 +828,6 @@
         <textarea id="feedbackMessage" class="feedback-textarea" rows="4" placeholder="Öneri veya şikayetini yaz..."></textarea>
         <button id="feedbackSubmit" class="menu-item back" type="button">Gönder</button>
         <p id="feedbackStatus" class="muted" style="display:none;"></p>
-      </div>
-    </div>
-
-    <div class="panel-section">
-      <button class="panel-section-toggle" data-target="settingsSection" type="button">
-        <span>Ayarlar</span>
-        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="panel-section-body collapsed" id="settingsSection">
-        <div class="settings-row">
-          <span>Karanlık Mod</span>
-          <label class="switch">
-            <input type="checkbox" id="darkModeToggle" />
-            <span class="switch-slider"></span>
-          </label>
-        </div>
-        <div class="settings-row">
-          <span>English</span>
-          <label class="switch">
-            <input type="checkbox" id="langToggle" />
-            <span class="switch-slider"></span>
-          </label>
-        </div>
       </div>
     </div>
   </div>
@@ -1473,7 +1317,7 @@
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: history.slice(0, -1), lang: currentLang })
+        body: JSON.stringify({ message: text, history: history.slice(0, -1) })
       });
 
       const data = await res.json();
@@ -1544,14 +1388,10 @@
   const sidePanelBackdrop = document.getElementById('sidePanelBackdrop');
   const sidePanelClose = document.getElementById('sidePanelClose');
   const sidePanelNewChat = document.getElementById('sidePanelNewChat');
-  const announcementsListEl = document.getElementById('announcementsList');
-
-  let announcementsLoaded = false;
 
   function openSidePanel() {
     sidePanel.classList.add('open');
     sidePanelBackdrop.classList.add('open');
-    if (!announcementsLoaded) loadAnnouncements();
   }
 
   function closeSidePanel() {
@@ -1576,128 +1416,6 @@
       toggle.classList.toggle('open', !isOpen);
       body.classList.toggle('collapsed', isOpen);
     });
-  });
-
-  async function loadAnnouncements() {
-    try {
-      const res = await fetch('/.netlify/functions/get-announcements');
-      const data = await res.json();
-
-      if (!res.ok || !data.announcements || !data.announcements.length) {
-        announcementsListEl.innerHTML = '<p class="muted">Şu an duyuru gösterilemiyor, daha sonra tekrar dene.</p>';
-        return;
-      }
-
-      announcementsLoaded = true;
-      announcementsListEl.innerHTML = '';
-      data.announcements.slice(0, 2).forEach((a) => {
-        const item = document.createElement('a');
-        item.href = a.url;
-        item.target = '_blank';
-        item.rel = 'noopener';
-        item.className = 'announcement-item';
-
-        const dateEl = document.createElement('span');
-        dateEl.className = 'announcement-date';
-        dateEl.textContent = a.date || '';
-        item.appendChild(dateEl);
-
-        const titleEl = document.createElement('span');
-        titleEl.className = 'announcement-title';
-        titleEl.textContent = a.title || '';
-        item.appendChild(titleEl);
-
-        if (a.excerpt) {
-          const excerptEl = document.createElement('span');
-          excerptEl.className = 'announcement-excerpt';
-          excerptEl.textContent = a.excerpt;
-          item.appendChild(excerptEl);
-        }
-
-        announcementsListEl.appendChild(item);
-      });
-    } catch (err) {
-      announcementsListEl.innerHTML = '<p class="muted">Duyurular yüklenemedi, lütfen tekrar dene.</p>';
-    }
-  }
-
-  // ---------- Karanlık mod ----------
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  const savedDarkMode = localStorage.getItem('tico-dark-mode') === '1';
-  if (savedDarkMode) {
-    document.body.classList.add('dark-mode');
-    darkModeToggle.checked = true;
-  }
-  darkModeToggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode', darkModeToggle.checked);
-    localStorage.setItem('tico-dark-mode', darkModeToggle.checked ? '1' : '0');
-  });
-
-  // ---------- Dil (TR/EN) ----------
-  let currentLang = localStorage.getItem('tico-lang') || 'tr';
-  const langToggle = document.getElementById('langToggle');
-
-  const TRANSLATIONS = {
-    en: {
-      heroTitle: 'Hello! I\'m UTİC AI Assistant Tico',
-      heroP1: 'Glad you\'re here. I answer your questions about internships, Erasmus, ÇAP, minors, courses, exams, graduation and other academic processes based on official department information.',
-      heroP2: 'Whether you want a quick answer or detailed help, you can pick a topic below or type your question directly.',
-      inputPlaceholder: 'Ask UTİC AI Assistant...',
-      disclaimer1: 'Tico can make mistakes, please verify important information with the department secretariat.',
-      newChat: 'New Chat',
-      announcements: 'Department Announcements',
-      calendar: '2026-2027 Academic Calendar',
-      quickLinks: 'Quick Links',
-      feedback: 'Suggestion / Complaint Box',
-      settings: 'Settings',
-      darkMode: 'Dark Mode',
-    },
-    tr: {
-      heroTitle: 'Merhaba! Ben UTİC AI Asistanı Tico',
-      heroP1: 'Burada olduğuna sevindim. Staj, Erasmus, ÇAP, Yandal, dersler, sınavlar, mezuniyet ve diğer akademik süreçlerle ilgili sorularını resmi bilgi ve yönergeleri esas alarak yanıtlıyorum.',
-      heroP2: 'İster kısa bir bilgi almak iste, ister detaylı bir konuda yardım arıyor ol, aşağıdan bir konu seçebilir veya sorunu doğrudan yazabilirsin.',
-      inputPlaceholder: 'UTİC AI Asistanı\'na sorun',
-      disclaimer1: 'Tico yanılabilir, önemli bilgileri bölüm sekreterliğinden teyit et.',
-      newChat: 'Yeni Sohbet',
-      announcements: 'Bölüm Duyuruları',
-      calendar: '2026-2027 Akademik Takvim',
-      quickLinks: 'Hızlı Linkler',
-      feedback: 'Öneri / Şikayet Kutusu',
-      settings: 'Ayarlar',
-      darkMode: 'Karanlık Mod',
-    },
-  };
-
-  function applyLanguage(lang) {
-    const t = TRANSLATIONS[lang];
-    const heroTitleEl = heroEl.querySelector('h1');
-    const heroPs = heroEl.querySelectorAll('p');
-    if (heroTitleEl) heroTitleEl.textContent = t.heroTitle;
-    if (heroPs[0]) heroPs[0].textContent = t.heroP1;
-    if (heroPs[1]) heroPs[1].textContent = t.heroP2;
-    inputEl.placeholder = t.inputPlaceholder;
-    const disclaimerP = document.querySelector('.disclaimer p');
-    if (disclaimerP) disclaimerP.textContent = t.disclaimer1;
-    sidePanelNewChat.lastChild.textContent = ' ' + t.newChat;
-
-    document.querySelectorAll('.panel-section-toggle span').forEach((span, i) => {
-      const keys = ['announcements', 'calendar', 'quickLinks', 'feedback', 'settings'];
-      if (t[keys[i]]) span.textContent = t[keys[i]];
-    });
-
-    const darkModeLabel = document.querySelector('.settings-row span');
-    if (darkModeLabel) darkModeLabel.textContent = t.darkMode;
-  }
-
-  if (currentLang === 'en') {
-    langToggle.checked = true;
-    applyLanguage('en');
-  }
-
-  langToggle.addEventListener('change', () => {
-    currentLang = langToggle.checked ? 'en' : 'tr';
-    localStorage.setItem('tico-lang', currentLang);
-    applyLanguage(currentLang);
   });
 
   // ---------- "Bugün Ne Var" akademik takvim widget'ı ----------
