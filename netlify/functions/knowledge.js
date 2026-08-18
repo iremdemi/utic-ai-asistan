@@ -1123,4 +1123,12 @@ Sakarya Üniversitesi'nin resmi 2026-2027 Öğretim Yılı Akademik Takvimi aşa
 - Ek Süre Hakkı Kazanmış Öğrenciler için Bahar Yarıyılı Sonu: Ek Süre Sınavı başvuru 19 Nisan-9 Mayıs 2027, program ilanı 14 Mayıs 2027, sınavlar 31 Mayıs-6 Haziran 2027, ilişik kesme 30 Temmuz 2027.
 - 2026-2027 Bahar Dönemi Sonunda Azami Süresi Dolacak Öğrenciler için: Ek Sınav başvuru 16 Ağustos-29 Eylül 2027, program ilanı 3 Eylül 2027, Ek Sınav 1: 13-19 Eylül 2027, Ek Sınav 2: 20-26 Eylül 2027, ilişik kesme 5 Kasım 2027.
 
+## KAYNAK: Kampüs Konumu ve Ulaşım
+
+Sakarya Üniversitesi Esentepe Kampüsü (UTİC bölümünün de bulunduğu ana kampüs), Serdivan ilçesinde, Kemalpaşa Mahallesi Üniversite Caddesi'nde yer almaktadır. Kampüsün resmi posta kodu 54187/54050 Serdivan/Sakarya'dır.
+
+Google Maps üzerinden kampüs konumuna şu linkten ulaşılabilir: https://www.google.com/maps/search/?api=1&query=Sakarya+%C3%9Cniversitesi+Esentepe+Kamp%C3%BCs%C3%BC
+
+Kampüse ulaşım hakkında bir soru geldiğinde (örneğin "kampüs nerede", "nasıl giderim", "ulaşım nasıl") bu bilgiyi ve MUTLAKA yukarıdaki Google Maps linkini cevabına ekle.
+
 `;
