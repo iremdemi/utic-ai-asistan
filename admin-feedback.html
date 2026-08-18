@@ -73,7 +73,11 @@
       const data = await res.json();
 
       if (!res.ok) {
-        listEl.innerHTML = '<p class="muted">' + (data.error || 'Bir hata oluştu.') + '</p>';
+        const p = document.createElement('p');
+        p.className = 'muted';
+        p.textContent = data.error || 'Bir hata oluştu.';
+        listEl.innerHTML = '';
+        listEl.appendChild(p);
         toolbarEl.style.display = 'none';
         return;
       }
@@ -86,10 +90,22 @@
     }
   }
 
+  // Öneri/şikayetin "konu" alanı öğrencinin kendi yazdığı serbest metindir.
+  // Bu yüzden ASLA innerHTML ile basılmaz; hep textContent ile, HTML olarak
+  // yorumlanmadan düz metin olarak gösterilir (XSS'e karşı güvenlik önlemi).
   function populateTopicFilter() {
     const topics = Array.from(new Set(allEntries.map((e) => e.topic || 'Genel'))).sort();
-    topicFilterEl.innerHTML = '<option value="">Tüm konular</option>' +
-      topics.map((t) => '<option value="' + t + '">' + t + '</option>').join('');
+    topicFilterEl.innerHTML = '';
+    const allOpt = document.createElement('option');
+    allOpt.value = '';
+    allOpt.textContent = 'Tüm konular';
+    topicFilterEl.appendChild(allOpt);
+    topics.forEach((t) => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = t;
+      topicFilterEl.appendChild(opt);
+    });
   }
 
   topicFilterEl.addEventListener('change', renderEntries);
@@ -103,7 +119,16 @@
 
     toolbarEl.style.display = 'flex';
     const unreadCount = allEntries.filter((e) => !e.read).length;
-    summaryEl.innerHTML = 'Toplam <strong>' + allEntries.length + '</strong> gönderim, <strong>' + unreadCount + '</strong> tanesi okunmamış';
+    summaryEl.innerHTML = '';
+    summaryEl.append('Toplam ');
+    const totalStrong = document.createElement('strong');
+    totalStrong.textContent = String(allEntries.length);
+    summaryEl.appendChild(totalStrong);
+    summaryEl.append(' gönderim, ');
+    const unreadStrong = document.createElement('strong');
+    unreadStrong.textContent = String(unreadCount);
+    summaryEl.appendChild(unreadStrong);
+    summaryEl.append(' tanesi okunmamış');
 
     const filterVal = topicFilterEl.value;
     const filtered = filterVal ? allEntries.filter((e) => (e.topic || 'Genel') === filterVal) : allEntries;
@@ -112,12 +137,28 @@
     filtered.forEach((e) => {
       const div = document.createElement('div');
       div.className = 'entry' + (e.read ? '' : ' unread');
+
       const dateStr = e.date ? new Date(e.date).toLocaleString('tr-TR') : '';
-      div.innerHTML =
-        '<span class="topic">' + (e.topic || 'Genel') + (e.read ? '' : '<span class="unread-badge">YENİ</span>') + '</span>' +
-        '<span class="date">' + dateStr + '</span>' +
-        '<div class="message"></div>';
-      div.querySelector('.message').textContent = e.message || '';
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'date';
+      dateSpan.textContent = dateStr;
+      div.appendChild(dateSpan);
+
+      const topicSpan = document.createElement('span');
+      topicSpan.className = 'topic';
+      topicSpan.textContent = e.topic || 'Genel';
+      if (!e.read) {
+        const badge = document.createElement('span');
+        badge.className = 'unread-badge';
+        badge.textContent = 'YENİ';
+        topicSpan.appendChild(badge);
+      }
+      div.appendChild(topicSpan);
+
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message';
+      messageDiv.textContent = e.message || '';
+      div.appendChild(messageDiv);
 
       if (!e.read) {
         div.addEventListener('click', () => markAsRead(e.id, div));
