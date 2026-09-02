@@ -36,15 +36,6 @@
     --danger: #a3402f;
   }
 
-  /* ==================================================================
-     DESIGN SYSTEM v2 — Aşama 1 (token hazırlığı)
-     Bu blok SADECE yeni CSS custom property'ler tanımlar.
-     Hiçbir mevcut kural bu tokenleri henüz TÜKETMİYOR, bu yüzden
-     görünüm şu an değişmiyor. Sonraki aşamalarda mevcut kurallar
-     adım adım bu tokenlere bağlanacak.
-     Not: "--border" ismi mevcut kodda zaten (açık tema için) kullanıldığı
-     için çakışmayı önlemek adına "--border-subtle" olarak eklendi.
-     ================================================================== */
   :root {
     --bg-primary: #080B12;
     --bg-secondary: #0D111A;
@@ -84,7 +75,6 @@
     padding-top: 56px;
   }
 
-  /* ---------- Yavaşça hareket eden mavi/altın ışık (Gemini tarzı) ---------- */
   .glow {
     position: fixed;
     inset: 0;
@@ -104,7 +94,6 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(210, 225, 245, 0.35) 100%);
   }
 
-  /* ---------- Üst bar ---------- */
   .topbar {
     position: fixed;
     top: 0;
@@ -383,7 +372,6 @@
     .reset-btn:hover { background: rgba(255, 255, 255, 0.85); border-color: rgba(0, 0, 0, 0.15); }
   }
 
-  /* ---------- Ana içerik ---------- */
   main {
     position: relative;
     z-index: 1;
@@ -396,7 +384,6 @@
     padding: 0 24px 160px;
   }
 
-  /* ---------- Karşılama (hero) ekranı ---------- */
   .hero {
     flex: 1;
     display: flex;
@@ -430,48 +417,15 @@
     margin: 0 0 8px;
   }
 
-  /* Sabit yükseklik rezervasyonu: kartlar JS ile eklenmeden önce de bu alan
-     zaten yer kapladığı için, eklendiklerinde sayfa "zıplamıyor" (CLS önlemi). */
-  #featuredSlot {
-    width: 100%;
-    max-width: 460px;
-    min-height: 56px;
-    margin-top: 26px;
-  }
-
   .hero-chips {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
     max-width: 460px;
     width: 100%;
     min-height: 400px;
     align-content: start;
-  }
-
-  .chip-featured {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center;
-    gap: 10px !important;
-    width: 100%;
-    max-width: 460px;
-    padding: 15px 18px !important;
-    font-size: 13.5px !important;
-    background: rgba(37, 211, 102, 0.10) !important;
-    border-color: rgba(37, 211, 102, 0.35) !important;
-  }
-
-  .chip-featured .chip-icon {
-    background: #fff;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .chip-featured:hover {
-      background: rgba(37, 211, 102, 0.16) !important;
-      border-color: rgba(37, 211, 102, 0.5) !important;
-    }
   }
 
   .chip {
@@ -518,7 +472,6 @@
     }
   }
 
-  /* ---------- Sohbet mesajları ---------- */
   .messages {
     display: flex;
     flex-direction: column;
@@ -589,21 +542,6 @@
     padding: 11px 16px;
     border-radius: 4px 18px 18px 18px;
     font-size: 13.5px;
-  }
-
-  .doc-upload-info {
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin: 0 0 12px;
-    line-height: 1.5;
-  }
-
-  .doc-file-input {
-    display: block;
-    width: 100%;
-    font-size: 13px;
-    margin-bottom: 10px;
-    color: var(--ink);
   }
 
   .menu-item.back:disabled {
@@ -710,7 +648,6 @@
     30% { transform: translateY(-4px); opacity: 1; }
   }
 
-  /* ---------- Alt sabit giriş çubuğu (pill) ---------- */
   .input-dock {
     position: fixed;
     left: 0; right: 0; bottom: 0;
@@ -878,11 +815,6 @@
     main { padding-bottom: 150px; }
   }
 
-  /* ==================================================================
-     MASAÜSTÜ GÖRÜNÜMÜ (yalnızca geniş ekranlar, min-width tabanlı)
-     Bu blok SADECE masaüstü/geniş ekran düzenini geliştirir.
-     Mobil kurallarının hiçbirine dokunmuyor, hepsi olduğu gibi kalıyor.
-     ================================================================== */
   @media (min-width: 900px) {
     main {
       max-width: 920px;
@@ -902,10 +834,6 @@
       max-width: 520px;
     }
 
-    #featuredSlot {
-      max-width: 920px;
-    }
-
     .hero-chips {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       max-width: 920px;
@@ -922,12 +850,6 @@
     .chip-icon {
       width: 36px;
       height: 36px;
-    }
-
-    .chip-featured {
-      max-width: 920px;
-      padding: 17px 20px !important;
-      font-size: 14.5px !important;
     }
 
     .messages {
@@ -1033,7 +955,6 @@
   <div class="hero" id="hero">
     <h1>Merhaba, ben Tico.</h1>
     <p>Merak ettiğin her şeyi sorabilir veya aşağıdan bir konu seçebilirsin.</p>
-    <div id="featuredSlot"></div>
     <div class="hero-chips" id="heroChips"></div>
   </div>
 
@@ -1066,7 +987,6 @@
       <p><strong>Hangi veriler işleniyor:</strong> Sohbet kutusuna yazdığınız mesajlar, size cevap üretebilmek amacıyla bir yapay zeka servisine iletilir.</p>
       <p><strong>Veriler nerede saklanıyor:</strong> Bu site, yazdığınız mesajları kendi sunucusunda kalıcı olarak saklamaz veya bir veritabanına kaydetmez. Sohbet geçmişiniz yalnızca tarayıcınızın hafızasında, o oturum boyunca tutulur; sayfayı yenilediğinizde veya kapattığınızda silinir.</p>
       <p><strong>Üçüncü taraflar:</strong> Mesajlarınız, cevap üretilmesi amacıyla bir yapay zeka servis sağlayıcısının altyapısına iletilir ve o sağlayıcının kendi gizlilik politikaları çerçevesinde işlenir. Bu asistan kişisel verilerinizi (ad, öğrenci numarası, iletişim bilgisi vb.) toplama veya saklama amacı gütmez; lütfen sohbet kutusuna bu tür hassas bilgileri paylaşmaktan kaçının.</p>
-      <p><strong>Öğrenci belgesi doğrulama:</strong> 1. sınıf WhatsApp grubuna katılım için yüklediğiniz öğrenci belgesi ya da YKS yerleştirme sonuç belgesi görseli, sadece anlık doğrulama amacıyla işlenir; hiçbir sunucuda veya veritabanında saklanmaz. Sadece onay/red kararı (belgenin içeriği değil) kayıt altına alınır.</p>
       <p><strong>Çerezler:</strong> Bu site, oturumu yönetmek dışında herhangi bir izleme veya reklam çerezi kullanmaz.</p>
       <p><strong>Sorularınız için:</strong> Bu proje hakkında sorularınız için UTİC Bölümü ile iletişime geçebilirsiniz.</p>
     </div>
@@ -1084,7 +1004,7 @@
     <div class="privacy-modal-body">
       <p><strong>1. Genel:</strong> Bu site (utic.info, Tico), Sakarya Üniversitesi UTİC Bölümü öğrencilerine ve adaylarına bilgi sağlamak amacıyla, bölüm öğrencisi İrem Demir tarafından geliştirilmiş bağımsız bir öğrenci projesidir. Siteyi kullanarak bu şartları kabul etmiş sayılırsınız.</p>
       <p><strong>2. Hizmetin niteliği:</strong> Tico, yapay zeka destekli bir bilgi asistanıdır. Verdiği cevaplar bölümün resmi belgelerine dayanır, ancak yapay zeka teknolojisinin doğası gereği hatalı, eksik veya güncel olmayan bilgi içerebilir. Tico'nun verdiği hiçbir cevap, bölümün veya üniversitenin resmi bir beyanı ya da taahhüdü niteliği taşımaz. Kesinlik gerektiren konularda (kayıt, mezuniyet, sınav sonuçları gibi) her zaman bölüm sekreterliği veya SABİS gibi resmi kaynaklara başvurulmalıdır.</p>
-      <p><strong>3. Kullanım koşulları:</strong> Bu siteyi kullanırken sistemi kötüye kullanmayacağınızı, öğrenci belgesi/YKS yerleştirme belgesi yükleme özelliğini yalnızca kendi gerçek belgenizle ve doğru amaçla kullanacağınızı, öneri/şikayet kutusuna veya sohbet kutusuna yasa dışı, hakaret içeren veya başkalarına zarar verebilecek içerik göndermeyeceğinizi kabul etmiş sayılırsınız.</p>
+      <p><strong>3. Kullanım koşulları:</strong> Bu siteyi kullanırken sistemi kötüye kullanmayacağınızı, öneri/şikayet kutusuna veya sohbet kutusuna yasa dışı, hakaret içeren veya başkalarına zarar verebilecek içerik göndermeyeceğinizi kabul etmiş sayılırsınız.</p>
       <p><strong>4. Fikri mülkiyet:</strong> Sitenin tasarımı ve içeriği İrem Demir'e ve UTİC Bölümü'ne aittir. Bölümün resmi belgelerinden derlenen bilgiler, ilgili kurumların mülkiyetindedir.</p>
       <p><strong>5. Sorumluluk sınırı:</strong> Bu site en iyi niyetle, ücretsiz bir öğrenci projesi olarak sunulmaktadır. Sitenin kullanımından doğabilecek herhangi bir zarardan bölüm, üniversite veya geliştirici sorumlu tutulamaz.</p>
       <p><strong>6. Değişiklikler:</strong> Bu şartlar zaman zaman güncellenebilir. Güncel sürüm her zaman bu sayfada yer alır.</p>
@@ -1096,7 +1016,6 @@
 <script>
   const heroEl = document.getElementById('hero');
   const heroChipsEl = document.getElementById('heroChips');
-  const featuredSlotEl = document.getElementById('featuredSlot');
   const messagesEl = document.getElementById('messages');
   const inputEl = document.getElementById('input');
   const sendBtn = document.getElementById('sendBtn');
@@ -1107,13 +1026,7 @@
 
   const ENDPOINT = '/.netlify/functions/chat';
 
-  // ---------- Konu / alt-konu menu verisi ----------
   const TOPICS = [
-    {
-      icon: 'whatsapp', label: '1. Sınıf WhatsApp Grubuna Katıl',
-      special: 'document-upload',
-      featured: true,
-    },
     {
       icon: 'building', label: 'Bölümümüz Hakkında',
       query: 'UTİC bölümü hakkında genel bilgi verir misin?',
@@ -1291,9 +1204,7 @@
     messagesEl.classList.remove('hidden');
   }
 
-  // ---------- Konu kartları için ikon seti (emoji yerine) ----------
   const ICONS = {
-    whatsapp: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.83 9.83 0 0 1 2.893 6.995c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.463 0 .102 5.36.1 11.947c0 2.105.549 4.16 1.595 5.976L0 24l6.223-1.632a11.9 11.9 0 0 0 5.822 1.484h.005c6.588 0 11.949-5.362 11.951-11.949a11.85 11.85 0 0 0-3.48-8.454"/></svg>',
     building: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 21v-4h6v4M9 7h.01M15 7h.01M9 11h.01M15 11h.01M9 15h.01M15 15h.01"/></svg>',
     clipboard: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h6"/></svg>',
     globe: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9z"/></svg>',
@@ -1304,11 +1215,10 @@
     person: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>',
   };
 
-  // ---------- Ana ekrandaki ilk konu çipleri ----------
   function renderHeroChips() {
     TOPICS.forEach((topic) => {
       const chip = document.createElement('button');
-      chip.className = topic.featured ? 'chip chip-featured' : 'chip';
+      chip.className = 'chip';
 
       const iconEl = document.createElement('span');
       iconEl.className = 'chip-icon';
@@ -1319,23 +1229,11 @@
       labelEl.textContent = topic.label;
       chip.appendChild(labelEl);
 
-      chip.addEventListener('click', () => {
-        if (topic.special === 'document-upload') {
-          openDocumentUpload();
-        } else {
-          askTopic(topic, topic.query);
-        }
-      });
-
-      if (topic.featured) {
-        featuredSlotEl.appendChild(chip);
-      } else {
-        heroChipsEl.appendChild(chip);
-      }
+      chip.addEventListener('click', () => askTopic(topic, topic.query));
+      heroChipsEl.appendChild(chip);
     });
   }
 
-  // ---------- Sohbet içinde alt menu kartı ----------
   function createMenuCard(topic) {
     const wrap = document.createElement('div');
     wrap.className = 'menu-card';
@@ -1386,13 +1284,7 @@
       const btn = document.createElement('button');
       btn.className = 'menu-item';
       btn.textContent = topic.label;
-      btn.addEventListener('click', () => {
-        if (topic.special === 'document-upload') {
-          openDocumentUpload();
-        } else {
-          askTopic(topic, topic.query);
-        }
-      });
+      btn.addEventListener('click', () => askTopic(topic, topic.query));
       list.appendChild(btn);
     });
 
@@ -1400,164 +1292,12 @@
     return wrap;
   }
 
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-
-  function createUploadCard({ title, info, buttonText, onSubmit }) {
-    const wrap = document.createElement('div');
-    wrap.className = 'menu-card';
-
-    const titleEl = document.createElement('p');
-    titleEl.className = 'submenu-title';
-    titleEl.textContent = title;
-    wrap.appendChild(titleEl);
-
-    const infoEl = document.createElement('p');
-    infoEl.className = 'doc-upload-info';
-    infoEl.textContent = info;
-    wrap.appendChild(infoEl);
-
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*';
-    fileInput.className = 'doc-file-input';
-    wrap.appendChild(fileInput);
-
-    const submitBtn = document.createElement('button');
-    submitBtn.className = 'menu-item back';
-    submitBtn.textContent = buttonText;
-    submitBtn.disabled = true;
-    wrap.appendChild(submitBtn);
-
-    fileInput.addEventListener('change', () => {
-      submitBtn.disabled = !fileInput.files.length;
-    });
-
-    submitBtn.addEventListener('click', async () => {
-      const file = fileInput.files[0];
-      if (!file) return;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Kontrol ediliyor...';
-      fileInput.disabled = true;
-      await onSubmit(file, wrap);
-    });
-
-    return wrap;
-  }
-
-  function openTranscriptUpload() {
-    const card = createUploadCard({
-      title: 'Not Döküm Belgeni Yükle',
-      info: '1. sınıftan alttan kalan bir dersin olduğunu gösteren e-Devlet not döküm belgeni (transkript) yükle.',
-      buttonText: 'Transkripti Yükle ve Doğrula',
-      onSubmit: async (file, wrap) => {
-        try {
-          const base64 = await fileToBase64(file);
-          const res = await fetch('/.netlify/functions/verify-student', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ imageBase64: base64, mimeType: file.type || 'image/jpeg', step: 2 })
-          });
-          const data = await res.json();
-          wrap.remove();
-
-          if (!res.ok) {
-            addError(data.error || 'Belge kontrol edilemedi, lütfen tekrar dene.');
-          } else {
-            addMessage('bot', data.message);
-          }
-        } catch (err) {
-          wrap.remove();
-          addError('Bağlantı hatası, lütfen tekrar dener misin?');
-        } finally {
-          messagesEl.appendChild(createTopicListCard());
-          scrollToBottom();
-        }
-      }
-    });
-    messagesEl.appendChild(card);
-    scrollToBottom();
-  }
-
-  function openDocumentUpload() {
-    revealChat();
-
-    const card = createUploadCard({
-      title: '1. Sınıf WhatsApp Grubuna Katıl',
-      info: 'e-Devlet üzerinden aldığın öğrenci belgeni ya da ÖSYM\'nin YKS yerleştirme sonuç belgeni (yeni yerleşen adaylar için, öğrenci belgen henüz çıkmadıysa bu da geçerli) yükle, seni doğrulayıp grup davet linkini hemen göndereyim.',
-      buttonText: 'Belgeyi Yükle ve Doğrula',
-      onSubmit: async (file, wrap) => {
-        try {
-          const base64 = await fileToBase64(file);
-          const res = await fetch('/.netlify/functions/verify-student', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ imageBase64: base64, mimeType: file.type || 'image/jpeg', step: 1 })
-          });
-          const data = await res.json();
-          wrap.remove();
-
-          if (!res.ok) {
-            addError(data.error || 'Belge kontrol edilemedi, lütfen tekrar dene.');
-            messagesEl.appendChild(createTopicListCard());
-            scrollToBottom();
-          } else if (data.approved) {
-            addMessage('bot', data.message + (data.inviteLink ? '\n\nGrup davet linkin: ' + data.inviteLink : ''));
-            messagesEl.appendChild(createTopicListCard());
-            scrollToBottom();
-          } else if (data.needsSecondDoc) {
-            addMessage('bot', data.message);
-            openTranscriptUpload();
-          } else {
-            addMessage('bot', data.message || 'Belge doğrulanamadı, lütfen tekrar dener misin?');
-            messagesEl.appendChild(createTopicListCard());
-            scrollToBottom();
-          }
-        } catch (err) {
-          wrap.remove();
-          addError('Bağlantı hatası, lütfen tekrar dener misin?');
-          messagesEl.appendChild(createTopicListCard());
-          scrollToBottom();
-        }
-      }
-    });
-
-    messagesEl.appendChild(card);
-    scrollToBottom();
-  }
-
   function askTopic(topic, query) {
     sendMessage(query, topic);
   }
 
-  function isWhatsappGroupIntent(text) {
-    const t = text
-      .toLowerCase()
-      .replace(/i̇/g, 'i')
-      .replace(/[çğıöşü]/g, (c) => ({ ç: 'c', ğ: 'g', ı: 'i', ö: 'o', ş: 's', ü: 'u' }[c] || c));
-    const mentionsGroup = /(grub|grup|whatsapp|wp)/.test(t);
-    const mentionsFirstYear = /(1\.?\s*sinif|birinci\s*sinif)/.test(t);
-    const mentionsIntent = /(katil|nasil|istiyorum|uye|ekle|gir)/.test(t);
-    return mentionsGroup && mentionsFirstYear && mentionsIntent;
-  }
-
   async function sendMessage(text, topic) {
     if (!text || !text.trim() || isLoading) return;
-
-    if (!topic && isWhatsappGroupIntent(text)) {
-      addMessage('user', text);
-      history.push({ role: 'user', text });
-      inputEl.value = '';
-      inputEl.style.height = 'auto';
-      openDocumentUpload();
-      return;
-    }
 
     revealChat();
 
@@ -1674,7 +1414,6 @@
     closeSidePanel();
   });
 
-  // ---------- Açılır/kapanır panel bölümleri ----------
   document.querySelectorAll('.panel-section-toggle').forEach((toggle) => {
     toggle.addEventListener('click', () => {
       const targetId = toggle.dataset.target;
@@ -1685,7 +1424,6 @@
     });
   });
 
-  // ---------- "Bugün Ne Var" akademik takvim widget'ı ----------
   const CALENDAR_EVENTS = [
     { date: '2026-08-31', title: 'ÇAP-Yandal başvuruları ve Güz dönemi ders programlarının ilanı başlıyor' },
     { date: '2026-09-04', title: 'ÇAP-Yandal sonuçlarının ilanı' },
@@ -1738,7 +1476,6 @@
 
   renderTodayWidget();
 
-  // ---------- Öneri / Şikayet kutusu ----------
   const feedbackTopic = document.getElementById('feedbackTopic');
   const feedbackMessage = document.getElementById('feedbackMessage');
   const feedbackSubmit = document.getElementById('feedbackSubmit');
