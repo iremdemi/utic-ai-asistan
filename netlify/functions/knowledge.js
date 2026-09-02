@@ -1131,4 +1131,10 @@ Google Maps üzerinden kampüs konumuna şu linkten ulaşılabilir: https://www.
 
 Kampüse ulaşım hakkında bir soru geldiğinde (örneğin "kampüs nerede", "nasıl giderim", "ulaşım nasıl") bu bilgiyi ve MUTLAKA yukarıdaki Google Maps linkini cevabına ekle.
 
+## KAYNAK: 1. Sınıf WhatsApp Grubu
+
+UTİC bölümünün 1. sınıf WhatsApp grubuna artık site üzerinden otomatik katılım yapılmamaktadır; tüm mevcut öğrenciler zaten gruba dahil edilmiştir.
+
+Bir öğrenci "gruba nasıl katılırım", "WhatsApp grubuna katılmak istiyorum" gibi bir soru sorduğunda: ona gruba katılmak için bölümün resmi Instagram hesabı üzerinden iletişime geçmesini söyle. Instagram linki: https://www.instagram.com/sauutic/
+
 `;
